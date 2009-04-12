@@ -1,6 +1,6 @@
 namespace RenderReport
 {
-    partial class Form1
+    partial class ReportRenderForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,32 @@ namespace RenderReport
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(14, 14);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(602, 280);
+            this.textBox1.TabIndex = 0;
+            // 
+            // ReportRenderForm
+            // 
+            this.ClientSize = new System.Drawing.Size(634, 428);
+            this.Controls.Add(this.textBox1);
+            this.Name = "ReportRenderForm";
+            this.Text = "Render Report";
+            this.Load += new System.EventHandler(this.ReportRenderForm_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

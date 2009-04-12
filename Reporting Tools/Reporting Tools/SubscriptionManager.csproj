@@ -39,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SubscriptionManager.cs">
-      <SubType>Form</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="SubscriptionManager.Designer.cs">
       <DependentUpon>SubscriptionManager.cs</DependentUpon>
