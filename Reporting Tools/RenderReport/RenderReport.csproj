@@ -39,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ReportRenderForm.cs">
-      <SubType>Component</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="ReportRenderForm.Designer.cs">
       <DependentUpon>ReportRenderForm.cs</DependentUpon>

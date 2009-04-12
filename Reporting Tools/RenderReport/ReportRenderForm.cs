@@ -26,9 +26,13 @@ namespace RenderReport
             CatalogItem[] serverItems =  rs.ListChildren("/", true);
 
             foreach(CatalogItem curItem in serverItems) {
-                textBox1.Text += String.Format("[{0}] {1} \r\n", curItem.Type, curItem.Path);
-            }
 
+                if(curItem.Type == ItemTypeEnum.Report) {
+                    mainReportTree.AddReport(curItem);
+                }
+            }
+            
+            mainReportTree.ExpandAll();
         }
     }
 
@@ -36,6 +40,33 @@ namespace RenderReport
     {
         public ReportTree() : base() 
         {
+            this.Nodes.Add("Root", "Home");
+        }
+
+        public void AddReport(CatalogItem curReport)
+        {
+            //// split the path up into its parts
+            //// path looks something like /AtomReport/Management/Report Name
+            string[] pathItems = curReport.Path.Split('/');
+            TreeNode curNode = this.Nodes["Root"];
+
+            foreach(string curFolder in pathItems) {
+                if(curFolder.Length > 0) {
+                    
+                    // does that folder exist already?
+                    TreeNode[] nodeList = curNode.Nodes.Find(curFolder, false);
+                    
+                    if(nodeList.Length == 0) {
+                        curNode = curNode.Nodes.Add(curFolder, curFolder);
+                    } else {
+                        curNode = nodeList[0];
+                    }
+                }
+            }
+
+            // curNode should be pointing to the final leaf of the item we addded
+            // so set the tag...
+            curNode.Tag = curReport;
         }
 
     }
