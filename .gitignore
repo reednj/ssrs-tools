@@ -2,5 +2,9 @@ Reporting Tools/Reporting Tools/bin/
 Reporting Tools/Reporting Tools/obj/
 Reporting Tools/Reporting Tools/Web References/
 
+Reporting Tools/RenderReport/bin/
+Reporting Tools/RenderReport/obj/
+Reporting Tools/RenderReport/Web References/
+
 *.suo
 *.user
