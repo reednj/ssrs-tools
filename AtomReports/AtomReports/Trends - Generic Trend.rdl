@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="Hydrogen_Atom">
+      <DataSourceReference>Hydrogen_Atom</DataSourceReference>
+      <rd:DataSourceID>eb173554-779e-4f96-9492-088a565786fd</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <BottomMargin>2.5cm</BottomMargin>
+  <RightMargin>2.5cm</RightMargin>
+  <PageWidth>21cm</PageWidth>
+  <ReportParameters>
+    <ReportParameter Name="TrendId">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>14000</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>TrendId</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+    <ReportParameter Name="TrendTitle">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>DEFAULT</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Report_Parameter_1</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+  </ReportParameters>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <InteractiveWidth>8.5in</InteractiveWidth>
+  <rd:GridSpacing>0.25cm</rd:GridSpacing>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <Body>
+    <ColumnSpacing>1cm</ColumnSpacing>
+    <ReportItems>
+      <Textbox Name="textbox1">
+        <Left>5cm</Left>
+        <Top>7.25cm</Top>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <ZIndex>1</ZIndex>
+        <Width>8.25cm</Width>
+        <Style>
+          <TextAlign>Center</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <PaddingRight>2pt</PaddingRight>
+          <FontStyle>Italic</FontStyle>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Value>="Avg: " &amp; Format(Sum(Fields!AvgValue.Value, "Atom_Mean"), "N1") &amp;
+", Max: " &amp; Format(Sum(Fields!MaxValue.Value, "Atom_Mean"), "N1") &amp;
+", Min: " &amp; Format(Sum(Fields!MinValue.Value, "Atom_Mean"), "N1")</Value>
+      </Textbox>
+      <Chart Name="GenericTrendChart">
+        <Legend>
+          <Style>
+            <BorderStyle>
+              <Default>Solid</Default>
+            </BorderStyle>
+          </Style>
+          <Position>RightCenter</Position>
+        </Legend>
+        <Subtype>Plain</Subtype>
+        <Title>
+          <Caption>=Parameters!TrendTitle.Value</Caption>
+          <Style>
+            <FontWeight>700</FontWeight>
+            <FontSize>12pt</FontSize>
+            <Color>Silver</Color>
+          </Style>
+        </Title>
+        <Height>7.25cm</Height>
+        <CategoryAxis>
+          <Axis>
+            <Title>
+              <Style />
+            </Title>
+            <Style>
+              <Format>yyyy-MM-dd</Format>
+            </Style>
+            <MajorGridLines>
+              <Style>
+                <BorderStyle>
+                  <Default>Solid</Default>
+                </BorderStyle>
+              </Style>
+            </MajorGridLines>
+            <MinorGridLines>
+              <Style>
+                <BorderStyle>
+                  <Default>Solid</Default>
+                </BorderStyle>
+              </Style>
+            </MinorGridLines>
+            <MajorTickMarks>Outside</MajorTickMarks>
+            <Min>0</Min>
+            <MajorInterval>7</MajorInterval>
+            <Visible>true</Visible>
+            <Scalar>true</Scalar>
+          </Axis>
+        </CategoryAxis>
+        <PointWidth>0</PointWidth>
+        <ThreeDProperties>
+          <Rotation>30</Rotation>
+          <Inclination>30</Inclination>
+          <Shading>Simple</Shading>
+          <WallThickness>50</WallThickness>
+        </ThreeDProperties>
+        <DataSetName>Hydrogen_Atom</DataSetName>
+        <SeriesGroupings>
+          <SeriesGrouping>
+            <StaticSeries>
+              <StaticMember>
+                <Label>Value1</Label>
+              </StaticMember>
+            </StaticSeries>
+          </SeriesGrouping>
+        </SeriesGroupings>
+        <PlotArea>
+          <Style>
+            <BorderStyle>
+              <Default>Solid</Default>
+            </BorderStyle>
+            <BackgroundColor>White</BackgroundColor>
+          </Style>
+        </PlotArea>
+        <ValueAxis>
+          <Axis>
+            <Title />
+            <Style>
+              <Format>N0</Format>
+            </Style>
+            <MajorGridLines>
+              <ShowGridLines>true</ShowGridLines>
+              <Style>
+                <BorderStyle>
+                  <Default>Solid</Default>
+                </BorderStyle>
+                <BorderColor>
+                  <Default>Gainsboro</Default>
+                </BorderColor>
+              </Style>
+            </MajorGridLines>
+            <MinorGridLines>
+              <Style>
+                <BorderStyle>
+                  <Default>Solid</Default>
+                </BorderStyle>
+              </Style>
+            </MinorGridLines>
+            <MajorTickMarks>Outside</MajorTickMarks>
+            <Min>0</Min>
+            <Margin>true</Margin>
+            <Visible>true</Visible>
+            <Scalar>true</Scalar>
+          </Axis>
+        </ValueAxis>
+        <Type>Line</Type>
+        <CategoryGroupings>
+          <CategoryGrouping>
+            <DynamicCategories>
+              <Grouping Name="chart1_CategoryGroup1">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!StartDate.Value</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+              <Sorting>
+                <SortBy>
+                  <SortExpression>=Fields!StartDate.Value</SortExpression>
+                  <Direction>Ascending</Direction>
+                </SortBy>
+              </Sorting>
+              <Label>=Fields!StartDate.Value</Label>
+            </DynamicCategories>
+          </CategoryGrouping>
+        </CategoryGroupings>
+        <Palette>Default</Palette>
+        <ChartData>
+          <ChartSeries>
+            <DataPoints>
+              <DataPoint>
+                <DataValues>
+                  <DataValue>
+                    <Value>=Sum(Fields!RealTrendValue.Value)</Value>
+                  </DataValue>
+                </DataValues>
+                <DataLabel />
+                <Style>
+                  <BorderWidth>
+                    <Default>0.5pt</Default>
+                  </BorderWidth>
+                  <BorderColor>
+                    <Default>DodgerBlue</Default>
+                  </BorderColor>
+                </Style>
+                <Marker>
+                  <Size>6pt</Size>
+                </Marker>
+              </DataPoint>
+            </DataPoints>
+          </ChartSeries>
+        </ChartData>
+        <Style>
+          <BackgroundColor>White</BackgroundColor>
+        </Style>
+      </Chart>
+    </ReportItems>
+    <Height>7.5cm</Height>
+    <Style>
+      <BorderStyle>
+        <Default>Solid</Default>
+      </BorderStyle>
+      <BorderColor>
+        <Default>Silver</Default>
+      </BorderColor>
+    </Style>
+  </Body>
+  <rd:ReportID>09eac6ee-9072-4783-8110-bc71439039c5</rd:ReportID>
+  <LeftMargin>2.5cm</LeftMargin>
+  <DataSets>
+    <DataSet Name="Hydrogen_Atom">
+      <Query>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+        <CommandText>select 
+ValueId,
+TrendId,
+StartDate,
+TrendValue,
+case when (
+  abs((select top(1) TrendValue from Core.TrendValues ctv2 where ctv2.StartDate &lt; ctv.StartDate and ctv2.TrendId = ctv.TrendId order by startDate desc) - ctv.TrendValue) &gt; 35
+) then null  else TrendValue end as RealTrendValue
+
+from Core.TrendValues ctv
+where trendid=@TrendId
+order by startdate</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@TrendId">
+            <Value>=Parameters!TrendId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <DataSourceName>Hydrogen_Atom</DataSourceName>
+      </Query>
+      <Fields>
+        <Field Name="ValueId">
+          <rd:TypeName>System.Int32</rd:TypeName>
+          <DataField>ValueId</DataField>
+        </Field>
+        <Field Name="TrendId">
+          <rd:TypeName>System.Int32</rd:TypeName>
+          <DataField>TrendId</DataField>
+        </Field>
+        <Field Name="StartDate">
+          <rd:TypeName>System.DateTime</rd:TypeName>
+          <DataField>StartDate</DataField>
+        </Field>
+        <Field Name="TrendValue">
+          <rd:TypeName>System.Decimal</rd:TypeName>
+          <DataField>TrendValue</DataField>
+        </Field>
+        <Field Name="RealTrendValue">
+          <rd:TypeName>System.Decimal</rd:TypeName>
+          <DataField>RealTrendValue</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Atom_Mean">
+      <Query>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+        <CommandText>select 
+avg(TrendValue) as AvgValue,
+max(TrendValue) as MaxValue,
+min(TrendValue) as MinValue
+from Core.TrendValues 
+where trendid=@TrendId</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@TrendId">
+            <Value>=Parameters!TrendId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <DataSourceName>Hydrogen_Atom</DataSourceName>
+      </Query>
+      <Fields>
+        <Field Name="AvgValue">
+          <rd:TypeName>System.Decimal</rd:TypeName>
+          <DataField>AvgValue</DataField>
+        </Field>
+        <Field Name="MaxValue">
+          <rd:TypeName>System.Decimal</rd:TypeName>
+          <DataField>MaxValue</DataField>
+        </Field>
+        <Field Name="MinValue">
+          <rd:TypeName>System.Decimal</rd:TypeName>
+          <DataField>MinValue</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <Author>Nathan Reed</Author>
+  <Width>18.25cm</Width>
+  <InteractiveHeight>11in</InteractiveHeight>
+  <Language>en-US</Language>
+  <TopMargin>2.5cm</TopMargin>
+  <PageHeight>29.7cm</PageHeight>
+</Report>

@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="Hydrogen_Atom">
+      <DataSourceReference>Hydrogen_Atom</DataSourceReference>
+      <rd:DataSourceID>eb173554-779e-4f96-9492-088a565786fd</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <BottomMargin>1cm</BottomMargin>
+  <RightMargin>1cm</RightMargin>
+  <PageWidth>21cm</PageWidth>
+  <ReportParameters>
+    <ReportParameter Name="AreaId">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value>1</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>AreaId</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>1</Value>
+            <Label>1000</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>2</Value>
+            <Label>2000</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>3</Value>
+            <Label>3000</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>4</Value>
+            <Label>4000</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+  </ReportParameters>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <InteractiveWidth>21cm</InteractiveWidth>
+  <rd:GridSpacing>0.25cm</rd:GridSpacing>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <Body>
+    <ColumnSpacing>1cm</ColumnSpacing>
+    <ReportItems>
+      <List Name="list1">
+        <Left>0.375cm</Left>
+        <ReportItems>
+          <Subreport Name="GenericTrendChart">
+            <Parameters>
+              <Parameter Name="TrendId">
+                <Value>=Fields!TrendId.Value</Value>
+              </Parameter>
+              <Parameter Name="TrendTitle">
+                <Value>=Fields!TrendName.Value</Value>
+              </Parameter>
+            </Parameters>
+            <Top>0.25cm</Top>
+            <ReportName>Trends - Generic Trend</ReportName>
+            <Height>7.5cm</Height>
+          </Subreport>
+        </ReportItems>
+        <Width>18.25cm</Width>
+        <Height>8cm</Height>
+      </List>
+    </ReportItems>
+    <Height>9cm</Height>
+  </Body>
+  <rd:ReportID>09eac6ee-9072-4783-8110-bc71439039c5</rd:ReportID>
+  <LeftMargin>1cm</LeftMargin>
+  <DataSets>
+    <DataSet Name="Hydrogen_Atom">
+      <Query>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+        <CommandText>select 
+ * 
+from Core.Trends
+where AreaId = @AreaId
+ and TrendId % 32 = 0</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@AreaId">
+            <Value>=Parameters!AreaId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <DataSourceName>Hydrogen_Atom</DataSourceName>
+      </Query>
+      <Fields>
+        <Field Name="TrendId">
+          <rd:TypeName>System.Int32</rd:TypeName>
+          <DataField>TrendId</DataField>
+        </Field>
+        <Field Name="AreaId">
+          <rd:TypeName>System.Int32</rd:TypeName>
+          <DataField>AreaId</DataField>
+        </Field>
+        <Field Name="TrendName">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>TrendName</DataField>
+        </Field>
+        <Field Name="Created">
+          <rd:TypeName>System.DateTime</rd:TypeName>
+          <DataField>Created</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <Author>Nathan Reed</Author>
+  <Width>19cm</Width>
+  <InteractiveHeight>29.7cm</InteractiveHeight>
+  <Language>en-US</Language>
+  <PageFooter>
+    <ReportItems>
+      <Textbox Name="textbox2">
+        <rd:DefaultName>textbox2</rd:DefaultName>
+        <ZIndex>1</ZIndex>
+        <Width>10cm</Width>
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>16pt</FontSize>
+          <PaddingRight>2pt</PaddingRight>
+          <FontStyle>Italic</FontStyle>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Value>Exceptional Trends Only</Value>
+      </Textbox>
+      <Textbox Name="textbox1">
+        <Left>14cm</Left>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Width>4.7619cm</Width>
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.50265cm</Height>
+        <Value>=Globals!ExecutionTime</Value>
+      </Textbox>
+    </ReportItems>
+    <Height>0.75265cm</Height>
+    <PrintOnLastPage>true</PrintOnLastPage>
+    <PrintOnFirstPage>true</PrintOnFirstPage>
+  </PageFooter>
+  <TopMargin>1cm</TopMargin>
+  <PageHeight>29.7cm</PageHeight>
+</Report>
