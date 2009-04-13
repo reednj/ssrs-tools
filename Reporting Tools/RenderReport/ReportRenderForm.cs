@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,43 +33,61 @@ namespace RenderReport
                     mainReportTree.AddReport(curItem);
                 }
             }
-            
+                        
             mainReportTree.ExpandAll();
+        }
+
+        private void StartRenderButton_Click(object sender, EventArgs e)
+        {
+            CatalogItem reportItem = mainReportTree.SelectedNode.Tag as CatalogItem;
+
+            if(reportItem != null) {
+                string reportPath = reportItem.Path;
+                string filePath = String.Format("C:\\{0}.pdf", reportItem.Name);
+
+                ReportRenderer renderer = new ReportRenderer(rs);
+                Byte[] data = renderer.render(reportPath);
+                renderer.saveBytes(filePath, data);
+            }
+
         }
     }
 
-    public class ReportTree : TreeView 
+    // wrapper for the reporting services render method. Its a complicated method, so
+    // better to make a wrapper.
+    public class ReportRenderer
     {
-        public ReportTree() : base() 
+        ReportingService rs;
+
+        public ReportRenderer(ReportingService newRs) 
         {
-            this.Nodes.Add("Root", "Home");
+            this.rs = newRs;
         }
 
-        public void AddReport(CatalogItem curReport)
+        // renders the report, and returns a byte array of whatever was created
+        public Byte[] render(string reportPath)
         {
-            //// split the path up into its parts
-            //// path looks something like /AtomReport/Management/Report Name
-            string[] pathItems = curReport.Path.Split('/');
-            TreeNode curNode = this.Nodes["Root"];
+            // we don't really care about these, but the render method needs them as 'out' params
+            string encoding;
+            string mimeType;
+            ParameterValue[] reportHistoryParameters = null;
+            Warning[] warnings = null;
+            string[] streamIDs = null;
 
-            foreach(string curFolder in pathItems) {
-                if(curFolder.Length > 0) {
-                    
-                    // does that folder exist already?
-                    TreeNode[] nodeList = curNode.Nodes.Find(curFolder, false);
-                    
-                    if(nodeList.Length == 0) {
-                        curNode = curNode.Nodes.Add(curFolder, curFolder);
-                    } else {
-                        curNode = nodeList[0];
-                    }
-                }
-            }
+            Byte[] data = rs.Render(reportPath, "PDF", null, null, null, null, null, out encoding, out mimeType, out reportHistoryParameters, out warnings, out streamIDs);
 
-            // curNode should be pointing to the final leaf of the item we addded
-            // so set the tag...
-            curNode.Tag = curReport;
+            return data;
         }
 
+        public void saveBytes(string filePath, Byte[] data)
+        {
+            FileStream fp = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+            BinaryWriter bw = new BinaryWriter(fp);
+
+            bw.Write(data);
+
+            bw.Close();
+            fp.Close();
+        }
     }
 }
