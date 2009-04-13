@@ -51,6 +51,25 @@ namespace RenderReport
             }
 
         }
+
+        private void GetParmsButton_Click(object sender, EventArgs e)
+        {
+            CatalogItem reportItem = mainReportTree.SelectedNode.Tag as CatalogItem;
+
+            if(reportItem != null) {
+                string reportPath = reportItem.Path;
+                
+                ReportParameter[] reportParams = rs.GetReportParameters(reportPath, null, false, null, null);
+
+                ParameterSelectForm paramSelect = new ParameterSelectForm(reportParams);
+                paramSelect.Show(this);
+            
+            }
+
+            // open the parameter select dialog
+            
+            
+        }
     }
 
     // wrapper for the reporting services render method. Its a complicated method, so

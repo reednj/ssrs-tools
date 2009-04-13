@@ -38,6 +38,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ParameterSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParameterSelect.Designer.cs">
+      <DependentUpon>ParameterSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportRenderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -46,6 +52,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ParameterSelect.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ParameterSelect.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportRenderForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ReportRenderForm.cs</DependentUpon>

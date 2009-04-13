@@ -28,23 +28,36 @@ namespace RenderReport
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Home");
             this.ToolGroupBox = new System.Windows.Forms.GroupBox();
+            this.StartRenderButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.mainReportTree = new RenderReport.ReportTree();
-            this.StartRenderButton = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.GetParmsButton = new System.Windows.Forms.Button();
             this.ToolGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolGroupBox
             // 
+            this.ToolGroupBox.Controls.Add(this.GetParmsButton);
+            this.ToolGroupBox.Controls.Add(this.textBox1);
             this.ToolGroupBox.Controls.Add(this.StartRenderButton);
             this.ToolGroupBox.Controls.Add(this.label1);
             this.ToolGroupBox.Location = new System.Drawing.Point(13, 334);
             this.ToolGroupBox.Name = "ToolGroupBox";
-            this.ToolGroupBox.Size = new System.Drawing.Size(493, 82);
+            this.ToolGroupBox.Size = new System.Drawing.Size(493, 193);
             this.ToolGroupBox.TabIndex = 2;
             this.ToolGroupBox.TabStop = false;
+            // 
+            // StartRenderButton
+            // 
+            this.StartRenderButton.Location = new System.Drawing.Point(357, 24);
+            this.StartRenderButton.Name = "StartRenderButton";
+            this.StartRenderButton.Size = new System.Drawing.Size(57, 29);
+            this.StartRenderButton.TabIndex = 1;
+            this.StartRenderButton.Text = "go";
+            this.StartRenderButton.UseVisualStyleBackColor = true;
+            this.StartRenderButton.Click += new System.EventHandler(this.StartRenderButton_Click);
             // 
             // label1
             // 
@@ -59,26 +72,30 @@ namespace RenderReport
             // 
             this.mainReportTree.Location = new System.Drawing.Point(12, 12);
             this.mainReportTree.Name = "mainReportTree";
-            treeNode2.Name = "Root";
-            treeNode2.Text = "Home";
-            this.mainReportTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
             this.mainReportTree.Size = new System.Drawing.Size(495, 313);
             this.mainReportTree.TabIndex = 1;
             // 
-            // StartRenderButton
+            // textBox1
             // 
-            this.StartRenderButton.Location = new System.Drawing.Point(357, 24);
-            this.StartRenderButton.Name = "StartRenderButton";
-            this.StartRenderButton.Size = new System.Drawing.Size(57, 29);
-            this.StartRenderButton.TabIndex = 1;
-            this.StartRenderButton.Text = "go";
-            this.StartRenderButton.UseVisualStyleBackColor = true;
-            this.StartRenderButton.Click += new System.EventHandler(this.StartRenderButton_Click);
+            this.textBox1.Location = new System.Drawing.Point(66, 24);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(241, 150);
+            this.textBox1.TabIndex = 2;
+            // 
+            // GetParmsButton
+            // 
+            this.GetParmsButton.Location = new System.Drawing.Point(365, 63);
+            this.GetParmsButton.Name = "GetParmsButton";
+            this.GetParmsButton.Size = new System.Drawing.Size(48, 20);
+            this.GetParmsButton.TabIndex = 3;
+            this.GetParmsButton.Text = "button1";
+            this.GetParmsButton.UseVisualStyleBackColor = true;
+            this.GetParmsButton.Click += new System.EventHandler(this.GetParmsButton_Click);
             // 
             // ReportRenderForm
             // 
-            this.ClientSize = new System.Drawing.Size(519, 428);
+            this.ClientSize = new System.Drawing.Size(519, 553);
             this.Controls.Add(this.ToolGroupBox);
             this.Controls.Add(this.mainReportTree);
             this.Name = "ReportRenderForm";
@@ -96,6 +113,8 @@ namespace RenderReport
         private System.Windows.Forms.GroupBox ToolGroupBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button StartRenderButton;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button GetParmsButton;
     }
 }
 

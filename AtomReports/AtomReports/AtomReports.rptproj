@@ -9,16 +9,20 @@
   </DataSources>
   <Reports>
     <ProjectItem>
-      <Name>Trends - Generic Trend.rdl</Name>
-      <FullPath>Trends - Generic Trend.rdl</FullPath>
+      <Name>Trends - Area - Exception.rdl</Name>
+      <FullPath>Trends - Area - Exception.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Trends - Area.rdl</Name>
       <FullPath>Trends - Area.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Trends - Area - Exception.rdl</Name>
-      <FullPath>Trends - Area - Exception.rdl</FullPath>
+      <Name>Trends - Generic Trend.rdl</Name>
+      <FullPath>Trends - Generic Trend.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Executive Summary.rdl</Name>
+      <FullPath>Executive Summary.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
