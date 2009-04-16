@@ -1,10 +1,14 @@
 Reporting Tools/SubscriptionManager/bin/
 Reporting Tools/SubscriptionManager/obj/
-Reporting Tools/SubscriptionManager/Web References/
 
 Reporting Tools/RenderReport/bin/
 Reporting Tools/RenderReport/obj/
-Reporting Tools/RenderReport/Web References/
+
+Reporting Tools/JobManager/bin/
+Reporting Tools/JobManager/obj/
+
+Reporting Tools/ReportingToolsCommon/bin/
+Reporting Tools/ReportingToolsCommon/obj/
 
 *.suo
 *.user
