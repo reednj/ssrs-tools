@@ -37,11 +37,12 @@ namespace ReportingTools.JobManager
         private void AddJob(Job reportJob)
         {
             List<string> columns = new List<string>();
+            TimeSpan jobDuation = (DateTime.Now - reportJob.StartDateTime);
 
             columns.Add(reportJob.Type.ToString());
             columns.Add(reportJob.Path);
             columns.Add(reportJob.User);
-            columns.Add(reportJob.StartDateTime.ToString());
+            columns.Add(jobDuation.ToString());
 
             jobListView.Items.Add(new ListViewItem(columns.ToArray()));
         }
