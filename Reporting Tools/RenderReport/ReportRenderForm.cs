@@ -1,5 +1,5 @@
 using System;
-using System.IO;
+
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +19,7 @@ namespace RenderReport
         public ReportRenderForm()
         {
             InitializeComponent();
+
         }
 
         private void ReportRenderForm_Load(object sender, EventArgs e)
@@ -35,6 +36,8 @@ namespace RenderReport
             }
                         
             mainReportTree.ExpandAll();
+
+            
         }
 
         private void StartRenderButton_Click(object sender, EventArgs e)
@@ -46,10 +49,17 @@ namespace RenderReport
                 string reportPath = reportItem.Path;
                 string filePath = String.Format("{0}\\{1}.pdf", baseFilePath, reportItem.Name);
 
+                renderProgressBar.Visible = true;
+
                 ReportRenderer renderer = new ReportRenderer(rs);
-                Byte[] data = renderer.render(reportPath);
-                renderer.saveBytes(filePath, data);
+                renderer.RenderAsyncComplete += renderer_RenderAsyncComplete;
+                renderer.renderAsync(reportPath, filePath);
             }
+        }
+
+        private void renderer_RenderAsyncComplete(object sender, EventArgs e)
+        {
+            renderProgressBar.Visible = false;
         }
 
         private void GetParmsButton_Click(object sender, EventArgs e)
@@ -65,9 +75,6 @@ namespace RenderReport
                 paramSelect.Show(this);
             
             }
-
-
-
         }
 
         private void targetDirLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -84,42 +91,5 @@ namespace RenderReport
         }
     }
 
-    // wrapper for the reporting services render method. Its a complicated method, so
-    // better to make a wrapper.
-    public class ReportRenderer
-    {
-        ReportingService rs;
-        string renderFormat = "PDF";
 
-        public ReportRenderer(ReportingService newRs) 
-        {
-            this.rs = newRs;
-        }
-
-        // renders the report, and returns a byte array of whatever was created
-        public Byte[] render(string reportPath)
-        {
-            // we don't really care about these, but the render method needs them as 'out' params
-            string encoding;
-            string mimeType;
-            ParameterValue[] reportHistoryParameters = null;
-            Warning[] warnings = null;
-            string[] streamIDs = null;
-
-            Byte[] data = rs.Render(reportPath, renderFormat, null, null, null, null, null, out encoding, out mimeType, out reportHistoryParameters, out warnings, out streamIDs);
-
-            return data;
-        }
-
-        public void saveBytes(string filePath, Byte[] data)
-        {
-            FileStream fp = new FileStream(filePath, FileMode.Create, FileAccess.Write);
-            BinaryWriter bw = new BinaryWriter(fp);
-
-            bw.Write(data);
-
-            bw.Close();
-            fp.Close();
-        }
-    }
 }

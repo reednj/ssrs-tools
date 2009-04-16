@@ -44,6 +44,7 @@
     <Compile Include="ParameterSelect.Designer.cs">
       <DependentUpon>ParameterSelect.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportRenderer.cs" />
     <Compile Include="ReportRenderForm.cs">
       <SubType>Form</SubType>
     </Compile>

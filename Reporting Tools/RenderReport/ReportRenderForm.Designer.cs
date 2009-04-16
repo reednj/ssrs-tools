@@ -35,8 +35,12 @@ namespace RenderReport
             this.GetParmsButton = new System.Windows.Forms.Button();
             this.StartRenderButton = new System.Windows.Forms.Button();
             this.folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.renderStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.renderProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.mainReportTree = new RenderReport.ReportTree();
             this.ToolGroupBox.SuspendLayout();
+            this.mainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolGroupBox
@@ -111,6 +115,30 @@ namespace RenderReport
             this.StartRenderButton.UseVisualStyleBackColor = true;
             this.StartRenderButton.Click += new System.EventHandler(this.StartRenderButton_Click);
             // 
+            // mainStatusStrip
+            // 
+            this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.renderStatusLabel,
+            this.renderProgressBar});
+            this.mainStatusStrip.Location = new System.Drawing.Point(0, 409);
+            this.mainStatusStrip.Name = "mainStatusStrip";
+            this.mainStatusStrip.Size = new System.Drawing.Size(519, 22);
+            this.mainStatusStrip.TabIndex = 3;
+            this.mainStatusStrip.Text = "statusStrip1";
+            // 
+            // renderStatusLabel
+            // 
+            this.renderStatusLabel.Name = "renderStatusLabel";
+            this.renderStatusLabel.Size = new System.Drawing.Size(19, 17);
+            this.renderStatusLabel.Text = "...";
+            // 
+            // renderProgressBar
+            // 
+            this.renderProgressBar.Name = "renderProgressBar";
+            this.renderProgressBar.Size = new System.Drawing.Size(100, 16);
+            this.renderProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.renderProgressBar.Visible = false;
+            // 
             // mainReportTree
             // 
             this.mainReportTree.Location = new System.Drawing.Point(12, 12);
@@ -121,6 +149,7 @@ namespace RenderReport
             // ReportRenderForm
             // 
             this.ClientSize = new System.Drawing.Size(519, 431);
+            this.Controls.Add(this.mainStatusStrip);
             this.Controls.Add(this.ToolGroupBox);
             this.Controls.Add(this.mainReportTree);
             this.Name = "ReportRenderForm";
@@ -128,7 +157,10 @@ namespace RenderReport
             this.Load += new System.EventHandler(this.ReportRenderForm_Load);
             this.ToolGroupBox.ResumeLayout(false);
             this.ToolGroupBox.PerformLayout();
+            this.mainStatusStrip.ResumeLayout(false);
+            this.mainStatusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -142,6 +174,9 @@ namespace RenderReport
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel targetDirLink;
         private System.Windows.Forms.FolderBrowserDialog folderBrowser;
+        private System.Windows.Forms.StatusStrip mainStatusStrip;
+        private System.Windows.Forms.ToolStripProgressBar renderProgressBar;
+        private System.Windows.Forms.ToolStripStatusLabel renderStatusLabel;
     }
 }
 
