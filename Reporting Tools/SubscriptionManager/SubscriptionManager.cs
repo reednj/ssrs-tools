@@ -11,9 +11,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-using Reporting_Tools.ReportService;
+using ReportingTools.Common.ReportService;
 
-namespace Reporting_Tools
+namespace ReportingTools.SubscriptionManager
 {
     public partial class SubscriptionManager : Form
     {

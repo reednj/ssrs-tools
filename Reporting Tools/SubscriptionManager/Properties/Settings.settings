@@ -1,9 +1,0 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Reporting_Tools.Properties" GeneratedClassName="Settings">
-  <Profiles />
-  <Settings>
-    <Setting Name="Reporting_Tools_ReportService_ReportingService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://hydrogen/ReportServer/ReportService.asmx</Value>
-    </Setting>
-  </Settings>
-</SettingsFile>

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 
 using System.Windows.Forms;
-using RenderReport.ReportService;
+using ReportingTools.Common.ReportService;
 
-namespace RenderReport
+namespace ReportingTools.RenderReport
 {
     public class ReportTree : TreeView
     {

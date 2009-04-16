@@ -1,0 +1,6 @@
+bin\Debug\ReportingToolsCommon.dll.config
+bin\Debug\ReportingToolsCommon.dll
+bin\Debug\ReportingToolsCommon.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\ReportingToolsCommon.dll
+obj\Debug\ReportingToolsCommon.pdb

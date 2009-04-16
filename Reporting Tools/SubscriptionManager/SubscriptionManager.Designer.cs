@@ -1,4 +1,4 @@
-namespace Reporting_Tools
+namespace ReportingTools.SubscriptionManager
 {
     partial class SubscriptionManager
     {
@@ -42,7 +42,7 @@ namespace Reporting_Tools
             this.triggerSubscriptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mainSubTree = new Reporting_Tools.SubscriptionTree();
+            this.mainSubTree = new ReportingTools.SubscriptionManager.SubscriptionTree();
             this.detailsBox.SuspendLayout();
             this.subTreeMenu.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();

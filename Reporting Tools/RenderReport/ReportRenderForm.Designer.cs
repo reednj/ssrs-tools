@@ -1,4 +1,4 @@
-namespace RenderReport
+namespace ReportingTools.RenderReport
 {
     partial class ReportRenderForm
     {
@@ -38,7 +38,7 @@ namespace RenderReport
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.renderStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.renderProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.mainReportTree = new RenderReport.ReportTree();
+            this.mainReportTree = new ReportingTools.RenderReport.ReportTree();
             this.ToolGroupBox.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +60,7 @@ namespace RenderReport
             // 
             this.targetDirLink.AutoSize = true;
             this.targetDirLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.targetDirLink.Image = global::RenderReport.Properties.Resources.Folder;
+            //this.targetDirLink.Image = global::ReportingTools.RenderReport.Properties.Resources.Folder;
             this.targetDirLink.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.targetDirLink.LinkColor = System.Drawing.Color.DodgerBlue;
             this.targetDirLink.Location = new System.Drawing.Point(103, 16);

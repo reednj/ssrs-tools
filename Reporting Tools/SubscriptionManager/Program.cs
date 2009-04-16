@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Reporting_Tools
+namespace ReportingTools.SubscriptionManager
 {
     static class Program
     {

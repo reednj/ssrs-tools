@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using RenderReport.ReportService;
+using ReportingTools.Common.ReportService;
 using System.Threading;
 using System.IO;
 
-namespace RenderReport
+namespace ReportingTools.RenderReport
 {
     // wrapper for the reporting services render method. Its a complicated method, so
     // better to make a wrapper.

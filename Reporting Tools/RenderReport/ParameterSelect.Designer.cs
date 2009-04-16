@@ -1,4 +1,4 @@
-namespace RenderReport
+namespace ReportingTools.RenderReport
 {
     partial class ParameterSelectForm
     {

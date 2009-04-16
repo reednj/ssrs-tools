@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Reporting_Tools.Properties {
+namespace ReportingTools.Common.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -27,9 +27,9 @@ namespace Reporting_Tools.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://hydrogen/ReportServer/ReportService.asmx")]
-        public string Reporting_Tools_ReportService_ReportingService {
+        public string ReportingToolsCommon_ReportService_ReportingService {
             get {
-                return ((string)(this["Reporting_Tools_ReportService_ReportingService"]));
+                return ((string)(this["ReportingToolsCommon_ReportService_ReportingService"]));
             }
         }
     }

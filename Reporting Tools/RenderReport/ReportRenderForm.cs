@@ -8,9 +8,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-using RenderReport.ReportService;
+using ReportingTools.Common.ReportService;
 
-namespace RenderReport
+namespace ReportingTools.RenderReport
 {
     public partial class ReportRenderForm : Form
     {
