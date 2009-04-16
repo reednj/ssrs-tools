@@ -54,11 +54,13 @@ namespace RenderReport
             this.NameColumn.HeaderText = "Parameter Name";
             this.NameColumn.Name = "NameColumn";
             this.NameColumn.ReadOnly = true;
+            this.NameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // ValueColumn
             // 
             this.ValueColumn.HeaderText = "Value";
             this.ValueColumn.Name = "ValueColumn";
+            this.ValueColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // ParameterSelectForm
             // 

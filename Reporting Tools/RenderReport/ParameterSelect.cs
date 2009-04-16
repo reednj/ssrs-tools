@@ -22,7 +22,7 @@ namespace RenderReport
         public ParameterSelectForm(ReportParameter[] newReportParams)
         {
             this.reportParams = newReportParams;
-
+                        
             InitializeComponent();
         }
 
@@ -36,7 +36,32 @@ namespace RenderReport
                     // if the promp varible is null then parameter is probably hidden
                     if(curParam.Prompt.Length > 0) {
                         string currentValue = (curParam.DefaultValues != null)? curParam.DefaultValues[0]:"";
-                        paramGridView.Rows.Add(curParam.Prompt, currentValue);
+                        //string currentValue = (curParam.ValidValues != null)? curParam.ValidValues[0].Label:"";
+                        
+                        DataGridViewRow newRow = new DataGridViewRow();
+  
+                        DataGridViewTextBoxCell nameCell = new DataGridViewTextBoxCell();
+                        nameCell.Value = curParam.Name;
+                        newRow.Cells.Add(nameCell);
+                        
+  
+                        
+                        if(curParam.Name != "AreaId") {
+                            DataGridViewTextBoxCell valueCell = new DataGridViewTextBoxCell();
+                            valueCell.Value = currentValue;
+
+                            newRow.Cells.Add(valueCell);
+                        } else {
+                            DataGridViewComboBoxCell valueCell = new DataGridViewComboBoxCell();
+                            foreach(ValidValue curValue in curParam.ValidValues) {
+                                valueCell.Items.Add(curValue.Label);
+                            }
+
+                            newRow.Cells.Add(valueCell);                            
+                        }
+                        
+                        paramGridView.Rows.Add(newRow);
+                        
                     }
                 }
             }

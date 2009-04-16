@@ -7,11 +7,15 @@ using RenderReport.ReportService;
 
 namespace RenderReport
 {
-    public class ReportTree : TreeView 
+    public class ReportTree : TreeView
     {
+
         public ReportTree() : base() 
         {
-            this.Nodes.Add("Root", "Home");
+            // add the root node. Check if it has already been created in the vs designer
+            if(this.Nodes["Root"] == null) {
+                this.Nodes.Add("Root", "Home");
+            }
         }
 
         public void AddReport(CatalogItem curReport)
@@ -38,7 +42,11 @@ namespace RenderReport
             // curNode should be pointing to the final leaf of the item we addded
             // so set the tag...
             curNode.Tag = curReport;
+            curNode.ImageIndex = 1;
+            
         }
+
+
 
     }
 }

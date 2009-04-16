@@ -29,44 +29,87 @@ namespace RenderReport
         private void InitializeComponent()
         {
             this.ToolGroupBox = new System.Windows.Forms.GroupBox();
-            this.StartRenderButton = new System.Windows.Forms.Button();
+            this.targetDirLink = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
-            this.mainReportTree = new RenderReport.ReportTree();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.GetParmsButton = new System.Windows.Forms.Button();
+            this.StartRenderButton = new System.Windows.Forms.Button();
+            this.folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            this.mainReportTree = new RenderReport.ReportTree();
             this.ToolGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolGroupBox
             // 
-            this.ToolGroupBox.Controls.Add(this.GetParmsButton);
-            this.ToolGroupBox.Controls.Add(this.textBox1);
-            this.ToolGroupBox.Controls.Add(this.StartRenderButton);
+            this.ToolGroupBox.Controls.Add(this.targetDirLink);
             this.ToolGroupBox.Controls.Add(this.label1);
+            this.ToolGroupBox.Controls.Add(this.comboBox1);
+            this.ToolGroupBox.Controls.Add(this.GetParmsButton);
+            this.ToolGroupBox.Controls.Add(this.StartRenderButton);
             this.ToolGroupBox.Location = new System.Drawing.Point(13, 334);
             this.ToolGroupBox.Name = "ToolGroupBox";
-            this.ToolGroupBox.Size = new System.Drawing.Size(493, 193);
+            this.ToolGroupBox.Size = new System.Drawing.Size(493, 70);
             this.ToolGroupBox.TabIndex = 2;
             this.ToolGroupBox.TabStop = false;
             // 
-            // StartRenderButton
+            // targetDirLink
             // 
-            this.StartRenderButton.Location = new System.Drawing.Point(357, 24);
-            this.StartRenderButton.Name = "StartRenderButton";
-            this.StartRenderButton.Size = new System.Drawing.Size(57, 29);
-            this.StartRenderButton.TabIndex = 1;
-            this.StartRenderButton.Text = "go";
-            this.StartRenderButton.UseVisualStyleBackColor = true;
-            this.StartRenderButton.Click += new System.EventHandler(this.StartRenderButton_Click);
+            this.targetDirLink.AutoSize = true;
+            this.targetDirLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.targetDirLink.Image = global::RenderReport.Properties.Resources.Folder;
+            this.targetDirLink.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.targetDirLink.LinkColor = System.Drawing.Color.DodgerBlue;
+            this.targetDirLink.Location = new System.Drawing.Point(103, 16);
+            this.targetDirLink.Name = "targetDirLink";
+            this.targetDirLink.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.targetDirLink.Size = new System.Drawing.Size(80, 17);
+            this.targetDirLink.TabIndex = 8;
+            this.targetDirLink.TabStop = true;
+            this.targetDirLink.Text = "Desktop";
+            this.targetDirLink.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.targetDirLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.targetDirLink_LinkClicked);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 24);
+            this.label1.Location = new System.Drawing.Point(203, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Format:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "PNG",
+            "PDF",
+            "Web Archive"});
+            this.comboBox1.Location = new System.Drawing.Point(251, 15);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(119, 21);
+            this.comboBox1.TabIndex = 4;
+            // 
+            // GetParmsButton
+            // 
+            this.GetParmsButton.Location = new System.Drawing.Point(430, 40);
+            this.GetParmsButton.Name = "GetParmsButton";
+            this.GetParmsButton.Size = new System.Drawing.Size(57, 20);
+            this.GetParmsButton.TabIndex = 3;
+            this.GetParmsButton.Text = "Params";
+            this.GetParmsButton.UseVisualStyleBackColor = true;
+            this.GetParmsButton.Click += new System.EventHandler(this.GetParmsButton_Click);
+            // 
+            // StartRenderButton
+            // 
+            this.StartRenderButton.Location = new System.Drawing.Point(430, 14);
+            this.StartRenderButton.Name = "StartRenderButton";
+            this.StartRenderButton.Size = new System.Drawing.Size(57, 20);
+            this.StartRenderButton.TabIndex = 1;
+            this.StartRenderButton.Text = "Render";
+            this.StartRenderButton.UseVisualStyleBackColor = true;
+            this.StartRenderButton.Click += new System.EventHandler(this.StartRenderButton_Click);
             // 
             // mainReportTree
             // 
@@ -75,27 +118,9 @@ namespace RenderReport
             this.mainReportTree.Size = new System.Drawing.Size(495, 313);
             this.mainReportTree.TabIndex = 1;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(66, 24);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(241, 150);
-            this.textBox1.TabIndex = 2;
-            // 
-            // GetParmsButton
-            // 
-            this.GetParmsButton.Location = new System.Drawing.Point(365, 63);
-            this.GetParmsButton.Name = "GetParmsButton";
-            this.GetParmsButton.Size = new System.Drawing.Size(48, 20);
-            this.GetParmsButton.TabIndex = 3;
-            this.GetParmsButton.Text = "button1";
-            this.GetParmsButton.UseVisualStyleBackColor = true;
-            this.GetParmsButton.Click += new System.EventHandler(this.GetParmsButton_Click);
-            // 
             // ReportRenderForm
             // 
-            this.ClientSize = new System.Drawing.Size(519, 553);
+            this.ClientSize = new System.Drawing.Size(519, 431);
             this.Controls.Add(this.ToolGroupBox);
             this.Controls.Add(this.mainReportTree);
             this.Name = "ReportRenderForm";
@@ -111,10 +136,12 @@ namespace RenderReport
 
         private ReportTree mainReportTree;
         private System.Windows.Forms.GroupBox ToolGroupBox;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button StartRenderButton;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button GetParmsButton;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel targetDirLink;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowser;
     }
 }
 

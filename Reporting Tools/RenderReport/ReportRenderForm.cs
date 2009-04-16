@@ -42,14 +42,14 @@ namespace RenderReport
             CatalogItem reportItem = mainReportTree.SelectedNode.Tag as CatalogItem;
 
             if(reportItem != null) {
+                string baseFilePath = targetDirLink.Tag as string;
                 string reportPath = reportItem.Path;
-                string filePath = String.Format("C:\\{0}.pdf", reportItem.Name);
+                string filePath = String.Format("{0}\\{1}.pdf", baseFilePath, reportItem.Name);
 
                 ReportRenderer renderer = new ReportRenderer(rs);
                 Byte[] data = renderer.render(reportPath);
                 renderer.saveBytes(filePath, data);
             }
-
         }
 
         private void GetParmsButton_Click(object sender, EventArgs e)
@@ -59,16 +59,28 @@ namespace RenderReport
             if(reportItem != null) {
                 string reportPath = reportItem.Path;
                 
-                ReportParameter[] reportParams = rs.GetReportParameters(reportPath, null, false, null, null);
+                ReportParameter[] reportParams = rs.GetReportParameters(reportPath, null, true, null, null);
 
                 ParameterSelectForm paramSelect = new ParameterSelectForm(reportParams);
                 paramSelect.Show(this);
             
             }
 
-            // open the parameter select dialog
-            
-            
+
+
+        }
+
+        private void targetDirLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            DialogResult selectResult = folderBrowser.ShowDialog();
+
+            if(selectResult == DialogResult.OK) {
+                // split the selected path into an array of folders...
+                string[] folders = folderBrowser.SelectedPath.Split('\\');
+
+                targetDirLink.Tag = folderBrowser.SelectedPath;
+                targetDirLink.Text = folders[folders.Length-1];
+            }
         }
     }
 
@@ -77,6 +89,7 @@ namespace RenderReport
     public class ReportRenderer
     {
         ReportingService rs;
+        string renderFormat = "PDF";
 
         public ReportRenderer(ReportingService newRs) 
         {
@@ -93,7 +106,7 @@ namespace RenderReport
             Warning[] warnings = null;
             string[] streamIDs = null;
 
-            Byte[] data = rs.Render(reportPath, "PDF", null, null, null, null, null, out encoding, out mimeType, out reportHistoryParameters, out warnings, out streamIDs);
+            Byte[] data = rs.Render(reportPath, renderFormat, null, null, null, null, null, out encoding, out mimeType, out reportHistoryParameters, out warnings, out streamIDs);
 
             return data;
         }
