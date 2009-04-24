@@ -29,12 +29,15 @@ namespace ReportingTools.JobManager
         private void InitializeComponent()
         {
             this.jobListView = new System.Windows.Forms.ListView();
-            this.killJobButton = new System.Windows.Forms.Button();
-            this.refreshButton = new System.Windows.Forms.Button();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.killJobButton = new System.Windows.Forms.Button();
+            this.refreshButton = new System.Windows.Forms.Button();
+            this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.mainStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // jobListView
@@ -51,24 +54,6 @@ namespace ReportingTools.JobManager
             this.jobListView.TabIndex = 0;
             this.jobListView.UseCompatibleStateImageBehavior = false;
             this.jobListView.View = System.Windows.Forms.View.Details;
-            // 
-            // killJobButton
-            // 
-            this.killJobButton.Location = new System.Drawing.Point(484, 260);
-            this.killJobButton.Name = "killJobButton";
-            this.killJobButton.Size = new System.Drawing.Size(97, 26);
-            this.killJobButton.TabIndex = 1;
-            this.killJobButton.Text = "Stop Job";
-            this.killJobButton.UseVisualStyleBackColor = true;
-            // 
-            // refreshButton
-            // 
-            this.refreshButton.Location = new System.Drawing.Point(381, 260);
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(97, 26);
-            this.refreshButton.TabIndex = 2;
-            this.refreshButton.Text = "Refresh";
-            this.refreshButton.UseVisualStyleBackColor = true;
             // 
             // columnHeader1
             // 
@@ -87,18 +72,58 @@ namespace ReportingTools.JobManager
             // 
             this.columnHeader4.Text = "Time";
             // 
+            // killJobButton
+            // 
+            this.killJobButton.Location = new System.Drawing.Point(484, 260);
+            this.killJobButton.Name = "killJobButton";
+            this.killJobButton.Size = new System.Drawing.Size(97, 26);
+            this.killJobButton.TabIndex = 1;
+            this.killJobButton.Text = "Stop Job";
+            this.killJobButton.UseVisualStyleBackColor = true;
+            this.killJobButton.Click += new System.EventHandler(this.killJobButton_Click);
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.Location = new System.Drawing.Point(381, 260);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(97, 26);
+            this.refreshButton.TabIndex = 2;
+            this.refreshButton.Text = "Refresh";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
+            // mainStatusStrip
+            // 
+            this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainStatusLabel});
+            this.mainStatusStrip.Location = new System.Drawing.Point(0, 293);
+            this.mainStatusStrip.Name = "mainStatusStrip";
+            this.mainStatusStrip.Size = new System.Drawing.Size(592, 22);
+            this.mainStatusStrip.TabIndex = 3;
+            this.mainStatusStrip.Text = "statusStrip1";
+            // 
+            // mainStatusLabel
+            // 
+            this.mainStatusLabel.Name = "mainStatusLabel";
+            this.mainStatusLabel.Size = new System.Drawing.Size(19, 17);
+            this.mainStatusLabel.Text = "...";
+            // 
             // JobManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 293);
+            this.ClientSize = new System.Drawing.Size(592, 315);
+            this.Controls.Add(this.mainStatusStrip);
             this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.killJobButton);
             this.Controls.Add(this.jobListView);
             this.Name = "JobManagerForm";
             this.Text = "Job Manager";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.mainStatusStrip.ResumeLayout(false);
+            this.mainStatusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -111,6 +136,8 @@ namespace ReportingTools.JobManager
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.StatusStrip mainStatusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel mainStatusLabel;
 
     }
 }

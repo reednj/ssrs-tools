@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
+using ReportingTools.Common;
 using ReportingTools.Common.ReportService;
 
 namespace ReportingTools.SubscriptionManager
@@ -138,13 +139,7 @@ namespace ReportingTools.SubscriptionManager
         }
     }
 
-    public enum ServiceState {
-        Disconnected,
-        Connected,
-        LoadingList,
-        LoadingEvent,
-        Error       
-    }
+
 
     // specilized treeview for showing the subscriptions on a given server
     public class SubscriptionTree : TreeView {

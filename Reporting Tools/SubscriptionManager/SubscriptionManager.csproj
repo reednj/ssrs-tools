@@ -38,7 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SubscriptionManager.cs">
-      <SubType>Component</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SubscriptionManager.Designer.cs">
       <DependentUpon>SubscriptionManager.cs</DependentUpon>
@@ -49,9 +49,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>SubscriptionManager.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReportingToolsCommon\ReportingToolsCommon.csproj">
