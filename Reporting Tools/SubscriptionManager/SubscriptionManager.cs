@@ -32,6 +32,7 @@ namespace ReportingTools.SubscriptionManager
             
             // set the event handlers. Should do this in the constructor?
             rs.ListSubscriptionsCompleted += SubscriptionLoadComplete;
+            rs.FireEventCompleted += triggerSubscriptionComplete;
             
             // get the subscription list...
             changeState(ServiceState.LoadingList);
@@ -78,6 +79,20 @@ namespace ReportingTools.SubscriptionManager
             rs.ListSubscriptionsAsync(null, null);
         }
 
+        private void triggerSubscription(Subscription curSub)
+        {
+            // trigger the currently selected subscription
+            if(curSub != null) {
+                try {
+                    changeState(ServiceState.LoadingEvent);
+                    rs.FireEventAsync(curSub.EventType, curSub.SubscriptionID);
+                    changeState(ServiceState.Connected);
+                } catch {
+                    changeState(ServiceState.Error);
+                }
+            }
+        }
+
         // change the state varible, set any messages etc
         private void changeState(ServiceState newState)
         {
@@ -90,10 +105,10 @@ namespace ReportingTools.SubscriptionManager
             curState = newState;
         }
 
+
         /*
          * Right click menu event handlers 
          */
-
         private void mainSubTree_MouseUp(object sender, MouseEventArgs e)
         {
             // show the right click menu..
@@ -116,24 +131,23 @@ namespace ReportingTools.SubscriptionManager
 
         private void triggerSubscriptionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // get the selected item
             Subscription curSub = mainSubTree.SelectedNode.Tag as Subscription;
+            triggerSubscription(curSub);
+        }
 
-            // trigger the currently selected subscription
-            if(curSub != null) {
-                try {
-                    
-                    changeState(ServiceState.LoadingEvent);
-                    rs.FireEvent(curSub.EventType, curSub.SubscriptionID);
-                    changeState(ServiceState.Connected);
 
-                } catch {
-                    changeState(ServiceState.Error);
-                }
-            }
+
+        private void triggerSubscriptionComplete(object sender, EventArgs e)
+        {
+            changeState(ServiceState.Connected);
         }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            reloadSubscriptions();
+        }
+
+        private void refreshToolButton_Click(object sender, EventArgs e)
         {
             reloadSubscriptions();
         }
@@ -143,11 +157,16 @@ namespace ReportingTools.SubscriptionManager
 
     // specilized treeview for showing the subscriptions on a given server
     public class SubscriptionTree : TreeView {
+        const string REPORT_ICON = "Report.png";
+        const string SUB_ICON = "Subscription.png";
+
 
         // just add a root nodes called "reports" or something similar
         public SubscriptionTree() : base() 
         {
-            this.Nodes.Add("Root", "Reports");
+            if(this.Nodes.Find("Root", false).Length == 0) {
+                this.Nodes.Add("Root", "Reports");
+            }
         }
 
         public void AddSubscription(Subscription[] subList) 
@@ -163,13 +182,21 @@ namespace ReportingTools.SubscriptionManager
         {
             // does this report exist in the list already? if not then add it
             if(this.Nodes.Find(curSub.Report, true).Length == 0) {
-                this.Nodes["Root"].Nodes.Add(curSub.Report, curSub.Report);
+                TreeNode reportNode = new TreeNode(curSub.Report);
+                
+                reportNode.Name = curSub.Report;
+                reportNode.ImageKey = REPORT_ICON;
+                reportNode.SelectedImageKey = REPORT_ICON;
+
+                this.Nodes["Root"].Nodes.Add(reportNode);
             }
         
             // create the new subscription node, and associate the actual subscription object
             // with it
             TreeNode newNode = new TreeNode(curSub.Description);
             newNode.Tag = curSub;
+            newNode.ImageKey = SUB_ICON;
+            newNode.SelectedImageKey = SUB_ICON;
 
             this.Nodes["Root"].Nodes[curSub.Report].Nodes.Add(newNode);
         }
