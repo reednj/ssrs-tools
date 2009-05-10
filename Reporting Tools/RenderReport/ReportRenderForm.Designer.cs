@@ -28,6 +28,7 @@ namespace ReportingTools.RenderReport
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Home");
             this.ToolGroupBox = new System.Windows.Forms.GroupBox();
             this.targetDirLink = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
@@ -60,7 +61,7 @@ namespace ReportingTools.RenderReport
             // 
             this.targetDirLink.AutoSize = true;
             this.targetDirLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            //this.targetDirLink.Image = global::ReportingTools.RenderReport.Properties.Resources.Folder;
+            this.targetDirLink.Image = global::RenderReport.Properties.Resources.folder_icon;
             this.targetDirLink.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.targetDirLink.LinkColor = System.Drawing.Color.DodgerBlue;
             this.targetDirLink.Location = new System.Drawing.Point(103, 16);
@@ -143,6 +144,10 @@ namespace ReportingTools.RenderReport
             // 
             this.mainReportTree.Location = new System.Drawing.Point(12, 12);
             this.mainReportTree.Name = "mainReportTree";
+            treeNode1.Name = "Root";
+            treeNode1.Text = "Home";
+            this.mainReportTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
             this.mainReportTree.Size = new System.Drawing.Size(495, 313);
             this.mainReportTree.TabIndex = 1;
             // 

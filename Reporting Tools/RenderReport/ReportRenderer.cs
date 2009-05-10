@@ -21,41 +21,44 @@ namespace ReportingTools.RenderReport
         public ReportRenderer(ReportingService newRs) 
         {
             this.rs = newRs;
+            rs.RenderCompleted += renderComplete;
         }
 
         public void renderAsync(string reportPath, string filePath)
         {
-            ThreadPool.QueueUserWorkItem(renderAsyncCallBack, new RendererThreadArgs(reportPath, filePath));
+            //ThreadPool.QueueUserWorkItem(renderAsyncCallBack, new RendererThreadArgs(reportPath, filePath));
+            render(reportPath);            
         }
 
-        private void renderAsyncCallBack(object reportArgsObj)
-        {
-            RendererThreadArgs reportArgs = reportArgsObj as RendererThreadArgs;
-            renderToFile(reportArgs.reportPath, reportArgs.filePath);
+        //private void renderAsyncCallBack(object reportArgsObj)
+        //{
+        //    RendererThreadArgs reportArgs = reportArgsObj as RendererThreadArgs;
+        //    renderToFile(reportArgs.reportPath, reportArgs.filePath);
 
-            // raise the render complete event...
-            RenderAsyncComplete(this, null);
-        }
+        //    // raise the render complete event...
+        //    RenderAsyncComplete(this, null);
+        //}
 
         // renders the report, and returns a byte array of whatever was created
-        public Byte[] render(string reportPath)
+
+        //public void renderToFile(string reportPath, string filePath)
+        //{
+        //    Byte[] data = render(reportPath);
+        //    saveBytes(filePath, data);
+        //}
+
+        public void render(string reportPath)
         {
-            // we don't really care about these, but the render method needs them as 'out' params
-            string encoding;
-            string mimeType;
-            ParameterValue[] reportHistoryParameters = null;
-            Warning[] warnings = null;
-            string[] streamIDs = null;
-
-            Byte[] data = rs.Render(reportPath, renderFormat, null, null, null, null, null, out encoding, out mimeType, out reportHistoryParameters, out warnings, out streamIDs);
-
-            return data;
+            rs.RenderAsync(reportPath, renderFormat, null, null, null, null, null);
         }
 
-        public void renderToFile(string reportPath, string filePath)
+        public void renderComplete(object sender, RenderCompletedEventArgs e)
         {
-            Byte[] data = render(reportPath);
-            saveBytes(filePath, data);
+            Byte[] data = e.Result;
+
+            saveBytes("C:\\test.pdf", data);
+
+            RenderAsyncComplete(this, null);
         }
 
         private static void saveBytes(string filePath, Byte[] data)
