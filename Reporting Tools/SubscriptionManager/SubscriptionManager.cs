@@ -83,15 +83,21 @@ namespace ReportingTools.SubscriptionManager
         {
             // trigger the currently selected subscription
             if(curSub != null) {
-                try {
-                    changeState(ServiceState.LoadingEvent);
-                    rs.FireEventAsync(curSub.EventType, curSub.SubscriptionID);
-                    changeState(ServiceState.Connected);
-                } catch {
-                    changeState(ServiceState.Error);
-                }
+                changeState(ServiceState.LoadingEvent);
+                rs.FireEventAsync(curSub.EventType, curSub.SubscriptionID);
             }
         }
+        
+        private void triggerSubscriptionComplete(object sender, AsyncCompletedEventArgs e)
+        {
+            if(e.Error == null) {
+                changeState(ServiceState.Connected);
+            } else {
+                // could not fire the subscription for some reason...
+                changeState(ServiceState.Error);
+            }
+        }
+
 
         // change the state varible, set any messages etc
         private void changeState(ServiceState newState)
@@ -99,12 +105,32 @@ namespace ReportingTools.SubscriptionManager
             if(newState == ServiceState.LoadingList) {
                 statusLabel.Text = "Loading...";
             } else if(newState == ServiceState.Connected) {
-                statusLabel.Text = "Connected to <SERVERNAME>";
+                statusLabel.Text = String.Format("Connected to '{0}'", ReportServerUrl.GetServerName(rs.Url));
+            } else if(newState == ServiceState.Error) {
+                statusLabel.Text = "Could not complete command";
             }
 
             curState = newState;
         }
 
+        public class ReportServerUrl
+        {
+            // convert a server url like 'http://hydrogen/reportserver/blah.asmx' to 'hydrogen'
+            public static string GetServerName(string serverUrl)
+            {
+                string result = serverUrl;
+                
+
+                // make sure we have an actual url here
+                try {
+                    Uri serverUri = new Uri(serverUrl);
+                    result = serverUri.Host;
+                } catch {
+                }
+
+                return result;
+            }
+        }
 
         /*
          * Right click menu event handlers 
@@ -136,12 +162,6 @@ namespace ReportingTools.SubscriptionManager
         }
 
 
-
-        private void triggerSubscriptionComplete(object sender, EventArgs e)
-        {
-            changeState(ServiceState.Connected);
-        }
-
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             reloadSubscriptions();
@@ -164,7 +184,7 @@ namespace ReportingTools.SubscriptionManager
         // just add a root nodes called "reports" or something similar
         public SubscriptionTree() : base() 
         {
-            if(this.Nodes.Find("Root", false).Length == 0) {
+            if(this.Nodes.Find("Root", true).Length == 0) {
                 this.Nodes.Add("Root", "Reports");
             }
         }
@@ -197,6 +217,11 @@ namespace ReportingTools.SubscriptionManager
             newNode.Tag = curSub;
             newNode.ImageKey = SUB_ICON;
             newNode.SelectedImageKey = SUB_ICON;
+            
+            // set the color, if the subscription has probably failed recently
+            if(curSub.Status.Contains("Failure")) {
+                newNode.BackColor = Color.Pink;
+            }
 
             this.Nodes["Root"].Nodes[curSub.Report].Nodes.Add(newNode);
         }

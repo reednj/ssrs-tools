@@ -31,7 +31,6 @@ namespace ReportingTools.SubscriptionManager
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SubscriptionManager));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Reports");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Reports");
             this.detailsBox = new System.Windows.Forms.GroupBox();
             this.subLastRanLabel = new System.Windows.Forms.Label();
             this.subLastResultLabel = new System.Windows.Forms.Label();
@@ -216,11 +215,8 @@ namespace ReportingTools.SubscriptionManager
             this.mainSubTree.Name = "mainSubTree";
             treeNode1.Name = "Root";
             treeNode1.Text = "Reports";
-            treeNode2.Name = "Root";
-            treeNode2.Text = "Reports";
             this.mainSubTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
+            treeNode1});
             this.mainSubTree.SelectedImageIndex = 0;
             this.mainSubTree.Size = new System.Drawing.Size(563, 305);
             this.mainSubTree.TabIndex = 2;
