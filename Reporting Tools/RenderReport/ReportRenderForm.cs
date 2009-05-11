@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Web.Services.Protocols;
 using ReportingTools.Common.ReportService;
+using System.Xml;
 
 namespace ReportingTools.RenderReport
 {
@@ -35,9 +37,10 @@ namespace ReportingTools.RenderReport
                         
             mainReportTree.ExpandAll();
 
-            // set the save directory if we have %USERPROFILE% or something in the path, then expand it
+            // set the save directory. if we have %USERPROFILE% or something in the path, then expand it
             setSavePath(Environment.ExpandEnvironmentVariables(DefaultRenderSavePath));
 
+            rs.RenderCompleted += renderer_RenderAsyncComplete;
         }
 
         private void StartRenderButton_Click(object sender, EventArgs e)
@@ -52,13 +55,26 @@ namespace ReportingTools.RenderReport
                 renderProgressBar.Visible = true;
 
                 ReportRenderer renderer = new ReportRenderer(rs);
-                renderer.RenderAsyncComplete += renderer_RenderAsyncComplete;
                 renderer.renderAsync(reportPath, filePath);
             }
         }
 
-        private void renderer_RenderAsyncComplete(object sender, EventArgs e)
+        private void renderer_RenderAsyncComplete(object sender, RenderCompletedEventArgs e)
         {
+            const string BAD_PARMS_ERROR = "rsReportParameterValueNotSet";
+
+            // TODO: refactor all this code, move the xml parsing out into some other class..
+            if(e.Error != null) {
+                // could not render the report for some reason
+                // probably there was a webservice exception
+                SoapException ex = e.Error as SoapException;
+                XmlNode xn = ex.Detail.SelectSingleNode("/*[local-name()='ErrorCode']");
+                
+                if(xn.InnerText == BAD_PARMS_ERROR) {
+                    MessageBox.Show("This report cannot be executed! Not all the parameters are set!");
+                }
+            }
+
             renderProgressBar.Visible = false;
         }
 
@@ -73,7 +89,6 @@ namespace ReportingTools.RenderReport
 
                 ParameterSelectForm paramSelect = new ParameterSelectForm(reportParams);
                 paramSelect.Show(this);
-            
             }
         }
 

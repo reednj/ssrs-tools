@@ -17,8 +17,7 @@ namespace ReportingTools.RenderReport
         string savePath = "C:\\default.pdf";
 
         public delegate void RenderAsyncCompleteHandler(object sender, EventArgs e);
-        public event RenderAsyncCompleteHandler RenderAsyncComplete;
-
+        
         public ReportRenderer(ReportingService newRs) 
         {
             this.rs = newRs;
@@ -38,9 +37,11 @@ namespace ReportingTools.RenderReport
 
         public void renderComplete(object sender, RenderCompletedEventArgs e)
         {
-            Byte[] data = e.Result;
-            saveBytes(savePath, data);
-            RenderAsyncComplete(this, null);
+            if(e.Error == null && e.Result != null) {
+                // if the render was successful then save the data
+                Byte[] data = e.Result;
+                saveBytes(savePath, data);
+            }
         }
 
         private static void saveBytes(string filePath, Byte[] data)
