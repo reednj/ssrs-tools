@@ -7,7 +7,7 @@
     <ProjectGuid>{D2296DD7-8BAF-4A8D-95C5-1E10F49C50D7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RenderReport</RootNamespace>
+    <RootNamespace>ReportingTools.RenderReport</RootNamespace>
     <AssemblyName>RenderReport</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -74,12 +74,22 @@
     <Compile Include="ReportTree.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\folder_icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Resources\Folder.ico" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <Content Include="Resources\Report.ico" />
   </ItemGroup>
   <ItemGroup>

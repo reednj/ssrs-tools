@@ -14,6 +14,7 @@ namespace ReportingTools.RenderReport
     {
         ReportingService rs;
         string renderFormat = "PDF";
+        string savePath = "C:\\default.pdf";
 
         public delegate void RenderAsyncCompleteHandler(object sender, EventArgs e);
         public event RenderAsyncCompleteHandler RenderAsyncComplete;
@@ -26,26 +27,9 @@ namespace ReportingTools.RenderReport
 
         public void renderAsync(string reportPath, string filePath)
         {
-            //ThreadPool.QueueUserWorkItem(renderAsyncCallBack, new RendererThreadArgs(reportPath, filePath));
+            savePath = filePath;
             render(reportPath);            
         }
-
-        //private void renderAsyncCallBack(object reportArgsObj)
-        //{
-        //    RendererThreadArgs reportArgs = reportArgsObj as RendererThreadArgs;
-        //    renderToFile(reportArgs.reportPath, reportArgs.filePath);
-
-        //    // raise the render complete event...
-        //    RenderAsyncComplete(this, null);
-        //}
-
-        // renders the report, and returns a byte array of whatever was created
-
-        //public void renderToFile(string reportPath, string filePath)
-        //{
-        //    Byte[] data = render(reportPath);
-        //    saveBytes(filePath, data);
-        //}
 
         public void render(string reportPath)
         {
@@ -55,9 +39,7 @@ namespace ReportingTools.RenderReport
         public void renderComplete(object sender, RenderCompletedEventArgs e)
         {
             Byte[] data = e.Result;
-
-            saveBytes("C:\\test.pdf", data);
-
+            saveBytes(savePath, data);
             RenderAsyncComplete(this, null);
         }
 

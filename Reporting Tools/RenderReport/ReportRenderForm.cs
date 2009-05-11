@@ -1,6 +1,4 @@
 using System;
-
-
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +13,7 @@ namespace ReportingTools.RenderReport
     public partial class ReportRenderForm : Form
     {
         ReportingService rs = new ReportingService();
+        string DefaultRenderSavePath = Properties.Settings.Default.DefaultSavePath;
 
         public ReportRenderForm()
         {
@@ -27,7 +26,6 @@ namespace ReportingTools.RenderReport
             rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
 
             CatalogItem[] serverItems =  rs.ListChildren("/", true);
-
             foreach(CatalogItem curItem in serverItems) {
 
                 if(curItem.Type == ItemTypeEnum.Report) {
@@ -37,7 +35,9 @@ namespace ReportingTools.RenderReport
                         
             mainReportTree.ExpandAll();
 
-            
+            // set the save directory if we have %USERPROFILE% or something in the path, then expand it
+            setSavePath(Environment.ExpandEnvironmentVariables(DefaultRenderSavePath));
+
         }
 
         private void StartRenderButton_Click(object sender, EventArgs e)
@@ -83,11 +83,21 @@ namespace ReportingTools.RenderReport
 
             if(selectResult == DialogResult.OK) {
                 // split the selected path into an array of folders...
-                string[] folders = folderBrowser.SelectedPath.Split('\\');
-
-                targetDirLink.Tag = folderBrowser.SelectedPath;
-                targetDirLink.Text = folders[folders.Length-1];
+                setSavePath(folderBrowser.SelectedPath);
             }
+        }
+
+        private void setSavePath(string Path)
+        {
+            // split the selected path into an array of folders...
+            string[] folders = Path.Split('\\');
+
+            targetDirLink.Tag = Path;
+            targetDirLink.Text = folders[folders.Length-1];
+
+            // save the settings to disk
+            Properties.Settings.Default.DefaultSavePath = Path;
+            Properties.Settings.Default.Save();
         }
     }
 

@@ -28,7 +28,6 @@ namespace ReportingTools.RenderReport
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Home");
             this.ToolGroupBox = new System.Windows.Forms.GroupBox();
             this.targetDirLink = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,10 +60,10 @@ namespace ReportingTools.RenderReport
             // 
             this.targetDirLink.AutoSize = true;
             this.targetDirLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.targetDirLink.Image = global::RenderReport.Properties.Resources.folder_icon;
+            this.targetDirLink.Image = global::ReportingTools.RenderReport.Properties.Resources.folder_icon;
             this.targetDirLink.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.targetDirLink.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.targetDirLink.Location = new System.Drawing.Point(103, 16);
+            this.targetDirLink.Location = new System.Drawing.Point(197, 38);
             this.targetDirLink.Name = "targetDirLink";
             this.targetDirLink.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.targetDirLink.Size = new System.Drawing.Size(80, 17);
@@ -77,7 +76,7 @@ namespace ReportingTools.RenderReport
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(203, 18);
+            this.label1.Location = new System.Drawing.Point(15, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 5;
@@ -91,7 +90,7 @@ namespace ReportingTools.RenderReport
             "PNG",
             "PDF",
             "Web Archive"});
-            this.comboBox1.Location = new System.Drawing.Point(251, 15);
+            this.comboBox1.Location = new System.Drawing.Point(63, 37);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(119, 21);
             this.comboBox1.TabIndex = 4;
@@ -144,10 +143,6 @@ namespace ReportingTools.RenderReport
             // 
             this.mainReportTree.Location = new System.Drawing.Point(12, 12);
             this.mainReportTree.Name = "mainReportTree";
-            treeNode1.Name = "Root";
-            treeNode1.Text = "Home";
-            this.mainReportTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
             this.mainReportTree.Size = new System.Drawing.Size(495, 313);
             this.mainReportTree.TabIndex = 1;
             // 
