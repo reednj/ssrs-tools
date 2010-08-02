@@ -30,7 +30,6 @@ namespace ReportingTools.SubscriptionManager
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SubscriptionManager));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Reports");
             this.detailsBox = new System.Windows.Forms.GroupBox();
             this.subLastRanLabel = new System.Windows.Forms.Label();
             this.subLastResultLabel = new System.Windows.Forms.Label();
@@ -187,6 +186,7 @@ namespace ReportingTools.SubscriptionManager
             this.mainToolStrip.Stretch = true;
             this.mainToolStrip.TabIndex = 5;
             this.mainToolStrip.Text = "toolStrip1";
+            this.mainToolStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mainToolStrip_ItemClicked);
             // 
             // refreshToolButton
             // 
@@ -213,15 +213,11 @@ namespace ReportingTools.SubscriptionManager
             this.mainSubTree.ImageList = this.iconList;
             this.mainSubTree.Location = new System.Drawing.Point(12, 28);
             this.mainSubTree.Name = "mainSubTree";
-            treeNode1.Name = "Root";
-            treeNode1.Text = "Reports";
-            this.mainSubTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
             this.mainSubTree.SelectedImageIndex = 0;
             this.mainSubTree.Size = new System.Drawing.Size(563, 305);
             this.mainSubTree.TabIndex = 2;
-            this.mainSubTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mainSubTree_AfterSelect);
             this.mainSubTree.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainSubTree_MouseUp);
+            this.mainSubTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mainSubTree_AfterSelect);
             // 
             // SubscriptionManager
             // 
@@ -232,7 +228,10 @@ namespace ReportingTools.SubscriptionManager
             this.Controls.Add(this.detailsBox);
             this.Controls.Add(this.mainSubTree);
             this.Controls.Add(this.mainStatusStrip);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "SubscriptionManager";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Subscription Manager";
             this.Load += new System.EventHandler(this.SubscriptionManager_Load);
             this.detailsBox.ResumeLayout(false);

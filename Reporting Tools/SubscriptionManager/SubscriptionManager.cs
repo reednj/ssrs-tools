@@ -29,22 +29,40 @@ namespace ReportingTools.SubscriptionManager
         private void SubscriptionManager_Load(object sender, EventArgs e)
         {
             rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
-            
-            // set the event handlers. Should do this in the constructor?
+
+            // set the event handlers
             rs.ListSubscriptionsCompleted += SubscriptionLoadComplete;
             rs.FireEventCompleted += triggerSubscriptionComplete;
-            
+
+            // we must start the list subscriptions thing as a background worker, 
+            // the built in async method connects first before returning, this can take
+            // 5-10 seconds, which is unacceptably long.
+            BackgroundWorker Subscription_Worker = new BackgroundWorker();
+            Subscription_Worker.DoWork += new DoWorkEventHandler(Subscription_Worker_DoWork);
+            Subscription_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Subscription_Worker_RunWorkerCompleted);
+            Subscription_Worker.RunWorkerAsync();
+        }
+
+        void Subscription_Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
             // get the subscription list...
             changeState(ServiceState.LoadingList);
-            rs.ListSubscriptionsAsync(null, null);
+            e.Result = rs.ListSubscriptions(null, null);
+        }
+
+        void Subscription_Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.LoadSubscriptions((Subscription[])e.Result);
         }
 
         private void SubscriptionLoadComplete(object sender, ListSubscriptionsCompletedEventArgs e)
         {
-            Subscription[] subList = e.Result;
-            mainSubTree.AddSubscription(subList);
+            this.LoadSubscriptions(e.Result);
+        }
 
-            // expand the root node only. leave the subscriptions hidden
+        private void LoadSubscriptions(Subscription[] subList)
+        {
+            mainSubTree.AddSubscription(subList);            
             mainSubTree.ExpandAll();
 
             changeState(ServiceState.Connected);
@@ -92,6 +110,7 @@ namespace ReportingTools.SubscriptionManager
         {
             if(e.Error == null) {
                 changeState(ServiceState.Connected);
+                statusLabel.Text = String.Format("subscription successfully triggered");
             } else {
                 // could not fire the subscription for some reason...
                 changeState(ServiceState.Error);
@@ -171,59 +190,13 @@ namespace ReportingTools.SubscriptionManager
         {
             reloadSubscriptions();
         }
+
+        private void mainToolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+
     }
 
-
-
-    // specilized treeview for showing the subscriptions on a given server
-    public class SubscriptionTree : TreeView {
-        const string REPORT_ICON = "Report.png";
-        const string SUB_ICON = "Subscription.png";
-
-
-        // just add a root nodes called "reports" or something similar
-        public SubscriptionTree() : base() 
-        {
-            if(this.Nodes.Find("Root", true).Length == 0) {
-                this.Nodes.Add("Root", "Reports");
-            }
-        }
-
-        public void AddSubscription(Subscription[] subList) 
-        {
-            foreach(Subscription curSub in subList) {
-                this.AddSubscription(curSub);
-            }
-        }
-
-        // adds a subscription to the treeview, checking to see if the report
-        // it is from is already there etc.
-        public void AddSubscription(Subscription curSub) 
-        {
-            // does this report exist in the list already? if not then add it
-            if(this.Nodes.Find(curSub.Report, true).Length == 0) {
-                TreeNode reportNode = new TreeNode(curSub.Report);
-                
-                reportNode.Name = curSub.Report;
-                reportNode.ImageKey = REPORT_ICON;
-                reportNode.SelectedImageKey = REPORT_ICON;
-
-                this.Nodes["Root"].Nodes.Add(reportNode);
-            }
-        
-            // create the new subscription node, and associate the actual subscription object
-            // with it
-            TreeNode newNode = new TreeNode(curSub.Description);
-            newNode.Tag = curSub;
-            newNode.ImageKey = SUB_ICON;
-            newNode.SelectedImageKey = SUB_ICON;
-            
-            // set the color, if the subscription has probably failed recently
-            if(curSub.Status.Contains("Failure")) {
-                newNode.BackColor = Color.Pink;
-            }
-
-            this.Nodes["Root"].Nodes[curSub.Report].Nodes.Add(newNode);
-        }
-    }
 }

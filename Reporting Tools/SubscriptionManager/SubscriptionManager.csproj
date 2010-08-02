@@ -42,8 +42,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SubscriptionManager.cs">
+    <Compile Include="SubscriptionTree.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SubscriptionTree.Designer.cs">
+      <DependentUpon>SubscriptionTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionManager.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SubscriptionManager.Designer.cs">
       <DependentUpon>SubscriptionManager.cs</DependentUpon>
