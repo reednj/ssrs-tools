@@ -21,10 +21,7 @@ namespace ReportingTools.SubscriptionManager
         public SubscriptionTree()
             : base()
         {
-            InitializeComponent();
-
-            this.Nodes.Clear();
-            this.Nodes.Add("Root", "Reports");         
+            InitializeComponent();     
         }
 
         public void AddSubscription(Subscription[] subList)

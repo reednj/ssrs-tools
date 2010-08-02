@@ -234,6 +234,7 @@ namespace ReportingTools.SubscriptionManager
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Subscription Manager";
             this.Load += new System.EventHandler(this.SubscriptionManager_Load);
+            this.Activated += new System.EventHandler(this.SubscriptionManager_Activated);
             this.detailsBox.ResumeLayout(false);
             this.detailsBox.PerformLayout();
             this.subTreeMenu.ResumeLayout(false);

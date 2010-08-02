@@ -28,7 +28,17 @@ namespace ReportingTools.SubscriptionManager
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Reports");
+            this.SuspendLayout();
+            // 
+            // SubscriptionTree
+            // 
+            treeNode1.Name = "Root";
+            treeNode1.Text = "Reports";
+            this.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            this.ResumeLayout(false);
+
         }
 
         #endregion

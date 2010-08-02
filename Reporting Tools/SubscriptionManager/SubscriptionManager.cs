@@ -18,6 +18,7 @@ namespace ReportingTools.SubscriptionManager
 {
     public partial class SubscriptionManager : Form
     {
+        bool _loadComplete = false;
         ServiceState curState = ServiceState.Disconnected;
         ReportingService rs = new ReportingService();
 
@@ -33,14 +34,31 @@ namespace ReportingTools.SubscriptionManager
             // set the event handlers
             rs.ListSubscriptionsCompleted += SubscriptionLoadComplete;
             rs.FireEventCompleted += triggerSubscriptionComplete;
+        }
 
-            // we must start the list subscriptions thing as a background worker, 
-            // the built in async method connects first before returning, this can take
-            // 5-10 seconds, which is unacceptably long.
-            BackgroundWorker Subscription_Worker = new BackgroundWorker();
-            Subscription_Worker.DoWork += new DoWorkEventHandler(Subscription_Worker_DoWork);
-            Subscription_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Subscription_Worker_RunWorkerCompleted);
-            Subscription_Worker.RunWorkerAsync();
+        private void SubscriptionManager_Activated(object sender, EventArgs e)
+        {
+            if (this._loadComplete == false)
+            {
+                this._loadComplete = true;
+
+                // we must start the list subscriptions thing as a background worker, 
+                // the built in async method connects first before returning, this can take
+                // 5-10 seconds, which is unacceptably long.
+                BackgroundWorker Subscription_Worker = new BackgroundWorker();
+                Subscription_Worker.DoWork += new DoWorkEventHandler(Subscription_Worker_DoWork);
+                Subscription_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Subscription_Worker_RunWorkerCompleted);
+
+                // show the login form, to select which server to connect to
+                LoginForm lf = new LoginForm();
+                if (lf.ShowDialog() == DialogResult.OK)
+                {
+                    // if the user click ok on the connection dialog box, set the rs url
+                    // and start getting the data. Otherwise to nothing...
+                    rs.Url = lf.ServerUrl.ToString();
+                    Subscription_Worker.RunWorkerAsync();
+                }
+            }
         }
 
         void Subscription_Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -195,6 +213,9 @@ namespace ReportingTools.SubscriptionManager
         {
 
         }
+
+
+
 
 
     }
