@@ -35,7 +35,7 @@ namespace ReportingTools.Common.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("hydrogen")]
         public string ServerName {
             get {
                 return ((string)(this["ServerName"]));

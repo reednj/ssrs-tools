@@ -26,6 +26,11 @@ namespace ReportingTools.Common
         {
             this.Activate();
             this.ActiveControl = this.ServerNameText;
+
+            if (Properties.Settings.Default.ServerName.Length > 0)
+            {
+                ServerNameText.Text = Properties.Settings.Default.ServerName;
+            }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -41,7 +46,10 @@ namespace ReportingTools.Common
 
             rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
             rs.Url = this.ServerUrl.ToString();
-        
+
+            Properties.Settings.Default.ServerName = this.ServerUrl.ServerName;
+            Properties.Settings.Default.Save();
+
             BackgroundWorker ListJobs_Worker = new BackgroundWorker();
             ListJobs_Worker.DoWork += new DoWorkEventHandler(ListJobs_Worker_DoWork);
             ListJobs_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ListJobs_Worker_RunWorkerCompleted);

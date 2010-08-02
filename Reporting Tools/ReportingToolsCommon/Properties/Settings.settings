@@ -6,7 +6,7 @@
       <Value Profile="(Default)">http://hydrogen/ReportServer/ReportService.asmx</Value>
     </Setting>
     <Setting Name="ServerName" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">hydrogen</Value>
     </Setting>
   </Settings>
 </SettingsFile>
