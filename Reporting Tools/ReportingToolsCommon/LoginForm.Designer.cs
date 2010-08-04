@@ -41,9 +41,11 @@ namespace ReportingTools.Common
             this.FormPanel = new System.Windows.Forms.Panel();
             this.SqlServerAuthPanel = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.ErrorLabel = new System.Windows.Forms.Label();
+            this.LoadingImg = new System.Windows.Forms.PictureBox();
+            this.ErrorLabel = new ReportingTools.Common.ImageLabel();
             this.FormPanel.SuspendLayout();
             this.SqlServerAuthPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LoadingImg)).BeginInit();
             this.SuspendLayout();
             // 
             // ServerNameText
@@ -168,14 +170,27 @@ namespace ReportingTools.Common
             this.label5.Size = new System.Drawing.Size(394, 2);
             this.label5.TabIndex = 11;
             // 
+            // LoadingImg
+            // 
+            this.LoadingImg.Image = global::ReportingTools.Common.Properties.Resources.loader;
+            this.LoadingImg.Location = new System.Drawing.Point(192, 241);
+            this.LoadingImg.Name = "LoadingImg";
+            this.LoadingImg.Size = new System.Drawing.Size(21, 23);
+            this.LoadingImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.LoadingImg.TabIndex = 14;
+            this.LoadingImg.TabStop = false;
+            this.LoadingImg.Visible = false;
+            // 
             // ErrorLabel
             // 
             this.ErrorLabel.AutoSize = true;
-            this.ErrorLabel.Location = new System.Drawing.Point(12, 205);
+            this.ErrorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ErrorLabel.Image = global::ReportingTools.Common.Properties.Resources.exclamation;
+            this.ErrorLabel.LabelText = "Error Message";
+            this.ErrorLabel.Location = new System.Drawing.Point(14, 209);
             this.ErrorLabel.Name = "ErrorLabel";
-            this.ErrorLabel.Size = new System.Drawing.Size(169, 13);
-            this.ErrorLabel.TabIndex = 12;
-            this.ErrorLabel.Text = "Error! Could not connect to server!";
+            this.ErrorLabel.Size = new System.Drawing.Size(108, 16);
+            this.ErrorLabel.TabIndex = 13;
             this.ErrorLabel.Visible = false;
             // 
             // LoginForm
@@ -183,6 +198,7 @@ namespace ReportingTools.Common
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(393, 276);
+            this.Controls.Add(this.LoadingImg);
             this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.FormPanel);
@@ -199,6 +215,7 @@ namespace ReportingTools.Common
             this.FormPanel.PerformLayout();
             this.SqlServerAuthPanel.ResumeLayout(false);
             this.SqlServerAuthPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LoadingImg)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,6 +236,7 @@ namespace ReportingTools.Common
         private System.Windows.Forms.Panel FormPanel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel SqlServerAuthPanel;
-        private System.Windows.Forms.Label ErrorLabel;
+        private ImageLabel ErrorLabel;
+        private System.Windows.Forms.PictureBox LoadingImg;
     }
 }

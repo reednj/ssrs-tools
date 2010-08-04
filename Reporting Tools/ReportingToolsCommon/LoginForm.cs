@@ -54,6 +54,7 @@ namespace ReportingTools.Common
             ListJobs_Worker.DoWork += new DoWorkEventHandler(ListJobs_Worker_DoWork);
             ListJobs_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ListJobs_Worker_RunWorkerCompleted);
 
+            LoadingImg.Visible = true;
             ConnectButton.Enabled = false;
             FormPanel.Enabled = false;
             ListJobs_Worker.RunWorkerAsync();
@@ -68,10 +69,11 @@ namespace ReportingTools.Common
         {
             if (e.Error != null)
             {
+                LoadingImg.Visible = false;
                 ConnectButton.Enabled = true;
                 FormPanel.Enabled = true;
                 ErrorLabel.Visible = true;
-                ErrorLabel.Text = "Error: " + e.Error.Message;
+                ErrorLabel.LabelText = "Error: " + e.Error.Message;
                 return;
             }
 
