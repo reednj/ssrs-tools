@@ -73,5 +73,12 @@ namespace ReportingTools.Common.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap login_banner {
+            get {
+                object obj = ResourceManager.GetObject("login_banner", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

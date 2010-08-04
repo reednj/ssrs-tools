@@ -45,10 +45,10 @@ namespace ReportingTools.SubscriptionManager
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.iconList = new System.Windows.Forms.ImageList(this.components);
             this.mainToolStrip = new System.Windows.Forms.ToolStrip();
-            this.mainSubTree = new ReportingTools.SubscriptionManager.SubscriptionTree();
             this.ConnectToolButton = new System.Windows.Forms.ToolStripButton();
             this.refreshToolButton = new System.Windows.Forms.ToolStripButton();
             this.triggerToolButton = new System.Windows.Forms.ToolStripButton();
+            this.mainSubTree = new ReportingTools.SubscriptionManager.SubscriptionTree();
             this.detailsBox.SuspendLayout();
             this.subTreeMenu.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
@@ -188,19 +188,6 @@ namespace ReportingTools.SubscriptionManager
             this.mainToolStrip.Stretch = true;
             this.mainToolStrip.TabIndex = 5;
             this.mainToolStrip.Text = "toolStrip1";
-            this.mainToolStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mainToolStrip_ItemClicked);
-            // 
-            // mainSubTree
-            // 
-            this.mainSubTree.ImageIndex = 0;
-            this.mainSubTree.ImageList = this.iconList;
-            this.mainSubTree.Location = new System.Drawing.Point(12, 28);
-            this.mainSubTree.Name = "mainSubTree";
-            this.mainSubTree.SelectedImageIndex = 0;
-            this.mainSubTree.Size = new System.Drawing.Size(563, 305);
-            this.mainSubTree.TabIndex = 2;
-            this.mainSubTree.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainSubTree_MouseUp);
-            this.mainSubTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mainSubTree_AfterSelect);
             // 
             // ConnectToolButton
             // 
@@ -210,6 +197,7 @@ namespace ReportingTools.SubscriptionManager
             this.ConnectToolButton.Name = "ConnectToolButton";
             this.ConnectToolButton.Size = new System.Drawing.Size(23, 22);
             this.ConnectToolButton.Text = "Connect";
+            this.ConnectToolButton.Click += new System.EventHandler(this.ConnectToolButton_Click);
             // 
             // refreshToolButton
             // 
@@ -229,6 +217,18 @@ namespace ReportingTools.SubscriptionManager
             this.triggerToolButton.Name = "triggerToolButton";
             this.triggerToolButton.Size = new System.Drawing.Size(23, 22);
             this.triggerToolButton.Text = "Trigger Subscription";
+            // 
+            // mainSubTree
+            // 
+            this.mainSubTree.ImageIndex = 0;
+            this.mainSubTree.ImageList = this.iconList;
+            this.mainSubTree.Location = new System.Drawing.Point(12, 28);
+            this.mainSubTree.Name = "mainSubTree";
+            this.mainSubTree.SelectedImageIndex = 0;
+            this.mainSubTree.Size = new System.Drawing.Size(563, 305);
+            this.mainSubTree.TabIndex = 2;
+            this.mainSubTree.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainSubTree_MouseUp);
+            this.mainSubTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mainSubTree_AfterSelect);
             // 
             // SubscriptionManager
             // 
@@ -260,7 +260,6 @@ namespace ReportingTools.SubscriptionManager
 
         #endregion
 
-        private SubscriptionTree mainSubTree;
         private System.Windows.Forms.GroupBox detailsBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -279,6 +278,7 @@ namespace ReportingTools.SubscriptionManager
         private System.Windows.Forms.ToolStripButton refreshToolButton;
         private System.Windows.Forms.ToolStripButton triggerToolButton;
         private System.Windows.Forms.ToolStripButton ConnectToolButton;
+        private SubscriptionTree mainSubTree;
     }
 }
 

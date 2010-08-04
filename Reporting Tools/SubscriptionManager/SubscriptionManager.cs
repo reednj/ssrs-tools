@@ -21,6 +21,7 @@ namespace ReportingTools.SubscriptionManager
         bool _loadComplete = false;
         ServiceState curState = ServiceState.Disconnected;
         ReportingService rs = new ReportingService();
+        BackgroundWorker Subscription_Worker;
 
         public SubscriptionManager()
         {
@@ -45,12 +46,12 @@ namespace ReportingTools.SubscriptionManager
                 // we must start the list subscriptions thing as a background worker, 
                 // the built in async method connects first before returning, this can take
                 // 5-10 seconds, which is unacceptably long.
-                BackgroundWorker Subscription_Worker = new BackgroundWorker();
+                Subscription_Worker = new BackgroundWorker();
                 Subscription_Worker.DoWork += new DoWorkEventHandler(Subscription_Worker_DoWork);
                 Subscription_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Subscription_Worker_RunWorkerCompleted);
 
                 // show the login form, to select which server to connect to
-                LoginForm lf = new LoginForm();
+                LoginForm lf = new LoginForm(true);
                 if (lf.ShowDialog() == DialogResult.OK)
                 {
                     // if the user click ok on the connection dialog box, set the rs url
@@ -209,9 +210,25 @@ namespace ReportingTools.SubscriptionManager
             reloadSubscriptions();
         }
 
-        private void mainToolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void ConnectToolButton_Click(object sender, EventArgs e)
         {
-
+            if (curState == ServiceState.Disconnected)
+            {
+                LoginForm lf = new LoginForm();
+                if (lf.ShowDialog() == DialogResult.OK)
+                {
+                    // if the user click ok on the connection dialog box, set the rs url
+                    // and start getting the data. Otherwise to nothing...
+                    rs.Url = lf.ServerUrl.ToString();
+                    Subscription_Worker.RunWorkerAsync();
+                }
+            }
+            else
+            {
+                // disconnect. TODO: a general method to set the ui on a state change.
+                curState = ServiceState.Disconnected;
+                mainSubTree.Nodes["Root"].Nodes.Clear();
+            }
         }
 
 

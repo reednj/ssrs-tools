@@ -193,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="loader.gif" />
+    <None Include="Resources\login-banner.png" />
     <None Include="Resources\exclamation.png" />
     <None Include="Resources\loader.gif" />
   </ItemGroup>

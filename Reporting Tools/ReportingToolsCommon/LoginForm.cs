@@ -13,6 +13,7 @@ namespace ReportingTools.Common
 {
     public partial class LoginForm : Form
     {
+        bool WillAutoConnect = false;
         public SSRSUri ServerUrl = null;
         ReportingService rs = new ReportingService();
 
@@ -20,6 +21,14 @@ namespace ReportingTools.Common
         {
             InitializeComponent();
             AuthTypeCombo.SelectedIndex = 0;
+        }
+
+        public LoginForm(bool WillAutoConnect)
+        {
+            InitializeComponent();
+
+            AuthTypeCombo.SelectedIndex = 0;
+            this.WillAutoConnect = WillAutoConnect;
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -30,6 +39,16 @@ namespace ReportingTools.Common
             if (Properties.Settings.Default.ServerName.Length > 0)
             {
                 ServerNameText.Text = Properties.Settings.Default.ServerName;
+            }
+
+            AutoLoginCheck.Checked = Properties.Settings.Default.AutoConnect;
+            
+            // should we connect automatically. Was this loaded at start up, or triggered by the user?
+            if (this.WillAutoConnect == true && this.AutoLoginCheck.Checked == true)
+            {
+                // TODO: no magic push buttons please. 
+                // this connection stuff should be moved out into its own method.
+                ConnectButton.PerformClick();
             }
         }
 
@@ -48,6 +67,7 @@ namespace ReportingTools.Common
             rs.Url = this.ServerUrl.ToString();
 
             Properties.Settings.Default.ServerName = this.ServerUrl.ServerName;
+            Properties.Settings.Default.AutoConnect = AutoLoginCheck.Checked;
             Properties.Settings.Default.Save();
 
             BackgroundWorker ListJobs_Worker = new BackgroundWorker();
@@ -92,6 +112,7 @@ namespace ReportingTools.Common
                 SqlServerAuthPanel.Enabled = true;
             }
         }
+
 
     }
 
