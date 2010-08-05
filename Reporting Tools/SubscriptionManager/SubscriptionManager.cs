@@ -22,6 +22,7 @@ namespace ReportingTools.SubscriptionManager
         ServiceState curState = ServiceState.Disconnected;
         ReportingService rs = new ReportingService();
         BackgroundWorker Subscription_Worker;
+        SSRSUri ServerUrl = null;
 
         public SubscriptionManager()
         {
@@ -56,7 +57,8 @@ namespace ReportingTools.SubscriptionManager
                 {
                     // if the user click ok on the connection dialog box, set the rs url
                     // and start getting the data. Otherwise to nothing...
-                    rs.Url = lf.ServerUrl.ToUrl();
+                    this.ServerUrl = lf.ServerUrl;
+                    rs.Url = this.ServerUrl.ToUrl();
                     Subscription_Worker.RunWorkerAsync();
                 }
             }
@@ -145,14 +147,19 @@ namespace ReportingTools.SubscriptionManager
         // change the state varible, set any messages etc
         private void changeState(ServiceState newState, string Message)
         {
+            statusLabel.Image = null;
+
             if(newState == ServiceState.LoadingList) {
                 statusLabel.Text = "Loading...";
             } else if(newState == ServiceState.Connected) {
-                statusLabel.Text = String.Format("Connected to '{0}'", ReportServerUrl.GetServerName(rs.Url));
+                statusLabel.Text = String.Format("Connected to '{0}'", this.ServerUrl.FullName);
             } else if(newState == ServiceState.Error) {
                 if (Message != null)
                 {
+                    // webservice errors have weird messages. We need to parse the error to get rid of that
+                    // shit
                     Message = Message.Split(new string[] {"--->"}, 2, StringSplitOptions.None)[0];
+                    statusLabel.Image = Properties.Resources.exclamation;
                     statusLabel.Text = String.Format("Error: {0}", Message);
                 }
                 else
@@ -228,28 +235,6 @@ namespace ReportingTools.SubscriptionManager
         }
 
 
-    }
-
-    public class ReportServerUrl
-    {
-        // convert a server url like 'http://hydrogen/reportserver/blah.asmx' to 'hydrogen'
-        public static string GetServerName(string serverUrl)
-        {
-            string result = serverUrl;
-
-
-            // make sure we have an actual url here
-            try
-            {
-                Uri serverUri = new Uri(serverUrl);
-                result = serverUri.Host;
-            }
-            catch
-            {
-            }
-
-            return result;
-        }
     }
 
 }
