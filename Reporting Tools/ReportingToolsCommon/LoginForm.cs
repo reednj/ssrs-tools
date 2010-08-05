@@ -33,12 +33,17 @@ namespace ReportingTools.Common
 
         private void Login_Load(object sender, EventArgs e)
         {
+            this.AcceptButton = this.ConnectButton;
+            this.CancelButton = this.CloseButton;
+
             this.Activate();
             this.ActiveControl = this.ServerNameText;
 
             if (Properties.Settings.Default.ServerName.Length > 0)
             {
                 ServerNameText.Text = Properties.Settings.Default.ServerName;
+                ServerNameText.SelectionStart = ServerNameText.Text.Length;
+
             }
 
             AutoLoginCheck.Checked = Properties.Settings.Default.AutoConnect;

@@ -137,7 +137,6 @@ namespace ReportingTools.SubscriptionManager
             this.triggerSubscriptionToolStripMenuItem.Name = "triggerSubscriptionToolStripMenuItem";
             this.triggerSubscriptionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.triggerSubscriptionToolStripMenuItem.Text = "Trigger Subscription";
-            this.triggerSubscriptionToolStripMenuItem.Click += new System.EventHandler(this.triggerSubscriptionToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -218,6 +217,7 @@ namespace ReportingTools.SubscriptionManager
             this.triggerToolButton.Name = "triggerToolButton";
             this.triggerToolButton.Size = new System.Drawing.Size(23, 22);
             this.triggerToolButton.Text = "Trigger Subscription";
+            this.triggerToolButton.Click += new System.EventHandler(this.triggerToolButton_Click);
             // 
             // mainSubTree
             // 

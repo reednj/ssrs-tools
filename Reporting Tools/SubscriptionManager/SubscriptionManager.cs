@@ -187,13 +187,6 @@ namespace ReportingTools.SubscriptionManager
             }
         }
 
-        private void triggerSubscriptionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Subscription curSub = mainSubTree.SelectedNode.Tag as Subscription;
-            triggerSubscription(curSub);
-        }
-
-
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             reloadSubscriptions();
@@ -224,6 +217,12 @@ namespace ReportingTools.SubscriptionManager
                 rs.Url = this.ServerUrl.ToUrl();
                 Subscription_Worker.RunWorkerAsync();
             }
+        }
+
+        private void triggerToolButton_Click(object sender, EventArgs e)
+        {
+            Subscription curSub = mainSubTree.SelectedNode.Tag as Subscription;
+            triggerSubscription(curSub);
         }
 
 
