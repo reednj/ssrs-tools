@@ -49,6 +49,7 @@ namespace ReportingTools.SubscriptionManager
             this.refreshToolButton = new System.Windows.Forms.ToolStripButton();
             this.triggerToolButton = new System.Windows.Forms.ToolStripButton();
             this.mainSubTree = new ReportingTools.SubscriptionManager.SubscriptionTree();
+            this.StatusTimer = new System.Windows.Forms.Timer(this.components);
             this.detailsBox.SuspendLayout();
             this.subTreeMenu.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
@@ -137,6 +138,7 @@ namespace ReportingTools.SubscriptionManager
             this.triggerSubscriptionToolStripMenuItem.Name = "triggerSubscriptionToolStripMenuItem";
             this.triggerSubscriptionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.triggerSubscriptionToolStripMenuItem.Text = "Trigger Subscription";
+            this.triggerSubscriptionToolStripMenuItem.Click += new System.EventHandler(this.triggerSubscriptionToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -231,6 +233,11 @@ namespace ReportingTools.SubscriptionManager
             this.mainSubTree.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainSubTree_MouseUp);
             this.mainSubTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mainSubTree_AfterSelect);
             // 
+            // StatusTimer
+            // 
+            this.StatusTimer.Interval = 5000;
+            this.StatusTimer.Tick += new System.EventHandler(this.StatusTimer_Tick);
+            // 
             // SubscriptionManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -281,6 +288,7 @@ namespace ReportingTools.SubscriptionManager
         private System.Windows.Forms.ToolStripButton triggerToolButton;
         private System.Windows.Forms.ToolStripButton ConnectToolButton;
         private SubscriptionTree mainSubTree;
+        private System.Windows.Forms.Timer StatusTimer;
     }
 }
 
