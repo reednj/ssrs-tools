@@ -35,7 +35,7 @@ namespace ReportingTools.Common
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.PasswordText = new System.Windows.Forms.TextBox();
             this.ConnectButton = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
             this.FormPanel = new System.Windows.Forms.Panel();
@@ -73,7 +73,7 @@ namespace ReportingTools.Common
             this.AuthTypeCombo.FormattingEnabled = true;
             this.AuthTypeCombo.Items.AddRange(new object[] {
             "Windows Authentication",
-            "SQL Server Authentication"});
+            "Basic Authentication"});
             this.AuthTypeCombo.Location = new System.Drawing.Point(115, 29);
             this.AuthTypeCombo.Name = "AuthTypeCombo";
             this.AuthTypeCombo.Size = new System.Drawing.Size(245, 21);
@@ -114,12 +114,13 @@ namespace ReportingTools.Common
             this.label4.TabIndex = 7;
             this.label4.Text = "Password:";
             // 
-            // textBox3
+            // PasswordText
             // 
-            this.textBox3.Location = new System.Drawing.Point(127, 28);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(221, 20);
-            this.textBox3.TabIndex = 6;
+            this.PasswordText.Location = new System.Drawing.Point(127, 28);
+            this.PasswordText.Name = "PasswordText";
+            this.PasswordText.Size = new System.Drawing.Size(221, 20);
+            this.PasswordText.TabIndex = 6;
+            this.PasswordText.UseSystemPasswordChar = true;
             // 
             // ConnectButton
             // 
@@ -167,7 +168,7 @@ namespace ReportingTools.Common
             // SqlServerAuthPanel
             // 
             this.SqlServerAuthPanel.Controls.Add(this.label4);
-            this.SqlServerAuthPanel.Controls.Add(this.textBox3);
+            this.SqlServerAuthPanel.Controls.Add(this.PasswordText);
             this.SqlServerAuthPanel.Controls.Add(this.label3);
             this.SqlServerAuthPanel.Controls.Add(this.UsernameText);
             this.SqlServerAuthPanel.Enabled = false;
@@ -256,7 +257,7 @@ namespace ReportingTools.Common
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox PasswordText;
         private System.Windows.Forms.Button ConnectButton;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Panel FormPanel;

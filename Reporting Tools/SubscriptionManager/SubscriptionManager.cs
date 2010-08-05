@@ -222,7 +222,7 @@ namespace ReportingTools.SubscriptionManager
         private void triggerToolButton_Click(object sender, EventArgs e)
         {
             Subscription curSub = mainSubTree.SelectedNode.Tag as Subscription;
-            triggerSubscription(curSub);
+            this.triggerSubscription(curSub);
         }
 
 

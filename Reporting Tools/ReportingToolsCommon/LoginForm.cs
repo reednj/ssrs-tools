@@ -13,6 +13,9 @@ namespace ReportingTools.Common
 {
     public partial class LoginForm : Form
     {
+        const int CMB_WINDOWS_AUTH = 0;
+        const int CMB_BASIC_AUTH = 1;
+        
         bool WillAutoConnect = false;
         public SSRSUri ServerUrl = null;
         ReportingService rs = new ReportingService();
@@ -48,6 +51,7 @@ namespace ReportingTools.Common
 
             AutoLoginCheck.Checked = Properties.Settings.Default.AutoConnect;
             UsernameText.Text = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            
             // should we connect automatically. Was this loaded at start up, or triggered by the user?
             if (this.WillAutoConnect == true && this.AutoLoginCheck.Checked == true)
             {
@@ -66,11 +70,24 @@ namespace ReportingTools.Common
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
-            this.ServerUrl = SSRSUri.ParseString(ServerNameText.Text);
 
-            rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            this.ServerUrl = SSRSUri.ParseString(ServerNameText.Text);
             rs.Url = this.ServerUrl.ToUrl();
 
+            // what credentials to use?
+            if (AuthTypeCombo.SelectedIndex == CMB_BASIC_AUTH)
+            {
+                string username = UsernameText.Text.Trim();
+                string password = PasswordText.Text.Trim();
+                rs.Credentials = new System.Net.NetworkCredential(username, password);
+            }
+            else
+            {
+                rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            }
+            
+            
+            // save the settings for next time.
             Properties.Settings.Default.ServerName = this.ServerUrl.FullName;
             Properties.Settings.Default.AutoConnect = AutoLoginCheck.Checked;
             Properties.Settings.Default.Save();
@@ -108,14 +125,9 @@ namespace ReportingTools.Common
 
         private void AuthTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (AuthTypeCombo.SelectedIndex == 0)
-            {
-                SqlServerAuthPanel.Enabled = false;
-            }
-            else
-            {
-                SqlServerAuthPanel.Enabled = true;
-            }
+            UsernameText.Clear();
+            PasswordText.Clear();
+            SqlServerAuthPanel.Enabled = !(AuthTypeCombo.SelectedIndex == CMB_WINDOWS_AUTH);
         }
 
 
