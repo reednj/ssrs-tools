@@ -158,6 +158,7 @@ namespace ReportingTools.SubscriptionManager
             this.mainStatusStrip.Location = new System.Drawing.Point(0, 416);
             this.mainStatusStrip.Name = "mainStatusStrip";
             this.mainStatusStrip.Size = new System.Drawing.Size(587, 22);
+            this.mainStatusStrip.SizingGrip = false;
             this.mainStatusStrip.TabIndex = 4;
             this.mainStatusStrip.Text = "statusStrip1";
             // 
@@ -242,6 +243,7 @@ namespace ReportingTools.SubscriptionManager
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "SubscriptionManager";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Subscription Manager";
             this.Load += new System.EventHandler(this.SubscriptionManager_Load);

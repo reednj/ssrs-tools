@@ -31,7 +31,7 @@ namespace ReportingTools.Common
             this.ServerNameText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.AuthTypeCombo = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.UsernameText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -80,12 +80,12 @@ namespace ReportingTools.Common
             this.AuthTypeCombo.TabIndex = 2;
             this.AuthTypeCombo.SelectedIndexChanged += new System.EventHandler(this.AuthTypeCombo_SelectedIndexChanged);
             // 
-            // textBox2
+            // UsernameText
             // 
-            this.textBox2.Location = new System.Drawing.Point(127, 6);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(221, 20);
-            this.textBox2.TabIndex = 3;
+            this.UsernameText.Location = new System.Drawing.Point(127, 6);
+            this.UsernameText.Name = "UsernameText";
+            this.UsernameText.Size = new System.Drawing.Size(221, 20);
+            this.UsernameText.TabIndex = 3;
             // 
             // label2
             // 
@@ -169,7 +169,7 @@ namespace ReportingTools.Common
             this.SqlServerAuthPanel.Controls.Add(this.label4);
             this.SqlServerAuthPanel.Controls.Add(this.textBox3);
             this.SqlServerAuthPanel.Controls.Add(this.label3);
-            this.SqlServerAuthPanel.Controls.Add(this.textBox2);
+            this.SqlServerAuthPanel.Controls.Add(this.UsernameText);
             this.SqlServerAuthPanel.Enabled = false;
             this.SqlServerAuthPanel.Location = new System.Drawing.Point(0, 56);
             this.SqlServerAuthPanel.Name = "SqlServerAuthPanel";
@@ -252,7 +252,7 @@ namespace ReportingTools.Common
         private System.Windows.Forms.TextBox ServerNameText;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox AuthTypeCombo;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox UsernameText;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

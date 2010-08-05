@@ -42,7 +42,7 @@ namespace ReportingTools.Common
             }
 
             AutoLoginCheck.Checked = Properties.Settings.Default.AutoConnect;
-            
+            UsernameText.Text = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             // should we connect automatically. Was this loaded at start up, or triggered by the user?
             if (this.WillAutoConnect == true && this.AutoLoginCheck.Checked == true)
             {
@@ -64,9 +64,9 @@ namespace ReportingTools.Common
             this.ServerUrl = SSRSUri.ParseString(ServerNameText.Text);
 
             rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
-            rs.Url = this.ServerUrl.ToString();
+            rs.Url = this.ServerUrl.ToUrl();
 
-            Properties.Settings.Default.ServerName = this.ServerUrl.ServerName;
+            Properties.Settings.Default.ServerName = this.ServerUrl.FullName;
             Properties.Settings.Default.AutoConnect = AutoLoginCheck.Checked;
             Properties.Settings.Default.Save();
 
@@ -124,7 +124,11 @@ namespace ReportingTools.Common
 
         public string ServerName{get { return _serverName; } set { _serverName = value; }}
         public string InstanceName {get { return _instanceName; } set { _instanceName = value; }}
-        public string WebServiceUrl { get { return this.ToString(); }  }
+        public string WebServiceUrl { get { return this.ToUrl(); }  }
+        public string FullName { get {
+            return this.InstanceName == null ? this.ServerName : String.Format("{0}\\{1}", this.ServerName, this.InstanceName);
+        }}
+
 
         public SSRSUri()
         {
@@ -156,7 +160,7 @@ namespace ReportingTools.Common
             }
         }
 
-        public override string ToString()
+        public string ToUrl()
         {
             if (this.ServerName == null)
             {

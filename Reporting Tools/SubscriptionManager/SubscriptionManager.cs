@@ -56,7 +56,7 @@ namespace ReportingTools.SubscriptionManager
                 {
                     // if the user click ok on the connection dialog box, set the rs url
                     // and start getting the data. Otherwise to nothing...
-                    rs.Url = lf.ServerUrl.ToString();
+                    rs.Url = lf.ServerUrl.ToUrl();
                     Subscription_Worker.RunWorkerAsync();
                 }
             }
@@ -132,43 +132,39 @@ namespace ReportingTools.SubscriptionManager
                 statusLabel.Text = String.Format("subscription successfully triggered");
             } else {
                 // could not fire the subscription for some reason...
-                changeState(ServiceState.Error);
+                changeState(ServiceState.Error, e.Error.Message);
             }
         }
 
 
-        // change the state varible, set any messages etc
         private void changeState(ServiceState newState)
+        {
+            this.changeState(newState, null);
+        }
+
+        // change the state varible, set any messages etc
+        private void changeState(ServiceState newState, string Message)
         {
             if(newState == ServiceState.LoadingList) {
                 statusLabel.Text = "Loading...";
             } else if(newState == ServiceState.Connected) {
                 statusLabel.Text = String.Format("Connected to '{0}'", ReportServerUrl.GetServerName(rs.Url));
             } else if(newState == ServiceState.Error) {
-                statusLabel.Text = "Could not complete command";
+                if (Message != null)
+                {
+                    Message = Message.Split(new string[] {"--->"}, 2, StringSplitOptions.None)[0];
+                    statusLabel.Text = String.Format("Error: {0}", Message);
+                }
+                else
+                {
+                    statusLabel.Text = "Could not complete action";
+                }
             }
 
             curState = newState;
         }
 
-        public class ReportServerUrl
-        {
-            // convert a server url like 'http://hydrogen/reportserver/blah.asmx' to 'hydrogen'
-            public static string GetServerName(string serverUrl)
-            {
-                string result = serverUrl;
-                
 
-                // make sure we have an actual url here
-                try {
-                    Uri serverUri = new Uri(serverUrl);
-                    result = serverUri.Host;
-                } catch {
-                }
-
-                return result;
-            }
-        }
 
         /*
          * Right click menu event handlers 
@@ -232,9 +228,28 @@ namespace ReportingTools.SubscriptionManager
         }
 
 
+    }
+
+    public class ReportServerUrl
+    {
+        // convert a server url like 'http://hydrogen/reportserver/blah.asmx' to 'hydrogen'
+        public static string GetServerName(string serverUrl)
+        {
+            string result = serverUrl;
 
 
+            // make sure we have an actual url here
+            try
+            {
+                Uri serverUri = new Uri(serverUrl);
+                result = serverUri.Host;
+            }
+            catch
+            {
+            }
 
+            return result;
+        }
     }
 
 }
