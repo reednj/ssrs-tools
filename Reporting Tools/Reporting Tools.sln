@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportingToolsCommon", "Rep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobManager", "JobManager\JobManager.csproj", "{6B066706-7BDC-40E1-BBEC-72D110236A2F}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ReportingToolsSetup", "ReportingToolsSetup\ReportingToolsSetup.vdproj", "{48C77561-1499-4717-8E5C-C833C57D820D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,8 @@ Global
 		{6B066706-7BDC-40E1-BBEC-72D110236A2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B066706-7BDC-40E1-BBEC-72D110236A2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B066706-7BDC-40E1-BBEC-72D110236A2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48C77561-1499-4717-8E5C-C833C57D820D}.Debug|Any CPU.ActiveCfg = Debug
+		{48C77561-1499-4717-8E5C-C833C57D820D}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

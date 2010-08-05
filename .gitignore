@@ -12,3 +12,6 @@ Reporting Tools/ReportingToolsCommon/obj/
 
 *.suo
 *.user
+
+*.msi
+*.exe
