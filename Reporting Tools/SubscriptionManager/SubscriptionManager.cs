@@ -53,7 +53,7 @@ namespace ReportingTools.SubscriptionManager
                 Subscription_Worker.DoWork += new DoWorkEventHandler(Subscription_Worker_DoWork);
                 Subscription_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Subscription_Worker_RunWorkerCompleted);
 
-                this.RunConnectDialog();
+                this.RunConnectDialog(true);
             }
         }
 
@@ -210,12 +210,12 @@ namespace ReportingTools.SubscriptionManager
 
         private void ConnectToolButton_Click(object sender, EventArgs e)
         {
-            this.RunConnectDialog();
+            this.RunConnectDialog(false);
         }
 
-        private void RunConnectDialog()
+        private void RunConnectDialog(bool AutoLogin)
         {
-            LoginForm lf = new LoginForm();
+            LoginForm lf = new LoginForm(AutoLogin);
             if (lf.ShowDialog() == DialogResult.OK)
             {
                 // disconnect. TODO: a general method to set the ui on a state change.
