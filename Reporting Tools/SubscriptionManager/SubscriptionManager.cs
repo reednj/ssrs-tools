@@ -51,16 +51,7 @@ namespace ReportingTools.SubscriptionManager
                 Subscription_Worker.DoWork += new DoWorkEventHandler(Subscription_Worker_DoWork);
                 Subscription_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Subscription_Worker_RunWorkerCompleted);
 
-                // show the login form, to select which server to connect to
-                LoginForm lf = new LoginForm(true);
-                if (lf.ShowDialog() == DialogResult.OK)
-                {
-                    // if the user click ok on the connection dialog box, set the rs url
-                    // and start getting the data. Otherwise to nothing...
-                    this.ServerUrl = lf.ServerUrl;
-                    rs.Url = this.ServerUrl.ToUrl();
-                    Subscription_Worker.RunWorkerAsync();
-                }
+                this.RunConnectDialog();
             }
         }
 
@@ -215,22 +206,23 @@ namespace ReportingTools.SubscriptionManager
 
         private void ConnectToolButton_Click(object sender, EventArgs e)
         {
-            if (curState == ServiceState.Disconnected)
-            {
-                LoginForm lf = new LoginForm();
-                if (lf.ShowDialog() == DialogResult.OK)
-                {
-                    // if the user click ok on the connection dialog box, set the rs url
-                    // and start getting the data. Otherwise to nothing...
-                    rs.Url = lf.ServerUrl.ToString();
-                    Subscription_Worker.RunWorkerAsync();
-                }
-            }
-            else
+            this.RunConnectDialog();
+        }
+
+        private void RunConnectDialog()
+        {
+            LoginForm lf = new LoginForm();
+            if (lf.ShowDialog() == DialogResult.OK)
             {
                 // disconnect. TODO: a general method to set the ui on a state change.
                 curState = ServiceState.Disconnected;
                 mainSubTree.Nodes["Root"].Nodes.Clear();
+
+                // if the user click ok on the connection dialog box, set the rs url
+                // and start getting the data. Otherwise to nothing...
+                this.ServerUrl = lf.ServerUrl;
+                rs.Url = this.ServerUrl.ToUrl();
+                Subscription_Worker.RunWorkerAsync();
             }
         }
 
