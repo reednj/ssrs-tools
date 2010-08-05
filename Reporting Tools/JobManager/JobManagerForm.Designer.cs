@@ -28,6 +28,7 @@ namespace ReportingTools.JobManager
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.jobListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -37,6 +38,8 @@ namespace ReportingTools.JobManager
             this.refreshButton = new System.Windows.Forms.Button();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.mainStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
             this.mainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,6 +47,7 @@ namespace ReportingTools.JobManager
             // 
             this.jobListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
+            this.columnHeader5,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
@@ -62,7 +66,7 @@ namespace ReportingTools.JobManager
             // columnHeader2
             // 
             this.columnHeader2.Text = "Path";
-            this.columnHeader2.Width = 330;
+            this.columnHeader2.Width = 251;
             // 
             // columnHeader3
             // 
@@ -108,6 +112,15 @@ namespace ReportingTools.JobManager
             this.mainStatusLabel.Size = new System.Drawing.Size(19, 17);
             this.mainStatusLabel.Text = "...";
             // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Status";
+            // 
+            // RefreshTimer
+            // 
+            this.RefreshTimer.Interval = 1000;
+            this.RefreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
+            // 
             // JobManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,6 +133,7 @@ namespace ReportingTools.JobManager
             this.Name = "JobManagerForm";
             this.Text = "Job Manager";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Activated += new System.EventHandler(this.JobManagerForm_Activated);
             this.mainStatusStrip.ResumeLayout(false);
             this.mainStatusStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -138,6 +152,8 @@ namespace ReportingTools.JobManager
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.StatusStrip mainStatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel mainStatusLabel;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Timer RefreshTimer;
 
     }
 }

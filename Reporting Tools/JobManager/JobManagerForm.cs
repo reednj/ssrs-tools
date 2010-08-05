@@ -14,7 +14,12 @@ namespace ReportingTools.JobManager
     public partial class JobManagerForm : Form
     {
 
+        bool hasStarted = false;
+
+        int tickCount = 0;
         ReportingService rs = new ReportingService();
+        ServiceState CurrentState = ServiceState.Disconnected;
+        SSRSUri ServerUrl = null;
 
         public JobManagerForm()
         {
@@ -28,11 +33,17 @@ namespace ReportingTools.JobManager
             rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
             rs.ListJobsCompleted += LoadJobsComplete;
             rs.CancelJobCompleted += CancelJobAsyncComplete;
-
-            changeState(ServiceState.LoadingList);
-            rs.ListJobsAsync();
         }
-        
+
+        private void JobManagerForm_Activated(object sender, EventArgs e)
+        {
+            if (this.hasStarted == false)
+            {
+                this.hasStarted = true;
+                this.RunConnectDialog(false);
+            }
+        }
+
         private void LoadJobsComplete(object sender, ListJobsCompletedEventArgs e)
         {
             Job[] jobList = e.Result;
@@ -48,15 +59,16 @@ namespace ReportingTools.JobManager
 
         private void AddJob(Job reportJob)
         {
-            List<string> columns = new List<string>();
+            List<string> columnData = new List<string>();
             TimeSpan jobDuation = (DateTime.Now - reportJob.StartDateTime);
 
-            columns.Add(reportJob.Type.ToString());
-            columns.Add(reportJob.Path);
-            columns.Add(reportJob.User);
-            columns.Add(jobDuation.ToString());
+            columnData.Add(reportJob.Type.ToString());
+            columnData.Add(reportJob.Status.ToString());
+            columnData.Add(reportJob.Path);
+            columnData.Add(reportJob.User);
+            columnData.Add(TimeSpanString(jobDuation));
 
-            ListViewItem newRow = new ListViewItem(columns.ToArray());
+            ListViewItem newRow = new ListViewItem(columnData.ToArray());
             newRow.Tag = reportJob;
 
             jobListView.Items.Add(newRow);
@@ -97,6 +109,8 @@ namespace ReportingTools.JobManager
             } else if(newState == ServiceState.Error) {
                 mainStatusLabel.Text = "Error: Could not load Job List...";
             }
+
+            this.CurrentState = newState;
         }
 
         private void lockControls(bool unlock)
@@ -105,7 +119,65 @@ namespace ReportingTools.JobManager
             refreshButton.Enabled = unlock;
         }
 
+        private static string TimeSpanString(TimeSpan ts)
+        {
+            return String.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
+        }
+
+        private void RefreshTimer_Tick(object sender, EventArgs e)
+        {
+            if (this.CurrentState != ServiceState.Connected)
+            {
+                return;
+            }
+
+            if (this.tickCount % 5 == 0)
+            {
+                // every one in 5 times actually refresh the page, the rest of the time
+                // just refresh the timer.
+                this.CurrentState = ServiceState.LoadingList;
+                rs.ListJobsAsync();
+            }
+
+            this.UpdateRowDurations();
+            this.tickCount++;
+        }
+
+        private void UpdateRowDurations()
+        {
+            foreach (ListViewItem lvi in jobListView.Items)
+            {
+                Job j = lvi.Tag as Job;
+                if (j != null)
+                {
+                    lvi.SubItems[lvi.SubItems.Count - 1].Text = TimeSpanString(DateTime.Now - j.StartDateTime);
+                }
+            }
+        }
+
+        private void RunConnectDialog(bool AutoLogin)
+        {
+            LoginForm lf = new LoginForm(AutoLogin);
+            if (lf.ShowDialog() == DialogResult.OK)
+            {
+                // disconnect. TODO: a general method to set the ui on a state change.
+                this.CurrentState = ServiceState.Disconnected;
+
+                // if the user click ok on the connection dialog box, set the rs url
+                // and start getting the data. Otherwise to nothing...
+                this.ServerUrl = lf.ServerUrl;
+                rs.Url = this.ServerUrl.ToUrl();
+
+                // start loading. I think this should really be done in the calling method?
+                // have this function return a result instead of doing it all...
+                changeState(ServiceState.LoadingList);
+                RefreshTimer.Enabled = true;
+                rs.ListJobsAsync();
+            }
+        }
+
 
     }
+
    
 }
