@@ -17,8 +17,10 @@ namespace ReportingTools.Common
         const int CMB_BASIC_AUTH = 1;
         
         bool WillAutoConnect = false;
-        public SSRSUri ServerUrl = null;
         ReportingService rs = new ReportingService();
+
+        public SSRSUri ServerUrl = null;
+        public System.Net.ICredentials RsCredentials { get { return rs.Credentials; } }
 
         public LoginForm()
         {

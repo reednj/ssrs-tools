@@ -33,8 +33,6 @@ namespace ReportingTools.SubscriptionManager
 
         private void SubscriptionManager_Load(object sender, EventArgs e)
         {
-            rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
-
             // set the event handlers
             rs.ListSubscriptionsCompleted += SubscriptionLoadComplete;
             rs.FireEventCompleted += triggerSubscriptionComplete;
@@ -226,6 +224,8 @@ namespace ReportingTools.SubscriptionManager
                 // and start getting the data. Otherwise to nothing...
                 this.ServerUrl = lf.ServerUrl;
                 rs.Url = this.ServerUrl.ToUrl();
+                rs.Credentials = lf.RsCredentials;
+                
                 Subscription_Worker.RunWorkerAsync();
             }
         }

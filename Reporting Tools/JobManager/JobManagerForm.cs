@@ -167,6 +167,7 @@ namespace ReportingTools.JobManager
                 // and start getting the data. Otherwise to nothing...
                 this.ServerUrl = lf.ServerUrl;
                 rs.Url = this.ServerUrl.ToUrl();
+                rs.Credentials = lf.RsCredentials;
 
                 // start loading. I think this should really be done in the calling method?
                 // have this function return a result instead of doing it all...
