@@ -256,15 +256,15 @@ namespace ReportingTools.SubscriptionManager
                 {
                     statusLabel.Text = String.Format("Subscription Triggered: {0}", this.JobStatus.Subscription.LastExecuted);
                     
+                    // update the last ran data as well, if we have that subscription selected still
+                    if (mainSubTree.SelectedNode.Tag != null && ((Subscription)mainSubTree.SelectedNode.Tag).SubscriptionID == this.JobStatus.Subscription.SubscriptionID)
+                    {
+                        subLastRanLabel.Text = this.JobStatus.Subscription.LastExecuted.ToString();
+                        subLastResultLabel.Text = this.JobStatus.Subscription.Status;
+                    }
+
                     this.JobStatus = null;
                     StatusTimer.Enabled = false;
-
-                    // update the last ran data as well, if we have that subscription selected still
-                    //if (mainSubTree.SelectedNode.Tag != null && ((Subscription)mainSubTree.SelectedNode.Tag).SubscriptionID == this.JobStatus.Subscription.SubscriptionID)
-                    //{
-                    //    subLastRanLabel.Text = this.JobStatus.Subscription.LastExecuted.ToShortTimeString();
-                    //    subLastResultLabel.Text = this.JobStatus.Subscription.Status;
-                    //}
                 }
             }
             else
