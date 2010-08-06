@@ -1,17 +1,8 @@
-Reporting Tools/SubscriptionManager/bin/
-Reporting Tools/SubscriptionManager/obj/
 
-Reporting Tools/RenderReport/bin/
-Reporting Tools/RenderReport/obj/
-
-Reporting Tools/JobManager/bin/
-Reporting Tools/JobManager/obj/
-
-Reporting Tools/ReportingToolsCommon/bin/
-Reporting Tools/ReportingToolsCommon/obj/
-
+# ignore binary & user state files.
+Reporting Tools/*/bin/*
+Reporting Tools/*/obj/*
 *.suo
 *.user
-
 *.msi
 *.exe
