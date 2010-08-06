@@ -48,6 +48,7 @@ namespace RDLSave
 
         private void LoadList_Worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            this.CurrentState = ServiceState.LoadingList;
             StatusLabel.Text = "Loading Reports...";
             e.Result = rs.ListChildren("/", true);
         }
@@ -67,14 +68,8 @@ namespace RDLSave
             }
 
             ReportTreeList.Nodes[0].Expand();
-            StatusLabel.Text = "Connected to SERVER/INSATNACE";
-        }
-
-        private void StartButton_Click(object sender, EventArgs e)
-        {
-            StartButton.Enabled = false;
-            StatusLabel.Text = "Starting Download...";
-            Download_Worker.RunWorkerAsync(new DownloadArgs("/", @"C:\Dev\Temp\"));
+            StatusLabel.Text = String.Format("Connected to '{0}'", this.ServerUrl.FullName);
+            this.CurrentState = ServiceState.Connected;
         }
 
         void Download_Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -131,7 +126,7 @@ namespace RDLSave
             }
             
             StatusLabel.Text = String.Format("{0} Items Downloaded", e.Result);
-            StartButton.Enabled = true;
+            DownloadButton.Enabled = true;
         }
 
         private Byte[] DownloadReportItem(CatalogItem ReportItem)
@@ -184,9 +179,21 @@ namespace RDLSave
             }
         }
 
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            if (this.CurrentState == ServiceState.Connected)
+            {
+                ReportTreeList.Nodes["Root"].Nodes.Clear();
+                LoadList_Worker.RunWorkerAsync();
+            }
+        }
 
-
-        
+        private void DownloadButton_Click(object sender, EventArgs e)
+        {
+            DownloadButton.Enabled = false;
+            StatusLabel.Text = "Starting Download...";
+            Download_Worker.RunWorkerAsync(new DownloadArgs("/", @"C:\Dev\Temp\"));
+        }
     }
 
     public class DownloadArgs

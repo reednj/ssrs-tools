@@ -13,11 +13,6 @@ namespace ReportingTools.Common
         public ReportTree() : base() 
         {
             InitializeComponent();
-
-            // add the root node. Check if it has already been created in the vs designer
-            if(this.Nodes["Root"] == null) {
-                this.Nodes.Add("Root", "Home", "Folder", "Folder");
-            }
         }
 
         public void AddReport(CatalogItem curReport)

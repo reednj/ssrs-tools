@@ -59,5 +59,12 @@ namespace RDLSave.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Bitmap arrow_refresh {
+            get {
+                object obj = ResourceManager.GetObject("arrow_refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
