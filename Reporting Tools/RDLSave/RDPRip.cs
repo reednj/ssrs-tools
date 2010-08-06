@@ -30,6 +30,8 @@ namespace RDLSave
         private void RDPRip_Load(object sender, EventArgs e)
         {
             rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            rs.Url = SSRSUri.ParseString("hydrogen/nate").ToUrl();
+
             CatalogItem[] serverItems = rs.ListChildren("/", true);
 
             foreach (CatalogItem curItem in serverItems)
