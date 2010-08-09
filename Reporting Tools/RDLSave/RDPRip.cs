@@ -14,9 +14,19 @@ namespace RDLSave
 {
     public partial class RDPRip : Form
     {
+        
         bool hasStarted = false;
-        ServiceState CurrentState = ServiceState.Disconnected;
         SSRSUri ServerUrl = null;
+        string downloadFolder = Properties.Settings.Default.DownloadFolder;
+
+        ServiceState _currentState = ServiceState.Disconnected;
+        ServiceState CurrentState { 
+            set {
+                this._currentState = value;
+                this.SetControlsState();
+            } 
+            get { return this._currentState;  } 
+        }
 
         ReportingService rs = new ReportingService();
 
@@ -36,13 +46,14 @@ namespace RDLSave
             if (hasStarted == false)
             {
                 hasStarted = true;
+                this.CurrentState = ServiceState.Disconnected;
                 RunConnectDialog(true);
             }
         }
 
         private void LoadList_Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            this.CurrentState = ServiceState.LoadingList;
+           
             StatusLabel.Text = "Loading Reports...";
             e.Result = rs.ListChildren("/", true);
         }
@@ -51,7 +62,10 @@ namespace RDLSave
         {
             if (e.Error != null)
             {
-                throw e.Error;
+                this.CurrentState = ServiceState.Connected;
+                StatusLabel.Image = Properties.Resources.exclamation;
+                StatusLabel.Text = "Error: " + e.Error.ShortMessage();
+                return;
             }
 
             CatalogItem[] serverItems = e.Result as CatalogItem[];
@@ -75,10 +89,12 @@ namespace RDLSave
             CatalogItem[] serverItems = rs.ListChildren(FromFolder, true);
             Directory.CreateDirectory(DestRootPath);
 
-            int i = 0;
+            int downloadCount = 0;
+            int errorCount = 0;
+
             foreach (CatalogItem item in serverItems)
             {
-                i++;
+                downloadCount++;
 
                 // has the download been cancelled?
                 if (Download_Worker.CancellationPending == true)
@@ -100,6 +116,10 @@ namespace RDLSave
                         FilePath = (item.Type == ItemTypeEnum.Report) ? FilePath + ".rdl" : FilePath;
                         File.WriteAllBytes(FilePath, data);
                     }
+                    else
+                    {
+                        errorCount++;
+                    }
                 }
                 else
                 {
@@ -110,7 +130,7 @@ namespace RDLSave
                     Directory.CreateDirectory(Path.Combine(DestRootPath, RelativePath));
                 }
                 
-                Download_Worker.ReportProgress(i * 100 / serverItems.Length, item.Name);
+                Download_Worker.ReportProgress(downloadCount * 100 / serverItems.Length, item.Name);
 
             }
 
@@ -126,24 +146,23 @@ namespace RDLSave
         {
             if (e.Error != null)
             {
-                throw e.Error;
+                this.CurrentState = ServiceState.Connected;
+                StatusLabel.Image = Properties.Resources.exclamation;
+                StatusLabel.Text = "Error: " + e.Error.ShortMessage();
+                return;
             }
 
             if (e.Cancelled == true)
             {
-                StatusLabel.Text = "Download Cancelled.";
+                StatusLabel.Text = "Download Cancelled";
             }
             else
             {
                 StatusLabel.Text = String.Format("{0} Items Downloaded", e.Result);
             } 
 
-           
             this.CurrentState = ServiceState.Connected;
-            DownloadButton.Image = Properties.Resources.application_go;
         }
-
-
 
         private void RunConnectDialog(bool AutoLogin)
         {
@@ -161,8 +180,9 @@ namespace RDLSave
                 this.ServerUrl = lf.ServerUrl;
                 rs.Url = this.ServerUrl.ToUrl();
                 rs.Credentials = lf.RsCredentials;
-                LoadList_Worker.RunWorkerAsync();
 
+                this.CurrentState = ServiceState.LoadingList;
+                LoadList_Worker.RunWorkerAsync();
             }
         }
 
@@ -179,21 +199,62 @@ namespace RDLSave
         {
             if (this.CurrentState == ServiceState.Connected)
             {
-                this.CurrentState = ServiceState.Downloading;
-                DownloadButton.Image = Properties.Resources.cancel;
+                string RemoteFolder = "/"; // TODO: set this from the arguments;
+
                 StatusLabel.Text = "Starting Download...";
-                Download_Worker.RunWorkerAsync(new DownloadArgs("/", @"C:\Dev\Temp\"));
+                this.CurrentState = ServiceState.Downloading;
+                Download_Worker.RunWorkerAsync(new DownloadArgs(RemoteFolder, downloadFolder));
             }
             else if (this.CurrentState == ServiceState.Downloading && !Download_Worker.CancellationPending)
             {
                 // cancel the download
                 Download_Worker.CancelAsync();
             }
+
         }
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
             RunConnectDialog(false);
+        }
+
+        private void SetControlsState()
+        {
+            StatusLabel.Image = null;
+
+            if (this._currentState == ServiceState.Downloading)
+            {
+                ConnectButton.Enabled = false;
+                RefreshButton.Enabled = false;
+                ReportTreeList.Enabled = false;
+                DownloadButton.Enabled = true;
+
+                DownloadButton.Image = Properties.Resources.cancel;
+                
+            }
+            else if (this._currentState == ServiceState.Connected)
+            {
+                ConnectButton.Enabled = true;
+                RefreshButton.Enabled = true;
+                DownloadButton.Enabled = true;
+                ReportTreeList.Enabled = true;
+
+                DownloadButton.Image = Properties.Resources.application_go;
+            }
+            else if (this._currentState == ServiceState.Disconnected)
+            {
+                ConnectButton.Enabled = true;
+                RefreshButton.Enabled = false;
+                ReportTreeList.Enabled = false;
+                DownloadButton.Enabled = false;
+            }
+            else if (this._currentState == ServiceState.LoadingList)
+            {
+                ConnectButton.Enabled = false;
+                RefreshButton.Enabled = false;
+                ReportTreeList.Enabled = false;
+                DownloadButton.Enabled = false;
+            }
         }
     }
 
@@ -230,16 +291,27 @@ namespace RDLSave
     {
         public static Byte[] DownloadReportItem(ReportingService rs, CatalogItem ReportItem)
         {
-
-            if (ReportItem.Type == ItemTypeEnum.Report)
+            try
             {
-                return rs.GetReportDefinition(ReportItem.Path);
+                if (ReportItem.Type == ItemTypeEnum.Report)
+                {
+                    return rs.GetReportDefinition(ReportItem.Path);
 
+                }
+                else if (ReportItem.Type == ItemTypeEnum.Resource)
+                {
+                    string MimeType;
+                    return rs.GetResourceContents(ReportItem.Path, out MimeType);
+                }
             }
-            else if (ReportItem.Type == ItemTypeEnum.Resource)
+            catch (System.Web.Services.Protocols.SoapException ex)
             {
-                string MimeType;
-                return rs.GetResourceContents(ReportItem.Path, out MimeType);
+                // the most likely error here it that the item cannot be found, maybe it was
+                // deleted since the item list was retrieved. Ignore those errors, but throw the rest.
+                if (ex.Detail.FirstChild.InnerText != "rsItemNotFound" && ex.Detail.FirstChild.InnerText != "rsAccessDenied")
+                {
+                    throw ex;
+                }
             }
 
             return null;

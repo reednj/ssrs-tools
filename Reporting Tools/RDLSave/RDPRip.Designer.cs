@@ -33,10 +33,11 @@ namespace RDLSave
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.LoadList_Worker = new System.ComponentModel.BackgroundWorker();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.Download_Worker = new System.ComponentModel.BackgroundWorker();
             this.ConnectButton = new System.Windows.Forms.ToolStripButton();
             this.RefreshButton = new System.Windows.Forms.ToolStripButton();
+            this.SetFolderButton = new System.Windows.Forms.ToolStripButton();
             this.DownloadButton = new System.Windows.Forms.ToolStripButton();
-            this.Download_Worker = new System.ComponentModel.BackgroundWorker();
             this.ReportTreeList = new ReportingTools.Common.ReportTree();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -68,12 +69,21 @@ namespace RDLSave
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ConnectButton,
             this.RefreshButton,
+            this.SetFolderButton,
             this.DownloadButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(655, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // Download_Worker
+            // 
+            this.Download_Worker.WorkerReportsProgress = true;
+            this.Download_Worker.WorkerSupportsCancellation = true;
+            this.Download_Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Download_Worker_DoWork);
+            this.Download_Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Download_Worker_RunWorkerCompleted);
+            this.Download_Worker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Download_Worker_ProgressChanged);
             // 
             // ConnectButton
             // 
@@ -95,6 +105,15 @@ namespace RDLSave
             this.RefreshButton.Text = "Refresh";
             this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
+            // SetFolderButton
+            // 
+            this.SetFolderButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SetFolderButton.Image = global::RDLSave.Properties.Resources.folder_icon;
+            this.SetFolderButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SetFolderButton.Name = "SetFolderButton";
+            this.SetFolderButton.Size = new System.Drawing.Size(23, 22);
+            this.SetFolderButton.Text = "Set Download Folder";
+            // 
             // DownloadButton
             // 
             this.DownloadButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -104,14 +123,6 @@ namespace RDLSave
             this.DownloadButton.Size = new System.Drawing.Size(23, 22);
             this.DownloadButton.Text = "Download Selection";
             this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
-            // 
-            // Download_Worker
-            // 
-            this.Download_Worker.WorkerReportsProgress = true;
-            this.Download_Worker.WorkerSupportsCancellation = true;
-            this.Download_Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Download_Worker_DoWork);
-            this.Download_Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Download_Worker_RunWorkerCompleted);
-            this.Download_Worker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Download_Worker_ProgressChanged);
             // 
             // ReportTreeList
             // 
@@ -156,6 +167,7 @@ namespace RDLSave
         private System.Windows.Forms.ToolStripButton DownloadButton;
         private System.Windows.Forms.ToolStripButton ConnectButton;
         private System.ComponentModel.BackgroundWorker Download_Worker;
+        private System.Windows.Forms.ToolStripButton SetFolderButton;
     }
 }
 

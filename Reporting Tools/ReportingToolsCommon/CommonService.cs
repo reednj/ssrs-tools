@@ -16,6 +16,24 @@ namespace System.Runtime.CompilerServices
 namespace ReportingTools.Common
 {
 
+    public static class CommonExtensions
+    {
+        public static string ShortMessage(this Exception ex)
+        {
+
+
+            if (ex.GetType() == typeof(System.Web.Services.Protocols.SoapException))
+            {
+                return ex.Message.Split(new string[] { "--->" }, 2, StringSplitOptions.None)[0];
+            }
+            else
+            {
+                return ex.Message;
+            }
+            
+        }
+    }
+
     public enum ServiceState {
         Disconnected,
         Connected,
