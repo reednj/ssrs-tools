@@ -2,8 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+// we use this to enable extension methods when targeting
+// .net 2.0.
+// from: http://csharpindepth.com/Articles/Chapter1/Versions.aspx
+namespace System.Runtime.CompilerServices
+{
+    [AttributeUsageAttribute(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method)]
+    public class ExtensionAttribute : Attribute
+    {
+    }
+}
+
 namespace ReportingTools.Common
 {
+
     public enum ServiceState {
         Disconnected,
         Connected,
@@ -23,6 +35,7 @@ namespace ReportingTools.Common
         public string WebServiceUrl { get { return this.ToUrl(); } }
         public string FullName
         {
+            
             get
             {
                 return this.InstanceName == null ? this.ServerName : String.Format("{0}\\{1}", this.ServerName, this.InstanceName);
