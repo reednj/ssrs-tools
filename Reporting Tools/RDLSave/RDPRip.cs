@@ -75,7 +75,7 @@ namespace RDLSave
         void Download_Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             DownloadArgs args = e.Argument as DownloadArgs;
-            string FromFolder = RemoveEndSlash(args.SourcePath);
+            string FromFolder = args.SourcePath.RemoveEndSlash();
             string DestRootPath = args.DestPath + Path.GetFileName(FromFolder);
 
             CatalogItem[] serverItems = rs.ListChildren(FromFolder, true);
@@ -88,11 +88,11 @@ namespace RDLSave
 
                 if (item.Type != ItemTypeEnum.Folder)
                 {
-                    Byte[] data = DownloadReportItem(item);
+                    Byte[] data = RsHelper.DownloadReportItem(rs, item);
 
                     if (data != null)
                     {
-                        string TempFromFolder = AddEndSlash(FromFolder);
+                        string TempFromFolder = FromFolder.AddEndSlash();
                         string FilePath = item.Path.Remove(item.Path.IndexOf(TempFromFolder), TempFromFolder.Length);
                         FilePath = Path.Combine(DestRootPath, FilePath);
                         FilePath = (item.Type == ItemTypeEnum.Report) ? FilePath + ".rdl" : FilePath;
@@ -101,7 +101,9 @@ namespace RDLSave
                 }
                 else
                 {
-                    string TempFromFolder = AddEndSlash(FromFolder);
+                    // the item is a folder. There is no need for downloading here, we just need to create
+                    // one with the same name
+                    string TempFromFolder = FromFolder.AddEndSlash();
                     string RelativePath = item.Path.Remove(item.Path.IndexOf(TempFromFolder), TempFromFolder.Length);
                     Directory.CreateDirectory(Path.Combine(DestRootPath, RelativePath));
                 }
@@ -129,37 +131,7 @@ namespace RDLSave
             DownloadButton.Enabled = true;
         }
 
-        private Byte[] DownloadReportItem(CatalogItem ReportItem)
-        {
-           
-            if (ReportItem.Type == ItemTypeEnum.Report)
-            {
-                return rs.GetReportDefinition(ReportItem.Path);
 
-            }
-            else if (ReportItem.Type == ItemTypeEnum.Resource)
-            {
-                string MimeType;
-                return rs.GetResourceContents(ReportItem.Path, out MimeType);
-            }
-
-            return null;
-        }
-
- 
-        private string RemoveEndSlash(string FilePath)
-        {
-            // we want to remove the initial '/' from the path, otherwise
-            // the Path.Combine method does not work correctly.
-            FilePath = FilePath.Trim();
-            return (FilePath[FilePath.Length - 1] == '/' && FilePath.Length > 1) ? FilePath.Substring(0, FilePath.Length - 1) : FilePath;
-        }
-
-        private string AddEndSlash(string FilePath)
-        {
-            FilePath = FilePath.Trim();
-            return (FilePath[FilePath.Length - 1] != '/') ? FilePath + "/" : FilePath;
-        }
 
         private void RunConnectDialog(bool AutoLogin)
         {
@@ -205,6 +177,43 @@ namespace RDLSave
         {
             this.SourcePath = SourcePath.Trim();
             this.DestPath = DestPath.Trim();
+        }
+    }
+
+    public static class Extensions
+    {
+        public static string RemoveEndSlash(this string FilePath)
+        {
+            // we want to remove the initial '/' from the path, otherwise
+            // the Path.Combine method does not work correctly.
+            FilePath = FilePath.Trim();
+            return (FilePath[FilePath.Length - 1] == '/' && FilePath.Length > 1) ? FilePath.Substring(0, FilePath.Length - 1) : FilePath;
+        }
+
+        public static string AddEndSlash(this string FilePath)
+        {
+            FilePath = FilePath.Trim();
+            return (FilePath[FilePath.Length - 1] != '/') ? FilePath + "/" : FilePath;
+        }
+    }
+
+    public class RsHelper
+    {
+        public static Byte[] DownloadReportItem(ReportingService rs, CatalogItem ReportItem)
+        {
+
+            if (ReportItem.Type == ItemTypeEnum.Report)
+            {
+                return rs.GetReportDefinition(ReportItem.Path);
+
+            }
+            else if (ReportItem.Type == ItemTypeEnum.Resource)
+            {
+                string MimeType;
+                return rs.GetResourceContents(ReportItem.Path, out MimeType);
+            }
+
+            return null;
         }
     }
 
