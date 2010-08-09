@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderReport", "RenderReport\RenderReport.csproj", "{D2296DD7-8BAF-4A8D-95C5-1E10F49C50D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubscriptionManager", "SubscriptionManager\SubscriptionManager.csproj", "{FC391456-AD2E-46B6-9E72-05B90EE5CD95}"
