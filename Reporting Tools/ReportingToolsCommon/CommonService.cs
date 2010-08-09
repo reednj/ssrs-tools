@@ -21,6 +21,7 @@ namespace ReportingTools.Common
         Connected,
         LoadingList,
         LoadingEvent,
+        Downloading,
         Error       
     }
 

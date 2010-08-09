@@ -80,12 +80,20 @@ namespace RDLSave
             {
                 i++;
 
+                // has the download been cancelled?
+                if (Download_Worker.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+
                 if (item.Type != ItemTypeEnum.Folder)
                 {
                     Byte[] data = RsHelper.DownloadReportItem(rs, item);
 
                     if (data != null)
                     {
+                        // finding the correct name and location for the file can be a bit tricky...
                         string TempFromFolder = FromFolder.AddEndSlash();
                         string FilePath = item.Path.Remove(item.Path.IndexOf(TempFromFolder), TempFromFolder.Length);
                         FilePath = Path.Combine(DestRootPath, FilePath);
@@ -101,9 +109,9 @@ namespace RDLSave
                     string RelativePath = item.Path.Remove(item.Path.IndexOf(TempFromFolder), TempFromFolder.Length);
                     Directory.CreateDirectory(Path.Combine(DestRootPath, RelativePath));
                 }
-
                 
                 Download_Worker.ReportProgress(i * 100 / serverItems.Length, item.Name);
+
             }
 
             e.Result = serverItems.Length;
@@ -120,9 +128,19 @@ namespace RDLSave
             {
                 throw e.Error;
             }
-            
-            StatusLabel.Text = String.Format("{0} Items Downloaded", e.Result);
-            DownloadButton.Enabled = true;
+
+            if (e.Cancelled == true)
+            {
+                StatusLabel.Text = "Download Cancelled.";
+            }
+            else
+            {
+                StatusLabel.Text = String.Format("{0} Items Downloaded", e.Result);
+            } 
+
+           
+            this.CurrentState = ServiceState.Connected;
+            DownloadButton.Image = Properties.Resources.application_go;
         }
 
 
@@ -159,9 +177,18 @@ namespace RDLSave
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
-            DownloadButton.Enabled = false;
-            StatusLabel.Text = "Starting Download...";
-            Download_Worker.RunWorkerAsync(new DownloadArgs("/", @"C:\Dev\Temp\"));
+            if (this.CurrentState == ServiceState.Connected)
+            {
+                this.CurrentState = ServiceState.Downloading;
+                DownloadButton.Image = Properties.Resources.cancel;
+                StatusLabel.Text = "Starting Download...";
+                Download_Worker.RunWorkerAsync(new DownloadArgs("/", @"C:\Dev\Temp\"));
+            }
+            else if (this.CurrentState == ServiceState.Downloading && !Download_Worker.CancellationPending)
+            {
+                // cancel the download
+                Download_Worker.CancelAsync();
+            }
         }
 
         private void ConnectButton_Click(object sender, EventArgs e)
