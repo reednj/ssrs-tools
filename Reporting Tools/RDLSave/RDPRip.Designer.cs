@@ -29,14 +29,15 @@ namespace RDLSave
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RDPRip));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.LoadList_Worker = new System.ComponentModel.BackgroundWorker();
-            this.ReportTreeList = new ReportingTools.Common.ReportTree();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.ConnectButton = new System.Windows.Forms.ToolStripButton();
             this.RefreshButton = new System.Windows.Forms.ToolStripButton();
             this.DownloadButton = new System.Windows.Forms.ToolStripButton();
+            this.Download_Worker = new System.ComponentModel.BackgroundWorker();
+            this.ReportTreeList = new ReportingTools.Common.ReportTree();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -62,18 +63,10 @@ namespace RDLSave
             this.LoadList_Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.LoadList_Worker_DoWork);
             this.LoadList_Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.LoadList_Worker_RunWorkerCompleted);
             // 
-            // ReportTreeList
-            // 
-            this.ReportTreeList.ImageIndex = 0;
-            this.ReportTreeList.Location = new System.Drawing.Point(12, 28);
-            this.ReportTreeList.Name = "ReportTreeList";
-            this.ReportTreeList.SelectedImageIndex = 0;
-            this.ReportTreeList.Size = new System.Drawing.Size(631, 462);
-            this.ReportTreeList.TabIndex = 0;
-            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ConnectButton,
             this.RefreshButton,
             this.DownloadButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -81,6 +74,16 @@ namespace RDLSave
             this.toolStrip1.Size = new System.Drawing.Size(655, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // ConnectButton
+            // 
+            this.ConnectButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ConnectButton.Image = global::RDLSave.Properties.Resources.connect;
+            this.ConnectButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ConnectButton.Name = "ConnectButton";
+            this.ConnectButton.Size = new System.Drawing.Size(23, 22);
+            this.ConnectButton.Text = "Connect";
+            this.ConnectButton.Click += new System.EventHandler(this.ConnectButton_Click);
             // 
             // RefreshButton
             // 
@@ -95,12 +98,29 @@ namespace RDLSave
             // DownloadButton
             // 
             this.DownloadButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.DownloadButton.Image = ((System.Drawing.Image)(resources.GetObject("DownloadButton.Image")));
+            this.DownloadButton.Image = global::RDLSave.Properties.Resources.application_go;
             this.DownloadButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.DownloadButton.Name = "DownloadButton";
             this.DownloadButton.Size = new System.Drawing.Size(23, 22);
-            this.DownloadButton.Text = "Download All";
+            this.DownloadButton.Text = "Download Selection";
             this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
+            // 
+            // Download_Worker
+            // 
+            this.Download_Worker.WorkerReportsProgress = true;
+            this.Download_Worker.WorkerSupportsCancellation = true;
+            this.Download_Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Download_Worker_DoWork);
+            this.Download_Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Download_Worker_RunWorkerCompleted);
+            this.Download_Worker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Download_Worker_ProgressChanged);
+            // 
+            // ReportTreeList
+            // 
+            this.ReportTreeList.ImageIndex = 0;
+            this.ReportTreeList.Location = new System.Drawing.Point(12, 28);
+            this.ReportTreeList.Name = "ReportTreeList";
+            this.ReportTreeList.SelectedImageIndex = 0;
+            this.ReportTreeList.Size = new System.Drawing.Size(631, 496);
+            this.ReportTreeList.TabIndex = 0;
             // 
             // RDPRip
             // 
@@ -134,6 +154,8 @@ namespace RDLSave
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton RefreshButton;
         private System.Windows.Forms.ToolStripButton DownloadButton;
+        private System.Windows.Forms.ToolStripButton ConnectButton;
+        private System.ComponentModel.BackgroundWorker Download_Worker;
     }
 }
 

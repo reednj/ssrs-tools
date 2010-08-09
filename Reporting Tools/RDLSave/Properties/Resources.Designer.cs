@@ -60,9 +60,23 @@ namespace RDLSave.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap application_go {
+            get {
+                object obj = ResourceManager.GetObject("application_go", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap arrow_refresh {
             get {
                 object obj = ResourceManager.GetObject("arrow_refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap connect {
+            get {
+                object obj = ResourceManager.GetObject("connect", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

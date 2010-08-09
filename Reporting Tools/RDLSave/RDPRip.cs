@@ -19,16 +19,10 @@ namespace RDLSave
         SSRSUri ServerUrl = null;
 
         ReportingService rs = new ReportingService();
-        BackgroundWorker Download_Worker = new BackgroundWorker();
 
         public RDPRip()
         {
             InitializeComponent();
-
-            Download_Worker.DoWork += new DoWorkEventHandler(Download_Worker_DoWork);
-            Download_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Download_Worker_RunWorkerCompleted);
-            Download_Worker.ProgressChanged += new ProgressChangedEventHandler(Download_Worker_ProgressChanged);
-            Download_Worker.WorkerReportsProgress = true;
         }
 
         private void RDPRip_Load(object sender, EventArgs e)
@@ -138,6 +132,9 @@ namespace RDLSave
             LoginForm lf = new LoginForm(AutoLogin);
             if (lf.ShowDialog() == DialogResult.OK)
             {
+                // clear the treeview
+                ReportTreeList.Nodes["Root"].Nodes.Clear();
+
                 // disconnect. TODO: a general method to set the ui on a state change.
                 this.CurrentState = ServiceState.Disconnected;
 
@@ -165,6 +162,11 @@ namespace RDLSave
             DownloadButton.Enabled = false;
             StatusLabel.Text = "Starting Download...";
             Download_Worker.RunWorkerAsync(new DownloadArgs("/", @"C:\Dev\Temp\"));
+        }
+
+        private void ConnectButton_Click(object sender, EventArgs e)
+        {
+            RunConnectDialog(false);
         }
     }
 
