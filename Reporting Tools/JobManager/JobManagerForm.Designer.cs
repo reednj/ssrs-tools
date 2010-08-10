@@ -29,8 +29,10 @@ namespace ReportingTools.JobManager
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JobManagerForm));
             this.jobListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
@@ -38,7 +40,6 @@ namespace ReportingTools.JobManager
             this.refreshButton = new System.Windows.Forms.Button();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.mainStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
             this.mainStatusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +63,10 @@ namespace ReportingTools.JobManager
             // columnHeader1
             // 
             this.columnHeader1.Text = "Type";
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Status";
             // 
             // columnHeader2
             // 
@@ -112,10 +117,6 @@ namespace ReportingTools.JobManager
             this.mainStatusLabel.Size = new System.Drawing.Size(19, 17);
             this.mainStatusLabel.Text = "...";
             // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Status";
-            // 
             // RefreshTimer
             // 
             this.RefreshTimer.Interval = 1000;
@@ -130,6 +131,7 @@ namespace ReportingTools.JobManager
             this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.killJobButton);
             this.Controls.Add(this.jobListView);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "JobManagerForm";
             this.Text = "Job Manager";
             this.Load += new System.EventHandler(this.Form1_Load);

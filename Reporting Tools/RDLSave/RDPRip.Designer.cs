@@ -30,13 +30,14 @@ namespace RDLSave
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Home");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RDPRip));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.LoadList_Worker = new System.ComponentModel.BackgroundWorker();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.ConnectButton = new System.Windows.Forms.ToolStripButton();
-            this.RefreshButton = new System.Windows.Forms.ToolStripButton();
             this.SetFolderButton = new System.Windows.Forms.ToolStripButton();
+            this.RefreshButton = new System.Windows.Forms.ToolStripButton();
             this.DownloadButton = new System.Windows.Forms.ToolStripButton();
             this.Download_Worker = new System.ComponentModel.BackgroundWorker();
             this.TreeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -94,16 +95,6 @@ namespace RDLSave
             this.ConnectButton.Text = "Connect";
             this.ConnectButton.Click += new System.EventHandler(this.ConnectButton_Click);
             // 
-            // RefreshButton
-            // 
-            this.RefreshButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.RefreshButton.Image = global::RDLSave.Properties.Resources.arrow_refresh;
-            this.RefreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(23, 22);
-            this.RefreshButton.Text = "Refresh";
-            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
-            // 
             // SetFolderButton
             // 
             this.SetFolderButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -113,6 +104,16 @@ namespace RDLSave
             this.SetFolderButton.Size = new System.Drawing.Size(23, 22);
             this.SetFolderButton.Text = "Set Download Folder";
             this.SetFolderButton.Click += new System.EventHandler(this.SetFolderButton_Click);
+            // 
+            // RefreshButton
+            // 
+            this.RefreshButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.RefreshButton.Image = global::RDLSave.Properties.Resources.arrow_refresh;
+            this.RefreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(23, 22);
+            this.RefreshButton.Text = "Refresh";
+            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // DownloadButton
             // 
@@ -191,6 +192,7 @@ namespace RDLSave
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ReportTreeList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "RDPRip";
             this.Text = "Save Rdls";

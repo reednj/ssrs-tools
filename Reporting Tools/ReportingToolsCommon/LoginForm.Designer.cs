@@ -28,6 +28,7 @@ namespace ReportingTools.Common
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.ServerNameText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.AuthTypeCombo = new System.Windows.Forms.ComboBox();
@@ -146,19 +147,20 @@ namespace ReportingTools.Common
             // 
             this.FormPanel.Controls.Add(this.AutoLoginCheck);
             this.FormPanel.Controls.Add(this.SqlServerAuthPanel);
+            this.FormPanel.Controls.Add(this.ErrorLabel);
             this.FormPanel.Controls.Add(this.label2);
             this.FormPanel.Controls.Add(this.AuthTypeCombo);
             this.FormPanel.Controls.Add(this.label1);
             this.FormPanel.Controls.Add(this.ServerNameText);
             this.FormPanel.Location = new System.Drawing.Point(12, 70);
             this.FormPanel.Name = "FormPanel";
-            this.FormPanel.Size = new System.Drawing.Size(369, 145);
+            this.FormPanel.Size = new System.Drawing.Size(369, 169);
             this.FormPanel.TabIndex = 10;
             // 
             // AutoLoginCheck
             // 
             this.AutoLoginCheck.AutoSize = true;
-            this.AutoLoginCheck.Location = new System.Drawing.Point(10, 123);
+            this.AutoLoginCheck.Location = new System.Drawing.Point(10, 145);
             this.AutoLoginCheck.Name = "AutoLoginCheck";
             this.AutoLoginCheck.Size = new System.Drawing.Size(175, 17);
             this.AutoLoginCheck.TabIndex = 9;
@@ -212,7 +214,7 @@ namespace ReportingTools.Common
             this.ErrorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ErrorLabel.Image = global::ReportingTools.Common.Properties.Resources.exclamation;
             this.ErrorLabel.LabelText = "Error Message";
-            this.ErrorLabel.Location = new System.Drawing.Point(12, 221);
+            this.ErrorLabel.Location = new System.Drawing.Point(10, 123);
             this.ErrorLabel.Name = "ErrorLabel";
             this.ErrorLabel.Size = new System.Drawing.Size(108, 16);
             this.ErrorLabel.TabIndex = 13;
@@ -225,15 +227,16 @@ namespace ReportingTools.Common
             this.ClientSize = new System.Drawing.Size(399, 285);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LoadingImg);
-            this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.FormPanel);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.ConnectButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoginForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Connect to Server";
             this.Load += new System.EventHandler(this.Login_Load);

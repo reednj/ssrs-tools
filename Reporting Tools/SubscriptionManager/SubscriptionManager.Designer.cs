@@ -30,6 +30,7 @@ namespace ReportingTools.SubscriptionManager
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SubscriptionManager));
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Reports");
             this.detailsBox = new System.Windows.Forms.GroupBox();
             this.subLastRanLabel = new System.Windows.Forms.Label();
             this.subLastResultLabel = new System.Windows.Forms.Label();
@@ -227,6 +228,10 @@ namespace ReportingTools.SubscriptionManager
             this.mainSubTree.ImageList = this.iconList;
             this.mainSubTree.Location = new System.Drawing.Point(12, 28);
             this.mainSubTree.Name = "mainSubTree";
+            treeNode1.Name = "Root";
+            treeNode1.Text = "Reports";
+            this.mainSubTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
             this.mainSubTree.SelectedImageIndex = 0;
             this.mainSubTree.Size = new System.Drawing.Size(563, 305);
             this.mainSubTree.TabIndex = 2;
@@ -248,6 +253,7 @@ namespace ReportingTools.SubscriptionManager
             this.Controls.Add(this.mainSubTree);
             this.Controls.Add(this.mainStatusStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "SubscriptionManager";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
