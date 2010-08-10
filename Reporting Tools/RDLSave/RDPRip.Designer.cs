@@ -44,6 +44,7 @@ namespace RDLSave
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReportTreeList = new ReportingTools.Common.ReportTree();
+            this.FolderSelectDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.TreeContextMenu.SuspendLayout();
@@ -74,8 +75,8 @@ namespace RDLSave
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ConnectButton,
-            this.RefreshButton,
             this.SetFolderButton,
+            this.RefreshButton,
             this.DownloadButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -111,6 +112,7 @@ namespace RDLSave
             this.SetFolderButton.Name = "SetFolderButton";
             this.SetFolderButton.Size = new System.Drawing.Size(23, 22);
             this.SetFolderButton.Text = "Set Download Folder";
+            this.SetFolderButton.Click += new System.EventHandler(this.SetFolderButton_Click);
             // 
             // DownloadButton
             // 
@@ -175,6 +177,10 @@ namespace RDLSave
             this.ReportTreeList.TabIndex = 0;
             this.ReportTreeList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ReportTreeList_MouseUp);
             // 
+            // FolderSelectDialog
+            // 
+            this.FolderSelectDialog.Description = "Select Download Folder";
+            // 
             // RDPRip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -215,6 +221,7 @@ namespace RDLSave
         private System.Windows.Forms.ToolStripMenuItem downloadAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog FolderSelectDialog;
     }
 }
 

@@ -17,7 +17,7 @@ namespace RDLSave
         
         bool hasStarted = false;
         SSRSUri ServerUrl = null;
-        string downloadFolder = Properties.Settings.Default.DownloadFolder.AddEndSlash();
+        string downloadFolder = Properties.Settings.Default.DownloadFolder.AddFileEndSlash();
 
         ServiceState _currentState = ServiceState.Disconnected;
         ServiceState CurrentState { 
@@ -207,15 +207,29 @@ namespace RDLSave
                 if (ReportTreeList.SelectedNode != null && ReportTreeList.SelectedNode.Tag != null)
                 {
                     CatalogItem ReportItem = ReportTreeList.SelectedNode.Tag as CatalogItem;
-                    
+
                     // only download entire folders, for now.
                     if (ReportItem.Type == ItemTypeEnum.Folder)
                     {
                         RemoteFolder = ReportItem.Path;
                     }
-
+                    else
+                    {
+                        return;
+                    }
                 }
 
+                // do we have a valid download folder? if not, then show the dialog to set it
+                if (this.downloadFolder == "" || !Directory.Exists(this.downloadFolder))
+                {
+                    bool FolderResult = this.RunFolderDialog();
+
+                    if (!FolderResult)
+                    {
+                        return;
+                    }
+                }
+                
                 StatusLabel.Text = "Starting Download...";
                 this.CurrentState = ServiceState.Downloading;
                 Download_Worker.RunWorkerAsync(new DownloadArgs(RemoteFolder, downloadFolder));
@@ -242,6 +256,7 @@ namespace RDLSave
                 ConnectButton.Enabled = false;
                 RefreshButton.Enabled = false;
                 ReportTreeList.Enabled = false;
+                SetFolderButton.Enabled = false;
                 DownloadButton.Enabled = true;
 
                 DownloadButton.Image = Properties.Resources.cancel;
@@ -252,6 +267,7 @@ namespace RDLSave
                 ConnectButton.Enabled = true;
                 RefreshButton.Enabled = true;
                 DownloadButton.Enabled = true;
+                SetFolderButton.Enabled = true;
                 ReportTreeList.Enabled = true;
 
                 DownloadButton.Image = Properties.Resources.application_go;
@@ -261,6 +277,7 @@ namespace RDLSave
                 ConnectButton.Enabled = true;
                 RefreshButton.Enabled = false;
                 ReportTreeList.Enabled = false;
+                SetFolderButton.Enabled = true;
                 DownloadButton.Enabled = false;
             }
             else if (this._currentState == ServiceState.LoadingList)
@@ -269,6 +286,7 @@ namespace RDLSave
                 RefreshButton.Enabled = false;
                 ReportTreeList.Enabled = false;
                 DownloadButton.Enabled = false;
+                SetFolderButton.Enabled = false;
             }
         }
 
@@ -296,6 +314,33 @@ namespace RDLSave
                 downloadAllToolStripMenuItem.Enabled = (ReportTreeList.SelectedNode != null && ReportTreeList.SelectedNode.Tag != null && ((CatalogItem)ReportTreeList.SelectedNode.Tag).Type == ItemTypeEnum.Folder);
                 TreeContextMenu.Show(ReportTreeList, new Point(e.X, e.Y));
             }
+        }
+
+        private void SetFolderButton_Click(object sender, EventArgs e)
+        {
+            this.RunFolderDialog();
+        }
+
+        private bool RunFolderDialog()
+        {
+            bool result = false;
+            
+            if (this.downloadFolder != "" && Directory.Exists(this.downloadFolder))
+            {
+                FolderSelectDialog.SelectedPath = this.downloadFolder;
+            }
+
+            if (FolderSelectDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                // save the selected directory to the settings file
+                this.downloadFolder = FolderSelectDialog.SelectedPath.AddFileEndSlash();
+                Properties.Settings.Default.DownloadFolder = downloadFolder;
+                Properties.Settings.Default.Save();
+
+                result = true;
+            }
+
+            return result;
         }
     }
 
@@ -325,6 +370,12 @@ namespace RDLSave
         {
             FilePath = FilePath.Trim();
             return (FilePath[FilePath.Length - 1] != '/') ? FilePath + "/" : FilePath;
+        }
+
+        public static string AddFileEndSlash(this string FilePath)
+        {
+            FilePath = FilePath.Trim();
+            return (FilePath[FilePath.Length - 1] != Path.DirectorySeparatorChar) ? FilePath + Path.DirectorySeparatorChar : FilePath;
         }
     }
 

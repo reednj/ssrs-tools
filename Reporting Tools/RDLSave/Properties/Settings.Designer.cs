@@ -25,7 +25,7 @@ namespace RDLSave.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Dev\\Temp")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DownloadFolder {
             get {
                 return ((string)(this["DownloadFolder"]));
