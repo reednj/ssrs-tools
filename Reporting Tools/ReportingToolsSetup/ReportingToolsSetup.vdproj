@@ -16,13 +16,19 @@
         "Entry"
         {
         "MsmKey" = "8:_0691C75A0CE09AD2AA754EC9C91C47E9"
-        "OwnerKey" = "8:_42F85ED1F4D94FFC864029F8FE6F72CE"
+        "OwnerKey" = "8:_38CC6FB72D7441A89215D398E78C711F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_0691C75A0CE09AD2AA754EC9C91C47E9"
-        "OwnerKey" = "8:_38CC6FB72D7441A89215D398E78C711F"
+        "OwnerKey" = "8:_EBF34E55FA9C4DDFBA2A1209D1AF1FAD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0691C75A0CE09AD2AA754EC9C91C47E9"
+        "OwnerKey" = "8:_42F85ED1F4D94FFC864029F8FE6F72CE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -39,8 +45,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_EBF34E55FA9C4DDFBA2A1209D1AF1FAD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0691C75A0CE09AD2AA754EC9C91C47E9"
+        "OwnerKey" = "8:_42F85ED1F4D94FFC864029F8FE6F72CE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EBF34E55FA9C4DDFBA2A1209D1AF1FAD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -52,7 +70,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_42F85ED1F4D94FFC864029F8FE6F72CE"
+        "OwnerKey" = "8:_0691C75A0CE09AD2AA754EC9C91C47E9"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -73,6 +91,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -89,6 +115,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -122,7 +156,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ReportingToolsCommon, Version=0.8.3869.30760, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ReportingToolsCommon, Version=0.8.3874.20215, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_0691C75A0CE09AD2AA754EC9C91C47E9"
@@ -210,6 +244,7 @@
         "MsiBootstrapper"
         {
         "LangId" = "3:1033"
+        "RequiresElevation" = "11:FALSE"
         }
         "Product"
         {
@@ -344,6 +379,20 @@
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_38CC6FB72D7441A89215D398E78C711F"
+            "Folder" = "8:_5EE6CBFFC8B44A9CB24C6127C23D2140"
+            "WorkingFolder" = "8:_8ECDE266B872473BBFA0EE0D2FC57879"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_67CC798E05494F118E7DA2D2D9287553"
+            {
+            "Name" = "8:Download RDLs"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_EBF34E55FA9C4DDFBA2A1209D1AF1FAD"
             "Folder" = "8:_5EE6CBFFC8B44A9CB24C6127C23D2140"
             "WorkingFolder" = "8:_8ECDE266B872473BBFA0EE0D2FC57879"
             "Icon" = "8:"
@@ -813,6 +862,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{6B066706-7BDC-40E1-BBEC-72D110236A2F}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EBF34E55FA9C4DDFBA2A1209D1AF1FAD"
+            {
+            "SourcePath" = "8:..\\RDLSave\\obj\\Debug\\RDLSave.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_8ECDE266B872473BBFA0EE0D2FC57879"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{0EBE885D-18B8-4C89-BD24-A58A515EE8DC}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {
