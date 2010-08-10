@@ -43,8 +43,8 @@ namespace RDLSave
             this.downloadAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ReportTreeList = new ReportingTools.Common.ReportTree();
             this.FolderSelectDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.ReportTreeList = new ReportingTools.Common.ReportTree();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.TreeContextMenu.SuspendLayout();
@@ -161,6 +161,10 @@ namespace RDLSave
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
+            // FolderSelectDialog
+            // 
+            this.FolderSelectDialog.Description = "Select Download Folder";
+            // 
             // ReportTreeList
             // 
             this.ReportTreeList.ImageIndex = 0;
@@ -176,10 +180,7 @@ namespace RDLSave
             this.ReportTreeList.Size = new System.Drawing.Size(631, 496);
             this.ReportTreeList.TabIndex = 0;
             this.ReportTreeList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ReportTreeList_MouseUp);
-            // 
-            // FolderSelectDialog
-            // 
-            this.FolderSelectDialog.Description = "Select Download Folder";
+            this.ReportTreeList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ReportTreeList_AfterSelect);
             // 
             // RDPRip
             // 

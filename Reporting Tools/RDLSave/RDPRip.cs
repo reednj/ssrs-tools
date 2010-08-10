@@ -33,12 +33,17 @@ namespace RDLSave
         public RDPRip()
         {
             InitializeComponent();
+
+            CatalogItem c = new CatalogItem();
+            c.Type = ItemTypeEnum.Folder;
+            c.Path = "/";
+
+            ReportTreeList.Nodes["Root"].Tag = c;
         }
 
         private void RDPRip_Load(object sender, EventArgs e)
         {
             
-
         }
 
         private void RDPRip_Activated(object sender, EventArgs e)
@@ -341,6 +346,23 @@ namespace RDLSave
             }
 
             return result;
+        }
+
+        private void ReportTreeList_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+            bool ButtonState = false;
+            if (ReportTreeList.SelectedNode != null && ReportTreeList.SelectedNode.Tag != null)
+            {
+                CatalogItem c = ReportTreeList.SelectedNode.Tag as CatalogItem;
+
+                if (c != null && c.Type == ItemTypeEnum.Folder)
+                {
+                    ButtonState = true;
+                }
+            }
+
+            DownloadButton.Enabled = ButtonState;
         }
     }
 
