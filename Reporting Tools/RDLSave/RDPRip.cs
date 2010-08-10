@@ -17,7 +17,7 @@ namespace RDLSave
         
         bool hasStarted = false;
         SSRSUri ServerUrl = null;
-        string downloadFolder = Properties.Settings.Default.DownloadFolder;
+        string downloadFolder = Properties.Settings.Default.DownloadFolder.AddEndSlash();
 
         ServiceState _currentState = ServiceState.Disconnected;
         ServiceState CurrentState { 
@@ -199,7 +199,21 @@ namespace RDLSave
         {
             if (this.CurrentState == ServiceState.Connected)
             {
-                string RemoteFolder = "/"; // TODO: set this from the arguments;
+                string RemoteFolder = "/";
+
+                // if the user has selected a particular node, then download only that folder.
+                // if nothing selected, then stick with the default choice and download everything
+                if (ReportTreeList.SelectedNode != null && ReportTreeList.SelectedNode.Tag != null)
+                {
+                    CatalogItem ReportItem = ReportTreeList.SelectedNode.Tag as CatalogItem;
+                    
+                    // only download entire folders, for now.
+                    if (ReportItem.Type == ItemTypeEnum.Folder)
+                    {
+                        RemoteFolder = ReportItem.Path;
+                    }
+
+                }
 
                 StatusLabel.Text = "Starting Download...";
                 this.CurrentState = ServiceState.Downloading;
