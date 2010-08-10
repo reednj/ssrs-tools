@@ -108,7 +108,7 @@ namespace RDLSave
                     break;
                 }
 
-                if (item.Type != ItemTypeEnum.Folder)
+                if (item.Type == ItemTypeEnum.Report || item.Type == ItemTypeEnum.Resource)
                 {
                     Byte[] data = RsHelper.DownloadReportItem(rs, item);
 
@@ -126,7 +126,7 @@ namespace RDLSave
                         errorCount++;
                     }
                 }
-                else
+                else if(item.Type == ItemTypeEnum.Folder) 
                 {
                     // the item is a folder. There is no need for downloading here, we just need to create
                     // one with the same name
@@ -139,7 +139,7 @@ namespace RDLSave
 
             }
 
-            e.Result = serverItems.Length;
+            e.Result = new DownloadResult(serverItems.Length - errorCount, errorCount);
         }
 
         void Download_Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -163,7 +163,8 @@ namespace RDLSave
             }
             else
             {
-                StatusLabel.Text = String.Format("{0} Items Downloaded", e.Result);
+                DownloadResult dr = e.Result as DownloadResult;
+                StatusLabel.Text = String.Format("{0} Items Downloaded, {1} Errors", dr.DownloadCount, dr.ErrorCount);
             } 
 
             this.CurrentState = ServiceState.Connected;
@@ -378,6 +379,18 @@ namespace RDLSave
         }
     }
 
+    public class DownloadResult
+    {
+        public int DownloadCount;
+        public int ErrorCount;
+
+        public DownloadResult(int DownloadCount, int ErrorCount)
+        {
+            this.DownloadCount = DownloadCount;
+            this.ErrorCount = ErrorCount;
+        }
+    }
+
     public static class Extensions
     {
         public static string RemoveEndSlash(this string FilePath)
@@ -391,13 +404,13 @@ namespace RDLSave
         public static string AddEndSlash(this string FilePath)
         {
             FilePath = FilePath.Trim();
-            return (FilePath[FilePath.Length - 1] != '/') ? FilePath + "/" : FilePath;
+            return (FilePath != "" && FilePath[FilePath.Length - 1] != '/') ? FilePath + "/" : FilePath;
         }
 
         public static string AddFileEndSlash(this string FilePath)
         {
             FilePath = FilePath.Trim();
-            return (FilePath[FilePath.Length - 1] != Path.DirectorySeparatorChar) ? FilePath + Path.DirectorySeparatorChar : FilePath;
+            return (FilePath != "" && FilePath[FilePath.Length - 1] != Path.DirectorySeparatorChar) ? FilePath + Path.DirectorySeparatorChar : FilePath;
         }
     }
 
