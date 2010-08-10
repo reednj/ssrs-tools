@@ -30,7 +30,6 @@ namespace ReportingTools.Common
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportTree));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Home");
             this.IconList = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
@@ -50,12 +49,6 @@ namespace ReportingTools.Common
             this.ImageIndex = 0;
             this.ImageList = this.IconList;
             this.LineColor = System.Drawing.Color.Black;
-            treeNode1.ImageKey = "Folder";
-            treeNode1.Name = "Root";
-            treeNode1.SelectedImageKey = "Folder";
-            treeNode1.Text = "Home";
-            this.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
             this.SelectedImageIndex = 0;
             this.ResumeLayout(false);
 

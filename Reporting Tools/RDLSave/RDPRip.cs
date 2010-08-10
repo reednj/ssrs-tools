@@ -111,7 +111,7 @@ namespace RDLSave
                     {
                         // finding the correct name and location for the file can be a bit tricky...
                         string TempFromFolder = FromFolder.AddEndSlash();
-                        string FilePath = item.Path.Remove(item.Path.IndexOf(TempFromFolder), TempFromFolder.Length);
+                        string FilePath = item.Path.Remove(item.Path.ToLower().IndexOf(TempFromFolder.ToLower()), TempFromFolder.Length);
                         FilePath = Path.Combine(DestRootPath, FilePath);
                         FilePath = (item.Type == ItemTypeEnum.Report) ? FilePath + ".rdl" : FilePath;
                         File.WriteAllBytes(FilePath, data);
@@ -126,7 +126,7 @@ namespace RDLSave
                     // the item is a folder. There is no need for downloading here, we just need to create
                     // one with the same name
                     string TempFromFolder = FromFolder.AddEndSlash();
-                    string RelativePath = item.Path.Remove(item.Path.IndexOf(TempFromFolder), TempFromFolder.Length);
+                    string RelativePath = item.Path.Remove(item.Path.ToLower().IndexOf(TempFromFolder.ToLower()), TempFromFolder.Length);
                     Directory.CreateDirectory(Path.Combine(DestRootPath, RelativePath));
                 }
                 
@@ -190,6 +190,7 @@ namespace RDLSave
         {
             if (this.CurrentState == ServiceState.Connected)
             {
+                this.CurrentState = ServiceState.LoadingList;
                 ReportTreeList.Nodes["Root"].Nodes.Clear();
                 LoadList_Worker.RunWorkerAsync();
             }
@@ -268,6 +269,32 @@ namespace RDLSave
                 RefreshButton.Enabled = false;
                 ReportTreeList.Enabled = false;
                 DownloadButton.Enabled = false;
+            }
+        }
+
+        private void downloadAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DownloadButton.PerformClick();
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RefreshButton.PerformClick();
+        }
+
+        private void ReportTreeList_MouseUp(object sender, MouseEventArgs e)
+        {
+            // show the right click menu..
+            if (e.Button == MouseButtons.Right)
+            {
+                // select the node they just clicked on. Don't know why this doesn't happen
+                // by default
+                ReportTreeList.SelectedNode = ReportTreeList.GetNodeAt(e.X, e.Y);
+
+                // check the selecteditem to see whether they should be able to trigger a subscription
+                // or not.
+                downloadAllToolStripMenuItem.Enabled = (ReportTreeList.SelectedNode != null && ReportTreeList.SelectedNode.Tag != null && ((CatalogItem)ReportTreeList.SelectedNode.Tag).Type == ItemTypeEnum.Folder);
+                TreeContextMenu.Show(ReportTreeList, new Point(e.X, e.Y));
             }
         }
     }

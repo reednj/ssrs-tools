@@ -29,18 +29,24 @@ namespace RDLSave
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Home");
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.LoadList_Worker = new System.ComponentModel.BackgroundWorker();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.Download_Worker = new System.ComponentModel.BackgroundWorker();
             this.ConnectButton = new System.Windows.Forms.ToolStripButton();
             this.RefreshButton = new System.Windows.Forms.ToolStripButton();
             this.SetFolderButton = new System.Windows.Forms.ToolStripButton();
             this.DownloadButton = new System.Windows.Forms.ToolStripButton();
+            this.Download_Worker = new System.ComponentModel.BackgroundWorker();
+            this.TreeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.downloadAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReportTreeList = new ReportingTools.Common.ReportTree();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.TreeContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -76,14 +82,6 @@ namespace RDLSave
             this.toolStrip1.Size = new System.Drawing.Size(655, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // Download_Worker
-            // 
-            this.Download_Worker.WorkerReportsProgress = true;
-            this.Download_Worker.WorkerSupportsCancellation = true;
-            this.Download_Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Download_Worker_DoWork);
-            this.Download_Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Download_Worker_RunWorkerCompleted);
-            this.Download_Worker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Download_Worker_ProgressChanged);
             // 
             // ConnectButton
             // 
@@ -124,14 +122,58 @@ namespace RDLSave
             this.DownloadButton.Text = "Download Selection";
             this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
             // 
+            // Download_Worker
+            // 
+            this.Download_Worker.WorkerReportsProgress = true;
+            this.Download_Worker.WorkerSupportsCancellation = true;
+            this.Download_Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Download_Worker_DoWork);
+            this.Download_Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Download_Worker_RunWorkerCompleted);
+            this.Download_Worker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Download_Worker_ProgressChanged);
+            // 
+            // TreeContextMenu
+            // 
+            this.TreeContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.downloadAllToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.refreshToolStripMenuItem});
+            this.TreeContextMenu.Name = "TreeContextMenu";
+            this.TreeContextMenu.ShowImageMargin = false;
+            this.TreeContextMenu.Size = new System.Drawing.Size(134, 54);
+            // 
+            // downloadAllToolStripMenuItem
+            // 
+            this.downloadAllToolStripMenuItem.Name = "downloadAllToolStripMenuItem";
+            this.downloadAllToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.downloadAllToolStripMenuItem.Text = "Download All...";
+            this.downloadAllToolStripMenuItem.Click += new System.EventHandler(this.downloadAllToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(130, 6);
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
+            // 
             // ReportTreeList
             // 
             this.ReportTreeList.ImageIndex = 0;
             this.ReportTreeList.Location = new System.Drawing.Point(12, 28);
             this.ReportTreeList.Name = "ReportTreeList";
+            treeNode1.ImageKey = "Folder";
+            treeNode1.Name = "Root";
+            treeNode1.SelectedImageKey = "Folder";
+            treeNode1.Text = "Home";
+            this.ReportTreeList.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
             this.ReportTreeList.SelectedImageIndex = 0;
             this.ReportTreeList.Size = new System.Drawing.Size(631, 496);
             this.ReportTreeList.TabIndex = 0;
+            this.ReportTreeList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ReportTreeList_MouseUp);
             // 
             // RDPRip
             // 
@@ -151,6 +193,7 @@ namespace RDLSave
             this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.TreeContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -168,6 +211,10 @@ namespace RDLSave
         private System.Windows.Forms.ToolStripButton ConnectButton;
         private System.ComponentModel.BackgroundWorker Download_Worker;
         private System.Windows.Forms.ToolStripButton SetFolderButton;
+        private System.Windows.Forms.ContextMenuStrip TreeContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem downloadAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
     }
 }
 
