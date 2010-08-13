@@ -24,12 +24,10 @@ namespace ReportingTools.JobManager
         public JobManagerForm()
         {
             InitializeComponent();
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             rs.Credentials = System.Net.CredentialCache.DefaultCredentials;
             rs.ListJobsCompleted += LoadJobsComplete;
             rs.CancelJobCompleted += CancelJobAsyncComplete;
@@ -49,11 +47,11 @@ namespace ReportingTools.JobManager
             Job[] jobList = e.Result;
 
             jobListView.Items.Clear();
-
-            foreach(Job curJob in jobList) {
+            foreach (Job curJob in jobList)
+            {
                 AddJob(curJob);
             }
-
+           
             changeState(ServiceState.Connected);
         }
 
@@ -71,13 +69,12 @@ namespace ReportingTools.JobManager
             ListViewItem newRow = new ListViewItem(columnData.ToArray());
             newRow.Tag = reportJob;
 
-            jobListView.Items.Add(newRow);
-        }
+            if (reportJob.Status == JobStatusEnum.CancelRequested)
+            {
+                newRow.BackColor = Color.Pink;
+            }
 
-        private void refreshButton_Click(object sender, EventArgs e)
-        {
-            changeState(ServiceState.LoadingList);
-            rs.ListJobsAsync();
+            jobListView.Items.Add(newRow);
         }
 
         private void CancelJobAsyncComplete(object sender, CancelJobCompletedEventArgs e)
@@ -85,38 +82,21 @@ namespace ReportingTools.JobManager
             changeState(ServiceState.Connected);
         }
 
-        private void killJobButton_Click(object sender, EventArgs e)
-        {
-            if(jobListView.SelectedItems.Count > 0) {
-                Job selectedJob = jobListView.SelectedItems[0].Tag as Job;
-                
-                if(selectedJob != null) {
-                    // kill the job
-                    changeState(ServiceState.LoadingList);
-                    rs.CancelJobAsync(selectedJob.JobID);
-                }
-            }
-        }
-
         private void changeState(ServiceState newState)
         {
             if(newState == ServiceState.Connected) {
-                mainStatusLabel.Text = "Connected";
-                lockControls(true);
+                mainStatusLabel.Text = "Connected (Refreshes automatically every 5 seconds)";
+                jobListView.Enabled = true;
+                StopJobButton.Enabled = true;
             } else if(newState == ServiceState.LoadingList) {
                 mainStatusLabel.Text = "Loading Jobs...";
-                lockControls(false);
+                jobListView.Enabled = false;
+                StopJobButton.Enabled = false;
             } else if(newState == ServiceState.Error) {
                 mainStatusLabel.Text = "Error: Could not load Job List...";
             }
 
             this.CurrentState = newState;
-        }
-
-        private void lockControls(bool unlock)
-        {
-            killJobButton.Enabled = unlock;
-            refreshButton.Enabled = unlock;
         }
 
         private static string TimeSpanString(TimeSpan ts)
@@ -131,7 +111,7 @@ namespace ReportingTools.JobManager
                 return;
             }
 
-            if (this.tickCount % 5 == 0)
+            if (this.tickCount % 5 == 0 && this.CurrentState == ServiceState.Connected)
             {
                 // every one in 5 times actually refresh the page, the rest of the time
                 // just refresh the timer.
@@ -175,6 +155,26 @@ namespace ReportingTools.JobManager
                 RefreshTimer.Enabled = true;
                 rs.ListJobsAsync();
             }
+        }
+
+        private void StopJobButton_Click(object sender, EventArgs e)
+        {
+            if (jobListView.SelectedItems.Count > 0)
+            {
+                Job selectedJob = jobListView.SelectedItems[0].Tag as Job;
+
+                if (selectedJob != null)
+                {
+                    // kill the job
+                    changeState(ServiceState.LoadingList);
+                    rs.CancelJobAsync(selectedJob.JobID);
+                }
+            }
+        }
+
+        private void ConnectButton_Click(object sender, EventArgs e)
+        {
+            this.RunConnectDialog(false);
         }
 
 
