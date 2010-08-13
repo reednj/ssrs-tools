@@ -72,9 +72,17 @@ namespace ReportingTools.Common
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
-
-            this.ServerUrl = SSRSUri.ParseString(ServerNameText.Text);
-            rs.Url = this.ServerUrl.ToUrl();
+            try
+            {
+                this.ServerUrl = SSRSUri.ParseString(ServerNameText.Text);
+                rs.Url = this.ServerUrl.ToUrl();
+            }
+            catch(Exception ex)
+            {
+                ErrorLabel.Visible = true;
+                ErrorLabel.LabelText = "Error: " + ex.Message;
+                return;
+            }
 
             // what credentials to use?
             if (AuthTypeCombo.SelectedIndex == CMB_BASIC_AUTH)
