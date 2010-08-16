@@ -26,6 +26,8 @@ namespace ReportingTools.Common
         {
             InitializeComponent();
             AuthTypeCombo.SelectedIndex = 0;
+
+            InitializeLicense();
         }
 
         public LoginForm(bool WillAutoConnect)
@@ -34,6 +36,32 @@ namespace ReportingTools.Common
 
             AuthTypeCombo.SelectedIndex = 0;
             this.WillAutoConnect = WillAutoConnect;
+
+            InitializeLicense();
+        }
+
+        private void InitializeLicense()
+        {
+            // check for a license
+            if (LicenseKey.ValidateKey())
+            {
+                // the user has a valid license, so make sure we hide the license panel
+                // then let them go about their business
+                LicensePanel.Visible = false;
+            }
+
+            // no valid license? How many days remaining in the trial?
+            int DaysLeft = LicenseTest.DaysLeft();
+            DaysLeft = (DaysLeft < 0) ? 0 : DaysLeft;
+            DaysLeftLabel.Text = DaysLeft.ToString();
+
+            // less then zero days left?
+            if (DaysLeft <= 0)
+            {
+                DaysLeftLabel.ForeColor = Color.Red;
+                ConnectButton.Enabled = false;
+                BuyNowButton.Font = new Font(BuyNowButton.Font, FontStyle.Bold);
+            }
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -139,6 +167,29 @@ namespace ReportingTools.Common
             PasswordText.Clear();
             SqlServerAuthPanel.Enabled = !(AuthTypeCombo.SelectedIndex == CMB_WINDOWS_AUTH);
         }
+
+
+        private void BuyNowButton_Click_1(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(ReportingToolsConsts.BUY_URL);
+        }
+
+        private void EnterKeyButton_Click(object sender, EventArgs e)
+        {
+            EnterKeyForm ekf = new EnterKeyForm();
+
+            if (ekf.ShowDialog(this) == DialogResult.OK)
+            {
+                // the license key is valid, so save it to the config file
+                Properties.Settings.Default.LicenseKey = ekf.LicenseKeyString;
+                Properties.Settings.Default.Save();
+
+                LicensePanel.Visible = false;
+                ConnectButton.Enabled = true;
+
+            }
+        }
+
 
 
     }

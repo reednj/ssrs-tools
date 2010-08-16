@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace ReportingTools.Common
 {
-    class LicenseKey
+    public class LicenseKey
     {
         const int DefaultZeroCount = 3;
         const string KeySalt = "reporting-tools-e987982fbbd3-";
@@ -25,7 +25,7 @@ namespace ReportingTools.Common
         public static bool ValidateKey(string KeyString, int ZeroCount)
         {
 
-            string KeyHash = SHA1(KeySalt + KeyString.ToUpper());
+            string KeyHash = SHA1(KeySalt + KeyString.ToUpper().Trim());
             return (KeyHash.Substring(0, ZeroCount) == new String('0', ZeroCount));
         }
 
@@ -44,7 +44,7 @@ namespace ReportingTools.Common
         }
     }
 
-    class LicenseTest
+    public class LicenseTest
     {
         const string DefaultValue = "mr.tickle";
         const string EncryptKey = "reporting-tools-e987982fbbd3-";

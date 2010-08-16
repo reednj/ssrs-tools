@@ -59,7 +59,7 @@ namespace ReportingTools.Common.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("869XN-2O1B8-9PLGU-48BHe-7Y70J")]
         public string LicenseKey {
             get {
                 return ((string)(this["LicenseKey"]));
@@ -71,7 +71,7 @@ namespace ReportingTools.Common.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("mr.tickle")]
         public string LicenseValue {
             get {
                 return ((string)(this["LicenseValue"]));

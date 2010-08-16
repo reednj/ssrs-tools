@@ -43,6 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonService.cs" />
+    <Compile Include="EnterKeyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterKeyForm.Designer.cs">
+      <DependentUpon>EnterKeyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImageLabel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -183,6 +189,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="EnterKeyForm.resx">
+      <DependentUpon>EnterKeyForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImageLabel.resx">
       <DependentUpon>ImageLabel.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -199,6 +209,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="loader.gif" />
+    <None Include="Resources\ok_ico.png" />
     <None Include="Resources\login-banner.png" />
     <None Include="Resources\exclamation.png" />
     <None Include="Resources\loader.gif" />
