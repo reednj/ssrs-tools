@@ -145,6 +145,13 @@ namespace ReportingTools.Common
         void ListJobs_Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             e.Result = rs.ListJobs();
+
+            // lets check the ssrs version - at this stage we only support ssrs2005, so anything
+            // else and we show an error message
+            if (!rs.ServerInfoHeaderValue.ReportServerVersionNumber.Contains(" 9."))
+            {
+                throw new Exception("Reporting Services 2008 is not currently supported.");
+            }
         }
 
         void ListJobs_Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -155,9 +162,12 @@ namespace ReportingTools.Common
                 ConnectButton.Enabled = true;
                 FormPanel.Enabled = true;
                 ErrorLabel.Visible = true;
-                ErrorLabel.LabelText = "Error: " + e.Error.Message;
+                ErrorLabel.LabelText = "Error: " + e.Error.ShortMessage();
+
                 return;
             }
+
+
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -191,10 +201,5 @@ namespace ReportingTools.Common
 
             }
         }
-
-
-
     }
-
-
 }

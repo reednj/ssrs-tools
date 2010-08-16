@@ -51,6 +51,30 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_BA96313CCE55A4591156AA1C3E737A63"
+        "OwnerKey" = "8:_38CC6FB72D7441A89215D398E78C711F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BA96313CCE55A4591156AA1C3E737A63"
+        "OwnerKey" = "8:_EBF34E55FA9C4DDFBA2A1209D1AF1FAD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BA96313CCE55A4591156AA1C3E737A63"
+        "OwnerKey" = "8:_42F85ED1F4D94FFC864029F8FE6F72CE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BA96313CCE55A4591156AA1C3E737A63"
+        "OwnerKey" = "8:_0691C75A0CE09AD2AA754EC9C91C47E9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DEF529AD1E144939A3E2B9E0F801A147"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -83,6 +107,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_0691C75A0CE09AD2AA754EC9C91C47E9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_BA96313CCE55A4591156AA1C3E737A63"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -194,7 +224,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ReportingToolsCommon, Version=0.9.3880.26850, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ReportingToolsCommon, Version=0.9.3880.33921, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_0691C75A0CE09AD2AA754EC9C91C47E9"
@@ -241,6 +271,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BA96313CCE55A4591156AA1C3E737A63"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_BA96313CCE55A4591156AA1C3E737A63"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_8ECDE266B872473BBFA0EE0D2FC57879"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DEF529AD1E144939A3E2B9E0F801A147"
             {
             "SourcePath" = "8:install-banner.JPG"
@@ -278,7 +339,7 @@
                 {
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_5EE6CBFFC8B44A9CB24C6127C23D2140"
                     {
-                    "Name" = "8:Tools for Reporting Services 2005"
+                    "Name" = "8:Reporting-Tools (For Reporting Services 2005)"
                     "AlwaysCreate" = "11:FALSE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
@@ -302,7 +363,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_8ECDE266B872473BBFA0EE0D2FC57879"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -327,24 +388,24 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Tools for Reporting Services 2005"
+        "ProductName" = "8:Reporting-Tools"
         "ProductCode" = "8:{E7F3F03C-FCD9-4904-8908-C6F38B41B5D7}"
-        "PackageCode" = "8:{C82621B3-5673-405D-BC61-1AE3F8859C95}"
+        "PackageCode" = "8:{A37509B8-BAD6-4204-A2C8-D159D6FFEED2}"
         "UpgradeCode" = "8:{92142E06-6429-42ED-873C-C3B6C6C411D4}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:servralert"
+        "Manufacturer" = "8:reednj"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:ReportingToolsSetup"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:servralert"
+        "ARPCONTACT" = "8:Nathan Reed"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
-        "ARPURLINFOABOUT" = "8:"
+        "ARPURLINFOABOUT" = "8:http://ssrs-tools.com"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
