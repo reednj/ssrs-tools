@@ -72,14 +72,14 @@ namespace ReportingTools.Common
             this.Activate();
             this.ActiveControl = this.ServerNameText;
 
-            if (Properties.Settings.Default.ServerName.Length > 0)
+            if (SharedSettings.ServerName.Length > 0)
             {
-                ServerNameText.Text = Properties.Settings.Default.ServerName;
+                ServerNameText.Text = SharedSettings.ServerName;
                 ServerNameText.SelectionStart = ServerNameText.Text.Length;
 
             }
 
-            AutoLoginCheck.Checked = Properties.Settings.Default.AutoConnect;
+            AutoLoginCheck.Checked = SharedSettings.AutoConnect;
             UsernameText.Text = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             
             // should we connect automatically. Was this loaded at start up, or triggered by the user?
@@ -100,6 +100,8 @@ namespace ReportingTools.Common
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
+            ErrorLabel.BringToFront();
+
             try
             {
                 this.ServerUrl = SSRSUri.ParseString(ServerNameText.Text);
@@ -126,9 +128,8 @@ namespace ReportingTools.Common
             
             
             // save the settings for next time.
-            Properties.Settings.Default.ServerName = this.ServerUrl.FullName;
-            Properties.Settings.Default.AutoConnect = AutoLoginCheck.Checked;
-            Properties.Settings.Default.Save();
+            SharedSettings.ServerName = this.ServerUrl.FullName;
+            SharedSettings.AutoConnect = AutoLoginCheck.Checked;
 
             BackgroundWorker ListJobs_Worker = new BackgroundWorker();
             ListJobs_Worker.DoWork += new DoWorkEventHandler(ListJobs_Worker_DoWork);
@@ -181,8 +182,7 @@ namespace ReportingTools.Common
             if (ekf.ShowDialog(this) == DialogResult.OK)
             {
                 // the license key is valid, so save it to the config file
-                Properties.Settings.Default.LicenseKey = ekf.LicenseKeyString;
-                Properties.Settings.Default.Save();
+                SharedSettings.LicenseKey = ekf.LicenseKeyString;
 
                 LicensePanel.Visible = false;
                 ConnectButton.Enabled = true;

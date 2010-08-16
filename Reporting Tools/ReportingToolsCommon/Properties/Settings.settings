@@ -5,17 +5,5 @@
     <Setting Name="ReportingToolsCommon_ReportService_ReportingService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://hydrogen/ReportServer/ReportService.asmx</Value>
     </Setting>
-    <Setting Name="ServerName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">hydrogen</Value>
-    </Setting>
-    <Setting Name="AutoConnect" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="LicenseKey" Type="System.String" Scope="User">
-      <Value Profile="(Default)">869XN-2O1B8-9PLGU-48BHe-7Y70J</Value>
-    </Setting>
-    <Setting Name="LicenseValue" Type="System.String" Scope="User">
-      <Value Profile="(Default)">mr.tickle</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

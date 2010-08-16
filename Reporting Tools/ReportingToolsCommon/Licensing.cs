@@ -14,7 +14,7 @@ namespace ReportingTools.Common
 
         public static bool ValidateKey()
         {
-            return ValidateKey(Properties.Settings.Default.LicenseKey);
+            return ValidateKey(SharedSettings.LicenseKey);
         }
 
         public static bool ValidateKey(string KeyString)
@@ -76,9 +76,7 @@ namespace ReportingTools.Common
         public static void SetTrialDate()
         {
             string EncodedString = SimpleEncrypt.Encrypt(DateTime.Now.ToString("yyyy-MM-dd"), EncryptKey);
-            Properties.Settings.Default.LicenseValue = EncodedString;
-            Properties.Settings.Default.Save();
-
+            SharedSettings.LicenseValue = EncodedString;
         }
 
         public static DateTime? GetTrialDate()
@@ -89,7 +87,7 @@ namespace ReportingTools.Common
             }
 
             DateTime DateValue;
-            string DateString = SimpleEncrypt.Decrypt(Properties.Settings.Default.LicenseValue, EncryptKey);
+            string DateString = SimpleEncrypt.Decrypt(SharedSettings.LicenseValue, EncryptKey);
             return DateTime.TryParse(DateString, out DateValue) ? (DateTime?)DateValue : null;
 
         }
@@ -98,7 +96,7 @@ namespace ReportingTools.Common
         // (which will be set by the installer usually)
         public static bool IsNew()
         {
-            return (Properties.Settings.Default.LicenseValue == DefaultValue);
+            return (SharedSettings.LicenseValue == DefaultValue);
         }
     }
 

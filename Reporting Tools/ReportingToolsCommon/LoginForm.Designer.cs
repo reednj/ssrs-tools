@@ -40,22 +40,22 @@ namespace ReportingTools.Common
             this.ConnectButton = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
             this.FormPanel = new System.Windows.Forms.Panel();
+            this.LicensePanel = new System.Windows.Forms.Panel();
+            this.DayLeftTextLabel = new System.Windows.Forms.Label();
             this.BuyNowButton = new System.Windows.Forms.Button();
             this.EnterKeyButton = new System.Windows.Forms.Button();
+            this.DaysLeftLabel = new System.Windows.Forms.Label();
             this.AutoLoginCheck = new System.Windows.Forms.CheckBox();
             this.SqlServerAuthPanel = new System.Windows.Forms.Panel();
+            this.ErrorLabel = new ReportingTools.Common.ImageLabel();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LoadingImg = new System.Windows.Forms.PictureBox();
-            this.DaysLeftLabel = new System.Windows.Forms.Label();
-            this.DayLeftTextLabel = new System.Windows.Forms.Label();
-            this.LicensePanel = new System.Windows.Forms.Panel();
-            this.ErrorLabel = new ReportingTools.Common.ImageLabel();
             this.FormPanel.SuspendLayout();
+            this.LicensePanel.SuspendLayout();
             this.SqlServerAuthPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LoadingImg)).BeginInit();
-            this.LicensePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ServerNameText
@@ -164,6 +164,27 @@ namespace ReportingTools.Common
             this.FormPanel.Size = new System.Drawing.Size(375, 169);
             this.FormPanel.TabIndex = 10;
             // 
+            // LicensePanel
+            // 
+            this.LicensePanel.Controls.Add(this.DayLeftTextLabel);
+            this.LicensePanel.Controls.Add(this.BuyNowButton);
+            this.LicensePanel.Controls.Add(this.EnterKeyButton);
+            this.LicensePanel.Controls.Add(this.DaysLeftLabel);
+            this.LicensePanel.Location = new System.Drawing.Point(207, 110);
+            this.LicensePanel.Name = "LicensePanel";
+            this.LicensePanel.Size = new System.Drawing.Size(168, 59);
+            this.LicensePanel.TabIndex = 20;
+            // 
+            // DayLeftTextLabel
+            // 
+            this.DayLeftTextLabel.AutoSize = true;
+            this.DayLeftTextLabel.ForeColor = System.Drawing.Color.DimGray;
+            this.DayLeftTextLabel.Location = new System.Drawing.Point(32, 36);
+            this.DayLeftTextLabel.Name = "DayLeftTextLabel";
+            this.DayLeftTextLabel.Size = new System.Drawing.Size(46, 13);
+            this.DayLeftTextLabel.TabIndex = 19;
+            this.DayLeftTextLabel.Text = "days left";
+            // 
             // BuyNowButton
             // 
             this.BuyNowButton.Location = new System.Drawing.Point(84, 6);
@@ -183,6 +204,16 @@ namespace ReportingTools.Common
             this.EnterKeyButton.Text = "Enter Key...";
             this.EnterKeyButton.UseVisualStyleBackColor = true;
             this.EnterKeyButton.Click += new System.EventHandler(this.EnterKeyButton_Click);
+            // 
+            // DaysLeftLabel
+            // 
+            this.DaysLeftLabel.AutoSize = true;
+            this.DaysLeftLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DaysLeftLabel.Location = new System.Drawing.Point(3, 27);
+            this.DaysLeftLabel.Name = "DaysLeftLabel";
+            this.DaysLeftLabel.Size = new System.Drawing.Size(36, 26);
+            this.DaysLeftLabel.TabIndex = 18;
+            this.DaysLeftLabel.Text = "30";
             // 
             // AutoLoginCheck
             // 
@@ -205,6 +236,19 @@ namespace ReportingTools.Common
             this.SqlServerAuthPanel.Name = "SqlServerAuthPanel";
             this.SqlServerAuthPanel.Size = new System.Drawing.Size(369, 54);
             this.SqlServerAuthPanel.TabIndex = 8;
+            // 
+            // ErrorLabel
+            // 
+            this.ErrorLabel.AutoSize = true;
+            this.ErrorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ErrorLabel.Image = global::ReportingTools.Common.Properties.Resources.exclamation;
+            this.ErrorLabel.LabelText = "Error Message";
+            this.ErrorLabel.Location = new System.Drawing.Point(10, 123);
+            this.ErrorLabel.MaximumSize = new System.Drawing.Size(270, 0);
+            this.ErrorLabel.Name = "ErrorLabel";
+            this.ErrorLabel.Size = new System.Drawing.Size(108, 16);
+            this.ErrorLabel.TabIndex = 13;
+            this.ErrorLabel.Visible = false;
             // 
             // label5
             // 
@@ -235,49 +279,6 @@ namespace ReportingTools.Common
             this.LoadingImg.TabStop = false;
             this.LoadingImg.Visible = false;
             // 
-            // DaysLeftLabel
-            // 
-            this.DaysLeftLabel.AutoSize = true;
-            this.DaysLeftLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DaysLeftLabel.Location = new System.Drawing.Point(3, 27);
-            this.DaysLeftLabel.Name = "DaysLeftLabel";
-            this.DaysLeftLabel.Size = new System.Drawing.Size(36, 26);
-            this.DaysLeftLabel.TabIndex = 18;
-            this.DaysLeftLabel.Text = "30";
-            // 
-            // DayLeftTextLabel
-            // 
-            this.DayLeftTextLabel.AutoSize = true;
-            this.DayLeftTextLabel.ForeColor = System.Drawing.Color.DimGray;
-            this.DayLeftTextLabel.Location = new System.Drawing.Point(32, 36);
-            this.DayLeftTextLabel.Name = "DayLeftTextLabel";
-            this.DayLeftTextLabel.Size = new System.Drawing.Size(46, 13);
-            this.DayLeftTextLabel.TabIndex = 19;
-            this.DayLeftTextLabel.Text = "days left";
-            // 
-            // LicensePanel
-            // 
-            this.LicensePanel.Controls.Add(this.DayLeftTextLabel);
-            this.LicensePanel.Controls.Add(this.BuyNowButton);
-            this.LicensePanel.Controls.Add(this.EnterKeyButton);
-            this.LicensePanel.Controls.Add(this.DaysLeftLabel);
-            this.LicensePanel.Location = new System.Drawing.Point(207, 110);
-            this.LicensePanel.Name = "LicensePanel";
-            this.LicensePanel.Size = new System.Drawing.Size(168, 59);
-            this.LicensePanel.TabIndex = 20;
-            // 
-            // ErrorLabel
-            // 
-            this.ErrorLabel.AutoSize = true;
-            this.ErrorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ErrorLabel.Image = global::ReportingTools.Common.Properties.Resources.exclamation;
-            this.ErrorLabel.LabelText = "Error Message";
-            this.ErrorLabel.Location = new System.Drawing.Point(10, 123);
-            this.ErrorLabel.Name = "ErrorLabel";
-            this.ErrorLabel.Size = new System.Drawing.Size(108, 16);
-            this.ErrorLabel.TabIndex = 13;
-            this.ErrorLabel.Visible = false;
-            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,12 +301,12 @@ namespace ReportingTools.Common
             this.Load += new System.EventHandler(this.Login_Load);
             this.FormPanel.ResumeLayout(false);
             this.FormPanel.PerformLayout();
+            this.LicensePanel.ResumeLayout(false);
+            this.LicensePanel.PerformLayout();
             this.SqlServerAuthPanel.ResumeLayout(false);
             this.SqlServerAuthPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LoadingImg)).EndInit();
-            this.LicensePanel.ResumeLayout(false);
-            this.LicensePanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

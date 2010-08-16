@@ -13,7 +13,7 @@ namespace ReportingTools.Common.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "9.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -30,54 +30,6 @@ namespace ReportingTools.Common.Properties {
         public string ReportingToolsCommon_ReportService_ReportingService {
             get {
                 return ((string)(this["ReportingToolsCommon_ReportService_ReportingService"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("hydrogen")]
-        public string ServerName {
-            get {
-                return ((string)(this["ServerName"]));
-            }
-            set {
-                this["ServerName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool AutoConnect {
-            get {
-                return ((bool)(this["AutoConnect"]));
-            }
-            set {
-                this["AutoConnect"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("869XN-2O1B8-9PLGU-48BHe-7Y70J")]
-        public string LicenseKey {
-            get {
-                return ((string)(this["LicenseKey"]));
-            }
-            set {
-                this["LicenseKey"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("mr.tickle")]
-        public string LicenseValue {
-            get {
-                return ((string)(this["LicenseValue"]));
-            }
-            set {
-                this["LicenseValue"] = value;
             }
         }
     }
