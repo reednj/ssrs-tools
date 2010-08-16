@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D30157CC-7A09-4D77-8756-41749310EFE5}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -49,6 +49,7 @@
     <Compile Include="ImageLabel.designer.cs">
       <DependentUpon>ImageLabel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Licensing.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
