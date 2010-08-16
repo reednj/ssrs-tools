@@ -39,9 +39,9 @@
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(405, 60);
+            this.CloseButton.Location = new System.Drawing.Point(318, 60);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(93, 25);
+            this.CloseButton.Size = new System.Drawing.Size(79, 25);
             this.CloseButton.TabIndex = 0;
             this.CloseButton.Text = "Cancel";
             this.CloseButton.UseVisualStyleBackColor = true;
@@ -49,9 +49,9 @@
             // 
             // ValidateButton
             // 
-            this.ValidateButton.Location = new System.Drawing.Point(306, 60);
+            this.ValidateButton.Location = new System.Drawing.Point(233, 60);
             this.ValidateButton.Name = "ValidateButton";
-            this.ValidateButton.Size = new System.Drawing.Size(93, 25);
+            this.ValidateButton.Size = new System.Drawing.Size(79, 25);
             this.ValidateButton.TabIndex = 1;
             this.ValidateButton.Text = "OK";
             this.ValidateButton.UseVisualStyleBackColor = true;
@@ -59,16 +59,16 @@
             // 
             // LicenseTextBox
             // 
-            this.LicenseTextBox.Location = new System.Drawing.Point(83, 12);
+            this.LicenseTextBox.Location = new System.Drawing.Point(80, 12);
             this.LicenseTextBox.Name = "LicenseTextBox";
-            this.LicenseTextBox.Size = new System.Drawing.Size(415, 20);
+            this.LicenseTextBox.Size = new System.Drawing.Size(317, 20);
             this.LicenseTextBox.TabIndex = 2;
             this.LicenseTextBox.TextChanged += new System.EventHandler(this.LicenseTextBox_KeyUp);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(9, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 3;
@@ -76,9 +76,9 @@
             // 
             // PurchaseButton
             // 
-            this.PurchaseButton.Location = new System.Drawing.Point(15, 60);
+            this.PurchaseButton.Location = new System.Drawing.Point(12, 60);
             this.PurchaseButton.Name = "PurchaseButton";
-            this.PurchaseButton.Size = new System.Drawing.Size(93, 25);
+            this.PurchaseButton.Size = new System.Drawing.Size(79, 25);
             this.PurchaseButton.TabIndex = 4;
             this.PurchaseButton.Text = "Buy Now...";
             this.PurchaseButton.UseVisualStyleBackColor = true;
@@ -100,7 +100,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(510, 97);
+            this.ClientSize = new System.Drawing.Size(409, 97);
             this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.PurchaseButton);
             this.Controls.Add(this.label1);

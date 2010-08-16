@@ -194,7 +194,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ReportingToolsCommon, Version=0.9.3880.24653, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ReportingToolsCommon, Version=0.9.3880.26850, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_0691C75A0CE09AD2AA754EC9C91C47E9"
@@ -329,7 +329,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Tools for Reporting Services 2005"
         "ProductCode" = "8:{E7F3F03C-FCD9-4904-8908-C6F38B41B5D7}"
-        "PackageCode" = "8:{60E95F03-D455-45E8-BA46-C1302160A6FE}"
+        "PackageCode" = "8:{C82621B3-5673-405D-BC61-1AE3F8859C95}"
         "UpgradeCode" = "8:{92142E06-6429-42ED-873C-C3B6C6C411D4}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -403,66 +403,6 @@
                     "Transitive" = "11:FALSE"
                         "Keys"
                         {
-                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_578AB332D334479C895C4BB84046E9B0"
-                            {
-                            "Name" = "8:servralert"
-                            "Condition" = "8:"
-                            "AlwaysCreate" = "11:FALSE"
-                            "DeleteAtUninstall" = "11:FALSE"
-                            "Transitive" = "11:FALSE"
-                                "Keys"
-                                {
-                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_55808B30B8BD449399B9F285C392199A"
-                                    {
-                                    "Name" = "8:reporting-tools"
-                                    "Condition" = "8:"
-                                    "AlwaysCreate" = "11:FALSE"
-                                    "DeleteAtUninstall" = "11:FALSE"
-                                    "Transitive" = "11:FALSE"
-                                        "Keys"
-                                        {
-                                        }
-                                        "Values"
-                                        {
-                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_3FBC23E20D6A486A86363FB183B764D0"
-                                            {
-                                            "Name" = "8:ServerName"
-                                            "Condition" = "8:"
-                                            "Transitive" = "11:FALSE"
-                                            "ValueTypes" = "3:1"
-                                            "Value" = "8:"
-                                            }
-                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_7A14F49FBE09402B9E15221CC1D873B8"
-                                            {
-                                            "Name" = "8:LicenseKey"
-                                            "Condition" = "8:"
-                                            "Transitive" = "11:FALSE"
-                                            "ValueTypes" = "3:1"
-                                            "Value" = "8:"
-                                            }
-                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_988BCF14C05443E79F7A934602891B56"
-                                            {
-                                            "Name" = "8:LicenseValue"
-                                            "Condition" = "8:"
-                                            "Transitive" = "11:FALSE"
-                                            "ValueTypes" = "3:1"
-                                            "Value" = "8:mr.tickle"
-                                            }
-                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_A9B24A3066F8473FACD4E7CE539AE917"
-                                            {
-                                            "Name" = "8:AutoConnect"
-                                            "Condition" = "8:"
-                                            "Transitive" = "11:FALSE"
-                                            "ValueTypes" = "3:1"
-                                            "Value" = "8:False"
-                                            }
-                                        }
-                                    }
-                                }
-                                "Values"
-                                {
-                                }
-                            }
                         }
                         "Values"
                         {

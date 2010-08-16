@@ -47,10 +47,10 @@ namespace ReportingTools.Common
             this.DaysLeftLabel = new System.Windows.Forms.Label();
             this.AutoLoginCheck = new System.Windows.Forms.CheckBox();
             this.SqlServerAuthPanel = new System.Windows.Forms.Panel();
-            this.ErrorLabel = new ReportingTools.Common.ImageLabel();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LoadingImg = new System.Windows.Forms.PictureBox();
+            this.ErrorLabel = new ReportingTools.Common.ImageLabel();
             this.FormPanel.SuspendLayout();
             this.LicensePanel.SuspendLayout();
             this.SqlServerAuthPanel.SuspendLayout();
@@ -131,7 +131,7 @@ namespace ReportingTools.Common
             // 
             // ConnectButton
             // 
-            this.ConnectButton.Location = new System.Drawing.Point(219, 252);
+            this.ConnectButton.Location = new System.Drawing.Point(219, 277);
             this.ConnectButton.Name = "ConnectButton";
             this.ConnectButton.Size = new System.Drawing.Size(78, 23);
             this.ConnectButton.TabIndex = 8;
@@ -141,7 +141,7 @@ namespace ReportingTools.Common
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(303, 252);
+            this.CloseButton.Location = new System.Drawing.Point(303, 277);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(78, 23);
             this.CloseButton.TabIndex = 9;
@@ -154,12 +154,11 @@ namespace ReportingTools.Common
             this.FormPanel.Controls.Add(this.LicensePanel);
             this.FormPanel.Controls.Add(this.AutoLoginCheck);
             this.FormPanel.Controls.Add(this.SqlServerAuthPanel);
-            this.FormPanel.Controls.Add(this.ErrorLabel);
             this.FormPanel.Controls.Add(this.label2);
             this.FormPanel.Controls.Add(this.AuthTypeCombo);
             this.FormPanel.Controls.Add(this.label1);
             this.FormPanel.Controls.Add(this.ServerNameText);
-            this.FormPanel.Location = new System.Drawing.Point(12, 70);
+            this.FormPanel.Location = new System.Drawing.Point(12, 92);
             this.FormPanel.Name = "FormPanel";
             this.FormPanel.Size = new System.Drawing.Size(375, 169);
             this.FormPanel.TabIndex = 10;
@@ -237,23 +236,10 @@ namespace ReportingTools.Common
             this.SqlServerAuthPanel.Size = new System.Drawing.Size(369, 54);
             this.SqlServerAuthPanel.TabIndex = 8;
             // 
-            // ErrorLabel
-            // 
-            this.ErrorLabel.AutoSize = true;
-            this.ErrorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ErrorLabel.Image = global::ReportingTools.Common.Properties.Resources.exclamation;
-            this.ErrorLabel.LabelText = "Error Message";
-            this.ErrorLabel.Location = new System.Drawing.Point(10, 123);
-            this.ErrorLabel.MaximumSize = new System.Drawing.Size(270, 0);
-            this.ErrorLabel.Name = "ErrorLabel";
-            this.ErrorLabel.Size = new System.Drawing.Size(108, 16);
-            this.ErrorLabel.TabIndex = 13;
-            this.ErrorLabel.Visible = false;
-            // 
             // label5
             // 
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label5.Location = new System.Drawing.Point(0, 242);
+            this.label5.Location = new System.Drawing.Point(0, 267);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(401, 2);
             this.label5.TabIndex = 11;
@@ -271,7 +257,7 @@ namespace ReportingTools.Common
             // LoadingImg
             // 
             this.LoadingImg.Image = global::ReportingTools.Common.Properties.Resources.loader;
-            this.LoadingImg.Location = new System.Drawing.Point(192, 252);
+            this.LoadingImg.Location = new System.Drawing.Point(192, 277);
             this.LoadingImg.Name = "LoadingImg";
             this.LoadingImg.Size = new System.Drawing.Size(21, 23);
             this.LoadingImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -279,14 +265,27 @@ namespace ReportingTools.Common
             this.LoadingImg.TabStop = false;
             this.LoadingImg.Visible = false;
             // 
+            // ErrorLabel
+            // 
+            this.ErrorLabel.AutoSize = true;
+            this.ErrorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ErrorLabel.Image = global::ReportingTools.Common.Properties.Resources.exclamation;
+            this.ErrorLabel.LabelText = "Error Message";
+            this.ErrorLabel.Location = new System.Drawing.Point(22, 70);
+            this.ErrorLabel.Name = "ErrorLabel";
+            this.ErrorLabel.Size = new System.Drawing.Size(108, 16);
+            this.ErrorLabel.TabIndex = 13;
+            this.ErrorLabel.Visible = false;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(399, 284);
+            this.ClientSize = new System.Drawing.Size(399, 312);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LoadingImg);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.FormPanel);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.ConnectButton);

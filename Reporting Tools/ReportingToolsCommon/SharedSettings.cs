@@ -2,57 +2,54 @@
 using System.Collections.Generic;
 using System.Text;
 
-using Microsoft.Win32;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace ReportingTools.Common
 {
     class SharedSettings
     {
-        const string DefaultPath = @"Software\servralert\reporting-tools";
+        public static DefaultSettings Default = DefaultSettings.Initialize();
+    }
 
-        public static string LicenseKey
-        {
-            get { return (string)GetValue("LicenseKey"); }
-            set { SetValue("LicenseKey", value); }
-        }
+    class DefaultSettings
+    {
+        const string DefaultFolder = "ReportingTools";
+        const string DefaultFileName = @"\ReportingTools\ReportingToolsSettings.json";
 
-        public static string LicenseValue
-        {
-            get { return (string)GetValue("LicenseValue"); }
-            set { SetValue("LicenseValue", value); }
-        }
 
-        public static string ServerName
-        {
-            get { return (string)GetValue("ServerName"); }
-            set { SetValue("ServerName", value); }
-        }
+        public string LicenseKey { get; set; }
+        public string LicenseValue { get; set; }
+        public string ServerName { get; set; }
+        public bool AutoConnect { get; set; }
 
-        public static bool AutoConnect
+        public static DefaultSettings Initialize()
         {
-            get { return (string)GetValue("AutoConnect") == "True" ? true : false ; }
-            set { SetValue("AutoConnect", value.ToString()); }
-        }
+            string FileName = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + DefaultFileName;
 
-        public static object GetValue(string KeyName)
-        {
-            try
+            if (!File.Exists(FileName))
             {
-                return Registry.CurrentUser.OpenSubKey(DefaultPath).GetValue(KeyName, "");
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DefaultFolder));
+                
+                // if the file doesn't exist, then just create one with all the default
+                // settings.
+                DefaultSettings d = new DefaultSettings();
+                d.LicenseKey = "";
+                d.LicenseValue = "mr.tickle";
+                d.ServerName = "";
+                d.AutoConnect = false;
+                d.Save();
+
+                return d;
             }
-            catch
-            {
-                return "";
-            }
+
+            return (DefaultSettings)JavaScriptConvert.DeserializeObject(File.ReadAllText(FileName), typeof(DefaultSettings));
         }
 
-        public static void SetValue(string KeyName, object KeyValue)
+        public void Save()
         {
-            try
-            {
-                Registry.CurrentUser.OpenSubKey(DefaultPath, true).SetValue(KeyName, KeyValue);
-            } catch {
-            }
+            string FileName = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + DefaultFileName;
+            File.WriteAllText(FileName, JavaScriptConvert.SerializeObject(this));
         }
     }
 }

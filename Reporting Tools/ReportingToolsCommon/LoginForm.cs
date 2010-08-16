@@ -72,14 +72,14 @@ namespace ReportingTools.Common
             this.Activate();
             this.ActiveControl = this.ServerNameText;
 
-            if (SharedSettings.ServerName.Length > 0)
+            if (SharedSettings.Default.ServerName.Length > 0)
             {
-                ServerNameText.Text = SharedSettings.ServerName;
+                ServerNameText.Text = SharedSettings.Default.ServerName;
                 ServerNameText.SelectionStart = ServerNameText.Text.Length;
 
             }
 
-            AutoLoginCheck.Checked = SharedSettings.AutoConnect;
+            AutoLoginCheck.Checked = SharedSettings.Default.AutoConnect;
             UsernameText.Text = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             
             // should we connect automatically. Was this loaded at start up, or triggered by the user?
@@ -128,8 +128,9 @@ namespace ReportingTools.Common
             
             
             // save the settings for next time.
-            SharedSettings.ServerName = this.ServerUrl.FullName;
-            SharedSettings.AutoConnect = AutoLoginCheck.Checked;
+            SharedSettings.Default.ServerName = this.ServerUrl.FullName;
+            SharedSettings.Default.AutoConnect = AutoLoginCheck.Checked;
+            SharedSettings.Default.Save();
 
             BackgroundWorker ListJobs_Worker = new BackgroundWorker();
             ListJobs_Worker.DoWork += new DoWorkEventHandler(ListJobs_Worker_DoWork);
@@ -182,7 +183,8 @@ namespace ReportingTools.Common
             if (ekf.ShowDialog(this) == DialogResult.OK)
             {
                 // the license key is valid, so save it to the config file
-                SharedSettings.LicenseKey = ekf.LicenseKeyString;
+                SharedSettings.Default.LicenseKey = ekf.LicenseKeyString;
+                SharedSettings.Default.Save();
 
                 LicensePanel.Visible = false;
                 ConnectButton.Enabled = true;
