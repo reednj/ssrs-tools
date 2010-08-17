@@ -38,7 +38,7 @@ namespace ReportingTools.JobManager
             if (this.hasStarted == false)
             {
                 this.hasStarted = true;
-                this.RunConnectDialog(false);
+                this.RunConnectDialog(true);
             }
         }
 
