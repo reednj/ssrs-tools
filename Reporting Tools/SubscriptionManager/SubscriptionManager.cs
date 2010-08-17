@@ -289,7 +289,7 @@ namespace ReportingTools.SubscriptionManager
         public Job Job { get { return _job; } set { _job = value; } }
         public SubscriptionJobState State { get { return _state; } }
 
-        public SubscriptionJob(Subscription s, ReportingService rs)
+        public SubscriptionJob(Subscription s, ReportingService2005 rs)
         {
             this.rsh = new RsHelper(rs);
             this.Subscription = s;
@@ -352,7 +352,7 @@ namespace ReportingTools.SubscriptionManager
     {
         ReportingService2005 rs = new ReportingService2005();
 
-        public RsHelper(ReportingService rs)
+        public RsHelper(ReportingService2005 rs)
         {
             this.rs.Credentials = rs.Credentials;
             this.rs.Url = rs.Url;
