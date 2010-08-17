@@ -17,7 +17,7 @@ namespace ReportingTools.JobManager
         bool hasStarted = false;
 
         int tickCount = 0;
-        ReportingService rs = new ReportingService();
+        ReportingService2005 rs = new ReportingService2005();
         ServiceState CurrentState = ServiceState.Disconnected;
         SSRSUri ServerUrl = null;
 

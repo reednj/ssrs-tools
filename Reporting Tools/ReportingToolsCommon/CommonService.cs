@@ -105,11 +105,11 @@ namespace ReportingTools.Common
 
             if (this.InstanceName == null)
             {
-                return String.Format("http://{0}/reportserver/reportservice.asmx", this.ServerName);
+                return String.Format("http://{0}/reportserver/reportservice2005.asmx", this.ServerName);
             }
             else
             {
-                return String.Format("http://{0}/reportserver${1}/reportservice.asmx", this.ServerName, this.InstanceName);
+                return String.Format("http://{0}/reportserver${1}/reportservice2005.asmx", this.ServerName, this.InstanceName);
             }
         }
     }

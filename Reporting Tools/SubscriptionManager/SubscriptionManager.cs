@@ -20,7 +20,7 @@ namespace ReportingTools.SubscriptionManager
     {
         bool _loadComplete = false;
         ServiceState curState = ServiceState.Disconnected;
-        ReportingService rs = new ReportingService();
+        ReportingService2005 rs = new ReportingService2005();
         BackgroundWorker Subscription_Worker;
         SSRSUri ServerUrl = null;
 
@@ -350,7 +350,7 @@ namespace ReportingTools.SubscriptionManager
 
     public class RsHelper
     {
-        ReportingService rs = new ReportingService();
+        ReportingService2005 rs = new ReportingService2005();
 
         public RsHelper(System.Net.ICredentials RsCredentials)
         {
@@ -372,7 +372,7 @@ namespace ReportingTools.SubscriptionManager
             return GetSubscriptionJob(s, rs);
         }
 
-        public static Subscription RefreshSubscription(Subscription curSub, ReportingService rs)
+        public static Subscription RefreshSubscription(Subscription curSub, ReportingService2005 rs)
         {
             // there is no method to get an individual subscription apart from
             // 'getsubscriptionproperties' and this is too hard to use.
@@ -388,7 +388,7 @@ namespace ReportingTools.SubscriptionManager
             return curSub;
         }
 
-        public static Job RefreshJob(Job curJob, ReportingService rs)
+        public static Job RefreshJob(Job curJob, ReportingService2005 rs)
         {
             Job[] jl = rs.ListJobs();
 
@@ -405,7 +405,7 @@ namespace ReportingTools.SubscriptionManager
 
         // given a subscription, search through the job list and see
         // if there is anything there that matches
-        public static Job GetSubscriptionJob(Subscription s, ReportingService rs)
+        public static Job GetSubscriptionJob(Subscription s, ReportingService2005 rs)
         {
             if (s == null)
             {

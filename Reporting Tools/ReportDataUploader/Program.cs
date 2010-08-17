@@ -17,7 +17,7 @@ namespace ReportDataUploader
     class Program
     {
         static Random rand = new Random();
-        static ReportingService rs = new ReportingService();
+        static ReportingService2005 rs = new ReportingService2005();
 
         static void Main(string[] args)
         {

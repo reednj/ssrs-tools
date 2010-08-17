@@ -17,7 +17,7 @@ namespace ReportingTools.Common
         const int CMB_BASIC_AUTH = 1;
         
         bool WillAutoConnect = false;
-        ReportingService rs = new ReportingService();
+        ReportingService2005 rs = new ReportingService2005();
 
         public SSRSUri ServerUrl = null;
         public System.Net.ICredentials RsCredentials { get { return rs.Credentials; } }
@@ -145,13 +145,13 @@ namespace ReportingTools.Common
         void ListJobs_Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             e.Result = rs.ListJobs();
-
+            
             // lets check the ssrs version - at this stage we only support ssrs2005, so anything
             // else and we show an error message
-            if (!rs.ServerInfoHeaderValue.ReportServerVersionNumber.Contains(" 9."))
-            {
-                throw new Exception("Reporting Services 2008 is not currently supported.");
-            }
+            //if (!rs.ServerInfoHeaderValue.ReportServerVersionNumber.Contains(" 9."))
+            //{
+            //    throw new Exception("Reporting Services 2008 is not currently supported.");
+            //}
         }
 
         void ListJobs_Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

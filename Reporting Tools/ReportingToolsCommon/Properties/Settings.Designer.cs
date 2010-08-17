@@ -26,10 +26,10 @@ namespace ReportingTools.Common.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://fakeserver/ReportServer/ReportService.asmx")]
-        public string ReportingToolsCommon_ReportService_ReportingService {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://fakeserver/ReportServer/ReportService2005.asmx")]
+        public string ReportingToolsCommon_ReportService_ReportingService2005 {
             get {
-                return ((string)(this["ReportingToolsCommon_ReportService_ReportingService"]));
+                return ((string)(this["ReportingToolsCommon_ReportService_ReportingService2005"]));
             }
         }
     }

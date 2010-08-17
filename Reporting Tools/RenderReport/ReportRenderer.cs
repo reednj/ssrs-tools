@@ -12,13 +12,13 @@ namespace ReportingTools.RenderReport
     // better to make a wrapper.
     public class ReportRenderer
     {
-        ReportingService rs;
+        ReportingService2005 rs;
         string renderFormat = "PDF";
         string savePath = "C:\\default.pdf";
 
         public delegate void RenderAsyncCompleteHandler(object sender, EventArgs e);
-        
-        public ReportRenderer(ReportingService newRs) 
+
+        public ReportRenderer(ReportingService2005 newRs) 
         {
             this.rs = newRs;
             rs.RenderCompleted += renderComplete;
@@ -35,7 +35,7 @@ namespace ReportingTools.RenderReport
             rs.RenderAsync(reportPath, renderFormat, null, null, null, null, null);
         }
 
-        public void renderComplete(object sender, RenderCompletedEventArgs e)
+        public void renderComplete(object sender, EventArgs e)
         {
             if(e.Error == null && e.Result != null) {
                 // if the render was successful then save the data

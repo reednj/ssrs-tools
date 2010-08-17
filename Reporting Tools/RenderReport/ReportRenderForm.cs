@@ -14,7 +14,7 @@ namespace ReportingTools.RenderReport
 {
     public partial class ReportRenderForm : Form
     {
-        ReportingService rs = new ReportingService();
+        ReportingService2005 rs = new ReportingService2005();
         string DefaultRenderSavePath = Properties.Settings.Default.DefaultSavePath;
 
         public ReportRenderForm()
@@ -59,7 +59,7 @@ namespace ReportingTools.RenderReport
             }
         }
 
-        private void renderer_RenderAsyncComplete(object sender, RenderCompletedEventArgs e)
+        private void renderer_RenderAsyncComplete(object sender, EventArgs e)
         {
             const string BAD_PARMS_ERROR = "rsReportParameterValueNotSet";
 

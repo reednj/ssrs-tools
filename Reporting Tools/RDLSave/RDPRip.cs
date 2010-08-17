@@ -28,7 +28,7 @@ namespace RDLSave
             get { return this._currentState;  } 
         }
 
-        ReportingService rs = new ReportingService();
+        ReportingService2005 rs = new ReportingService2005();
 
         public RDPRip()
         {
@@ -416,7 +416,7 @@ namespace RDLSave
 
     public class RsHelper
     {
-        public static Byte[] DownloadReportItem(ReportingService rs, CatalogItem ReportItem)
+        public static Byte[] DownloadReportItem(ReportingService2005 rs, CatalogItem ReportItem)
         {
             try
             {
