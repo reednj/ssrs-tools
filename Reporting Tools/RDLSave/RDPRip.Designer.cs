@@ -191,12 +191,12 @@ namespace RDLSave
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ReportTreeList);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "RDPRip";
             this.Text = "Save Rdls";
             this.Load += new System.EventHandler(this.RDPRip_Load);
+            this.SizeChanged += new System.EventHandler(this.RDPRip_SizeChanged);
             this.Activated += new System.EventHandler(this.RDPRip_Activated);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

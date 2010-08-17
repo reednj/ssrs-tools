@@ -49,8 +49,8 @@ namespace ReportingTools.SubscriptionManager
             this.ConnectToolButton = new System.Windows.Forms.ToolStripButton();
             this.refreshToolButton = new System.Windows.Forms.ToolStripButton();
             this.triggerToolButton = new System.Windows.Forms.ToolStripButton();
-            this.mainSubTree = new ReportingTools.SubscriptionManager.SubscriptionTree();
             this.StatusTimer = new System.Windows.Forms.Timer(this.components);
+            this.mainSubTree = new ReportingTools.SubscriptionManager.SubscriptionTree();
             this.detailsBox.SuspendLayout();
             this.subTreeMenu.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
@@ -74,9 +74,10 @@ namespace ReportingTools.SubscriptionManager
             // 
             // subLastRanLabel
             // 
+            this.subLastRanLabel.AutoSize = true;
             this.subLastRanLabel.Location = new System.Drawing.Point(99, 45);
             this.subLastRanLabel.Name = "subLastRanLabel";
-            this.subLastRanLabel.Size = new System.Drawing.Size(459, 13);
+            this.subLastRanLabel.Size = new System.Drawing.Size(10, 13);
             this.subLastRanLabel.TabIndex = 5;
             this.subLastRanLabel.Text = "-";
             // 
@@ -85,7 +86,7 @@ namespace ReportingTools.SubscriptionManager
             this.subLastResultLabel.AutoEllipsis = true;
             this.subLastResultLabel.Location = new System.Drawing.Point(99, 32);
             this.subLastResultLabel.Name = "subLastResultLabel";
-            this.subLastResultLabel.Size = new System.Drawing.Size(459, 13);
+            this.subLastResultLabel.Size = new System.Drawing.Size(10, 13);
             this.subLastResultLabel.TabIndex = 4;
             this.subLastResultLabel.Text = "-";
             // 
@@ -94,7 +95,7 @@ namespace ReportingTools.SubscriptionManager
             this.subDescLabel.AutoEllipsis = true;
             this.subDescLabel.Location = new System.Drawing.Point(99, 19);
             this.subDescLabel.Name = "subDescLabel";
-            this.subDescLabel.Size = new System.Drawing.Size(459, 13);
+            this.subDescLabel.Size = new System.Drawing.Size(10, 13);
             this.subDescLabel.TabIndex = 3;
             this.subDescLabel.Text = "-";
             // 
@@ -155,12 +156,12 @@ namespace ReportingTools.SubscriptionManager
             // 
             // mainStatusStrip
             // 
+            this.mainStatusStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabel});
             this.mainStatusStrip.Location = new System.Drawing.Point(0, 416);
             this.mainStatusStrip.Name = "mainStatusStrip";
             this.mainStatusStrip.Size = new System.Drawing.Size(587, 22);
-            this.mainStatusStrip.SizingGrip = false;
             this.mainStatusStrip.TabIndex = 4;
             this.mainStatusStrip.Text = "statusStrip1";
             // 
@@ -222,6 +223,11 @@ namespace ReportingTools.SubscriptionManager
             this.triggerToolButton.Text = "Trigger Subscription";
             this.triggerToolButton.Click += new System.EventHandler(this.triggerToolButton_Click);
             // 
+            // StatusTimer
+            // 
+            this.StatusTimer.Interval = 5000;
+            this.StatusTimer.Tick += new System.EventHandler(this.StatusTimer_Tick);
+            // 
             // mainSubTree
             // 
             this.mainSubTree.ImageIndex = 0;
@@ -238,11 +244,6 @@ namespace ReportingTools.SubscriptionManager
             this.mainSubTree.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainSubTree_MouseUp);
             this.mainSubTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mainSubTree_AfterSelect);
             // 
-            // StatusTimer
-            // 
-            this.StatusTimer.Interval = 5000;
-            this.StatusTimer.Tick += new System.EventHandler(this.StatusTimer_Tick);
-            // 
             // SubscriptionManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -252,7 +253,6 @@ namespace ReportingTools.SubscriptionManager
             this.Controls.Add(this.detailsBox);
             this.Controls.Add(this.mainSubTree);
             this.Controls.Add(this.mainStatusStrip);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "SubscriptionManager";
@@ -260,6 +260,7 @@ namespace ReportingTools.SubscriptionManager
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Subscription Manager";
             this.Load += new System.EventHandler(this.SubscriptionManager_Load);
+            this.SizeChanged += new System.EventHandler(this.SubscriptionManager_SizeChanged);
             this.Activated += new System.EventHandler(this.SubscriptionManager_Activated);
             this.detailsBox.ResumeLayout(false);
             this.detailsBox.PerformLayout();

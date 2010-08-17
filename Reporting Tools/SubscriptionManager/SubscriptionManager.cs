@@ -24,11 +24,17 @@ namespace ReportingTools.SubscriptionManager
         BackgroundWorker Subscription_Worker;
         SSRSUri ServerUrl = null;
 
+        int FormPadding = 0;
+
         SubscriptionJob JobStatus = null;
 
         public SubscriptionManager()
         {
             InitializeComponent();
+
+            // this is the distance between the right edge of the main tree list and
+            // the edge of the form. It is used when resizing the form.
+            this.FormPadding = this.Width - mainSubTree.Width;
         }
 
         private void SubscriptionManager_Load(object sender, EventArgs e)
@@ -36,6 +42,9 @@ namespace ReportingTools.SubscriptionManager
             // set the event handlers
             rs.ListSubscriptionsCompleted += SubscriptionLoadComplete;
             rs.FireEventCompleted += triggerSubscriptionComplete;
+
+            subDescLabel.Width = detailsBox.Width - subDescLabel.Left - 10;
+            subLastResultLabel.Width = detailsBox.Width - subLastResultLabel.Left - 10;
         }
 
         private void SubscriptionManager_Activated(object sender, EventArgs e)
@@ -271,6 +280,21 @@ namespace ReportingTools.SubscriptionManager
             {
                 StatusTimer.Enabled = false;
             }
+        }
+
+        private void SubscriptionManager_SizeChanged(object sender, EventArgs e)
+        {
+            mainSubTree.Width = this.Width - this.FormPadding;
+            detailsBox.Width = this.Width - this.FormPadding;
+            detailsBox.Top = this.Height - detailsBox.Height*2; // why x2??
+
+            mainSubTree.Height = detailsBox.Top - this.FormPadding;
+
+            // these labels need to be manually resized so the ellipsis correctly when
+            // the text is too long. If set to autosize they will just keep growing...
+            subDescLabel.Width = detailsBox.Width - subDescLabel.Left - 10;
+            subLastResultLabel.Width = detailsBox.Width - subLastResultLabel.Left - 10;
+
         }
 
     }

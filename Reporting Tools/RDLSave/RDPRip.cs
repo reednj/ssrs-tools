@@ -14,7 +14,10 @@ namespace RDLSave
 {
     public partial class RDPRip : Form
     {
-        
+
+        int FormPadding = 0;
+        int FormPaddingY = 0;
+
         bool hasStarted = false;
         SSRSUri ServerUrl = null;
         string downloadFolder = Properties.Settings.Default.DownloadFolder.AddFileEndSlash();
@@ -33,12 +36,18 @@ namespace RDLSave
         public RDPRip()
         {
             InitializeComponent();
-
+            
+            // we need to tag the root node so that it will know how to 
+            // download from it correctly when it is selected
             CatalogItem c = new CatalogItem();
             c.Type = ItemTypeEnum.Folder;
             c.Path = "/";
-
             ReportTreeList.Nodes["Root"].Tag = c;
+
+            // this is the distance between the right edge of the main tree list and
+            // the edge of the form. It is used when resizing the form.
+            this.FormPadding = this.Width - ReportTreeList.Width;
+            this.FormPaddingY = this.Height - ReportTreeList.Height;
         }
 
         private void RDPRip_Load(object sender, EventArgs e)
@@ -364,6 +373,12 @@ namespace RDLSave
             }
 
             DownloadButton.Enabled = ButtonState;
+        }
+
+        private void RDPRip_SizeChanged(object sender, EventArgs e)
+        {
+            ReportTreeList.Width = this.Width - this.FormPadding;
+            ReportTreeList.Height = this.Height - this.FormPaddingY;
         }
     }
 
