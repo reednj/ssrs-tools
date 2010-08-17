@@ -118,7 +118,7 @@ namespace ReportingTools.SubscriptionManager
                 rs.FireEventAsync(curSub.EventType, curSub.SubscriptionID);
 
                 // we set this here, even though it should really go in the trigger complete section...
-                JobStatus = new SubscriptionJob(curSub, rs.Credentials);
+                JobStatus = new SubscriptionJob(curSub, rs);
             }
         }
         
@@ -289,9 +289,9 @@ namespace ReportingTools.SubscriptionManager
         public Job Job { get { return _job; } set { _job = value; } }
         public SubscriptionJobState State { get { return _state; } }
 
-        public SubscriptionJob(Subscription s, System.Net.ICredentials RsCredentials)
+        public SubscriptionJob(Subscription s, ReportingService rs)
         {
-            this.rsh = new RsHelper(RsCredentials);
+            this.rsh = new RsHelper(rs);
             this.Subscription = s;
             this._state = SubscriptionJobState.Starting;
         }
@@ -352,9 +352,10 @@ namespace ReportingTools.SubscriptionManager
     {
         ReportingService2005 rs = new ReportingService2005();
 
-        public RsHelper(System.Net.ICredentials RsCredentials)
+        public RsHelper(ReportingService rs)
         {
-            rs.Credentials = RsCredentials;
+            this.rs.Credentials = rs.Credentials;
+            this.rs.Url = rs.Url;
         }
 
         public Subscription RefreshSubscription(Subscription curSub)
