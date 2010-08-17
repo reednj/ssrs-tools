@@ -139,12 +139,34 @@ namespace ReportingTools.Common
             LoadingImg.Visible = true;
             ConnectButton.Enabled = false;
             FormPanel.Enabled = false;
+
             ListJobs_Worker.RunWorkerAsync();
         }
         
         void ListJobs_Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            e.Result = rs.ListJobs();
+            try
+            {
+                e.Result = rs.ListJobs();
+            }
+            catch(System.Net.WebException ex)
+            {
+                if (this.ServerUrl.InstanceName != null && ((System.Net.HttpWebResponse)ex.Response).StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    // this is a special case when we are first logging on to a named instance
+                    //
+                    // There are generally two possibilities for reportservice urls w.r.t. which separator
+                    // they use with the instance name. SSRS2005 generally uses '$' while SSRS2008 uses '_'
+                    // if we got a 404 using one, then we will try the other just in case.
+                    this.ServerUrl.UseSecondaryInstanceSeparator();
+                    rs.Url = this.ServerUrl.ToUrl();
+                    e.Result = rs.ListJobs();
+                }
+                else
+                {
+                    throw ex;
+                }
+            }
             
             // lets check the ssrs version - at this stage we only support ssrs2005, so anything
             // else and we show an error message

@@ -50,13 +50,19 @@ namespace ReportingTools.Common
     // sets a url specifically for reporting services
     public class SSRSUri
     {
+        private const string DefaultInstanceSeparator = "$";
+        private const string SecondaryInstanceSeparator = "_";
+
         private string _serverName = null;
         private string _instanceName = null;
+        private string _instanceSeparator = DefaultInstanceSeparator;
 
+        public string InstanceSeparator { get { return _instanceSeparator; } set { _instanceSeparator = value; } }
         public string ServerName { get { return _serverName; } set { _serverName = value; } }
         public string InstanceName { get { return _instanceName; } set { _instanceName = value; } }
         public string WebServiceUrl { get { return this.ToUrl(); } }
-        public string FullName
+
+          public string FullName
         {
             
             get
@@ -109,8 +115,13 @@ namespace ReportingTools.Common
             }
             else
             {
-                return String.Format("http://{0}/reportserver${1}/reportservice2005.asmx", this.ServerName, this.InstanceName);
+                return String.Format("http://{0}/reportserver{2}{1}/reportservice2005.asmx", this.ServerName, this.InstanceName, this.InstanceSeparator);
             }
+        }
+
+        public void UseSecondaryInstanceSeparator()
+        {
+            this.InstanceSeparator = SecondaryInstanceSeparator;
         }
     }
 }
