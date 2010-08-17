@@ -17,7 +17,7 @@ namespace ReportingTools.Common
 {
     public class ReportingToolsConsts
     {
-        public const string BUY_URL = "http://popacular.com/reporting-tools/purchase";
+        public const string BUY_URL = "http://ssrs-tools.com/purchase";
     }
 
     public static class CommonExtensions
