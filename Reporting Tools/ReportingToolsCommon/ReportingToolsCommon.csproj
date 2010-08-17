@@ -89,10 +89,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://hydrogen/reportserver/reportservice.asmx">
+    <WebReferenceUrl Include="http://fakeserver/reportserver/reportservice.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\ReportService\</RelPath>
-      <UpdateFromURL>http://hydrogen/reportserver/reportservice.asmx</UpdateFromURL>
+      <UpdateFromURL>http://fakeserver/reportserver/reportservice.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

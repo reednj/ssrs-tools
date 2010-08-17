@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ReportingToolsCommon_ReportService_ReportingService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://hydrogen/ReportServer/ReportService.asmx</Value>
+      <Value Profile="(Default)">http://fakeserver/ReportServer/ReportService.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

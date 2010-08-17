@@ -26,7 +26,7 @@ namespace ReportingTools.Common.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://hydrogen/ReportServer/ReportService.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://fakeserver/ReportServer/ReportService.asmx")]
         public string ReportingToolsCommon_ReportService_ReportingService {
             get {
                 return ((string)(this["ReportingToolsCommon_ReportService_ReportingService"]));
