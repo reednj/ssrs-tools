@@ -305,6 +305,19 @@ namespace RDLSave
             }
         }
 
+        private void viewReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ReportTreeList.SelectedNode != null && ReportTreeList.SelectedNode.Tag != null)
+            {
+                CatalogItem CurrentItem = ReportTreeList.SelectedNode.Tag as CatalogItem;
+
+                if (CurrentItem != null && CurrentItem.Type == ItemTypeEnum.Report)
+                {
+                    System.Diagnostics.Process.Start(this.ServerUrl.ToRenderUrl(CurrentItem.Path));
+                }
+            }
+        }
+
         private void downloadAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DownloadButton.PerformClick();
@@ -326,7 +339,12 @@ namespace RDLSave
 
                 // check the selecteditem to see whether they should be able to trigger a subscription
                 // or not.
-                downloadAllToolStripMenuItem.Enabled = (ReportTreeList.SelectedNode != null && ReportTreeList.SelectedNode.Tag != null && ((CatalogItem)ReportTreeList.SelectedNode.Tag).Type == ItemTypeEnum.Folder);
+                if(ReportTreeList.SelectedNode != null && ReportTreeList.SelectedNode.Tag != null) {
+                    CatalogItem CurrentItem = ReportTreeList.SelectedNode.Tag as CatalogItem;
+                    downloadAllToolStripMenuItem.Enabled = (CurrentItem.Type == ItemTypeEnum.Folder);
+                    viewReportToolStripMenuItem.Enabled = (CurrentItem.Type == ItemTypeEnum.Report);
+                }
+
                 TreeContextMenu.Show(ReportTreeList, new Point(e.X, e.Y));
             }
         }
@@ -380,6 +398,8 @@ namespace RDLSave
             ReportTreeList.Width = this.Width - this.FormPadding;
             ReportTreeList.Height = this.Height - this.FormPaddingY;
         }
+
+
     }
 
     public class DownloadArgs

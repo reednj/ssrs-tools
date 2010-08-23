@@ -29,7 +29,7 @@ namespace RDLSave
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Home");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Home");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RDPRip));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -46,6 +46,7 @@ namespace RDLSave
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FolderSelectDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.ReportTreeList = new ReportingTools.Common.ReportTree();
+            this.viewReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.TreeContextMenu.SuspendLayout();
@@ -136,12 +137,13 @@ namespace RDLSave
             // TreeContextMenu
             // 
             this.TreeContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewReportToolStripMenuItem,
             this.downloadAllToolStripMenuItem,
             this.toolStripMenuItem1,
             this.refreshToolStripMenuItem});
             this.TreeContextMenu.Name = "TreeContextMenu";
             this.TreeContextMenu.ShowImageMargin = false;
-            this.TreeContextMenu.Size = new System.Drawing.Size(134, 54);
+            this.TreeContextMenu.Size = new System.Drawing.Size(134, 98);
             // 
             // downloadAllToolStripMenuItem
             // 
@@ -171,17 +173,24 @@ namespace RDLSave
             this.ReportTreeList.ImageIndex = 0;
             this.ReportTreeList.Location = new System.Drawing.Point(12, 28);
             this.ReportTreeList.Name = "ReportTreeList";
-            treeNode1.ImageKey = "Folder";
-            treeNode1.Name = "Root";
-            treeNode1.SelectedImageKey = "Folder";
-            treeNode1.Text = "Home";
+            treeNode2.ImageKey = "Folder";
+            treeNode2.Name = "Root";
+            treeNode2.SelectedImageKey = "Folder";
+            treeNode2.Text = "Home";
             this.ReportTreeList.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.ReportTreeList.SelectedImageIndex = 0;
             this.ReportTreeList.Size = new System.Drawing.Size(631, 496);
             this.ReportTreeList.TabIndex = 0;
             this.ReportTreeList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ReportTreeList_MouseUp);
             this.ReportTreeList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ReportTreeList_AfterSelect);
+            // 
+            // viewReportToolStripMenuItem
+            // 
+            this.viewReportToolStripMenuItem.Name = "viewReportToolStripMenuItem";
+            this.viewReportToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.viewReportToolStripMenuItem.Text = "View Report...";
+            this.viewReportToolStripMenuItem.Click += new System.EventHandler(this.viewReportToolStripMenuItem_Click);
             // 
             // RDPRip
             // 
@@ -225,6 +234,7 @@ namespace RDLSave
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.FolderBrowserDialog FolderSelectDialog;
+        private System.Windows.Forms.ToolStripMenuItem viewReportToolStripMenuItem;
     }
 }
 

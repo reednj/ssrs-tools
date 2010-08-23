@@ -200,6 +200,10 @@ namespace ReportingTools.SubscriptionManager
                 } else {
                     triggerSubscriptionToolStripMenuItem.Enabled = false;
                 }
+                
+                // view report link is enabled as long as we are not clicking on the root node
+                // everything else should be a report or a subscription.
+                viewReportToolStripMenuItem.Enabled = (mainSubTree.SelectedNode != null && mainSubTree.SelectedNode.Parent != null);
 
                 subTreeMenu.Show(mainSubTree, new Point(e.X, e.Y));
             }
@@ -295,6 +299,26 @@ namespace ReportingTools.SubscriptionManager
             subDescLabel.Width = detailsBox.Width - subDescLabel.Left - 10;
             subLastResultLabel.Width = detailsBox.Width - subLastResultLabel.Left - 10;
 
+        }
+
+        private void viewReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (mainSubTree.SelectedNode != null)
+            {
+                Subscription CurrentItem = mainSubTree.SelectedNode.Tag as Subscription;
+
+                if (CurrentItem == null && mainSubTree.SelectedNode.Nodes.Count != 0)
+                {
+                    // maybe we have selected a report node with no tag, try get one of the
+                    // children and see what happens
+                    CurrentItem = mainSubTree.SelectedNode.Nodes[0].Tag as Subscription;
+                }
+                
+                if (CurrentItem != null)
+                {
+                    System.Diagnostics.Process.Start(this.ServerUrl.ToRenderUrl(CurrentItem.Path));
+                }
+            }
         }
 
     }

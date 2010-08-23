@@ -51,6 +51,7 @@ namespace ReportingTools.SubscriptionManager
             this.triggerToolButton = new System.Windows.Forms.ToolStripButton();
             this.StatusTimer = new System.Windows.Forms.Timer(this.components);
             this.mainSubTree = new ReportingTools.SubscriptionManager.SubscriptionTree();
+            this.viewReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detailsBox.SuspendLayout();
             this.subTreeMenu.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
@@ -129,11 +130,12 @@ namespace ReportingTools.SubscriptionManager
             // subTreeMenu
             // 
             this.subTreeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewReportToolStripMenuItem,
             this.triggerSubscriptionToolStripMenuItem,
             this.toolStripSeparator1,
             this.refreshToolStripMenuItem});
             this.subTreeMenu.Name = "subTreeMenu";
-            this.subTreeMenu.Size = new System.Drawing.Size(181, 54);
+            this.subTreeMenu.Size = new System.Drawing.Size(181, 98);
             // 
             // triggerSubscriptionToolStripMenuItem
             // 
@@ -244,6 +246,13 @@ namespace ReportingTools.SubscriptionManager
             this.mainSubTree.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainSubTree_MouseUp);
             this.mainSubTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mainSubTree_AfterSelect);
             // 
+            // viewReportToolStripMenuItem
+            // 
+            this.viewReportToolStripMenuItem.Name = "viewReportToolStripMenuItem";
+            this.viewReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewReportToolStripMenuItem.Text = "View Report...";
+            this.viewReportToolStripMenuItem.Click += new System.EventHandler(this.viewReportToolStripMenuItem_Click);
+            // 
             // SubscriptionManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,6 +305,7 @@ namespace ReportingTools.SubscriptionManager
         private System.Windows.Forms.ToolStripButton ConnectToolButton;
         private SubscriptionTree mainSubTree;
         private System.Windows.Forms.Timer StatusTimer;
+        private System.Windows.Forms.ToolStripMenuItem viewReportToolStripMenuItem;
     }
 }
 

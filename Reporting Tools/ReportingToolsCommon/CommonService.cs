@@ -104,6 +104,11 @@ namespace ReportingTools.Common
 
         public string ToUrl()
         {
+            return this.ToBaseUrl() + "/reportservice2005.asmx";
+        }
+
+        public string ToBaseUrl()
+        {
             if (this.ServerName == null)
             {
                 throw new InvalidOperationException("You must set a ServerName to generate a url");
@@ -111,12 +116,18 @@ namespace ReportingTools.Common
 
             if (this.InstanceName == null)
             {
-                return String.Format("http://{0}/reportserver/reportservice2005.asmx", this.ServerName);
+                return String.Format("http://{0}/reportserver", this.ServerName);
             }
             else
             {
-                return String.Format("http://{0}/reportserver{2}{1}/reportservice2005.asmx", this.ServerName, this.InstanceName, this.InstanceSeparator);
+                return String.Format("http://{0}/reportserver{2}{1}", this.ServerName, this.InstanceName, this.InstanceSeparator);
             }
+        }
+
+        public string ToRenderUrl(string ReportPath)
+        {
+            
+            return String.Format("{0}?{1}&rs:Command=render", this.ToBaseUrl(), System.Web.HttpUtility.UrlEncode(ReportPath));
         }
 
         public void UseSecondaryInstanceSeparator()
