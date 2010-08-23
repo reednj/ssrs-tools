@@ -257,8 +257,8 @@ namespace ReportingTools.SubscriptionManager
 
         private void StatusTimer_Tick(object sender, EventArgs e)
         {
-            //// TODO THIS CODE NEEDS TO BE LOCKED, in case the timer fires while we are already getting
-            //// the details. Or maybe just disable the timer or something?
+
+            StatusTimer.Enabled = false;
 
             if (this.JobStatus != null)
             {
@@ -268,7 +268,7 @@ namespace ReportingTools.SubscriptionManager
                 if (this.JobStatus.State == SubscriptionJobState.Running)
                 {
                     statusLabel.Text = String.Format("Subscription Triggered: {0}", this.JobStatus.Subscription.LastExecuted);
-                    
+
                     // update the last ran data as well, if we have that subscription selected still
                     if (mainSubTree.SelectedNode.Tag != null && ((Subscription)mainSubTree.SelectedNode.Tag).SubscriptionID == this.JobStatus.Subscription.SubscriptionID)
                     {
@@ -278,6 +278,10 @@ namespace ReportingTools.SubscriptionManager
 
                     this.JobStatus = null;
                     StatusTimer.Enabled = false;
+                }
+                else
+                {
+                    StatusTimer.Enabled = true;
                 }
             }
             else
@@ -348,6 +352,7 @@ namespace ReportingTools.SubscriptionManager
         {
             if (this._state == SubscriptionJobState.Starting)
             {
+
                 // refresh the subscription, there is no job yet
                 Subscription s = rsh.RefreshSubscription(this.Subscription);
 
