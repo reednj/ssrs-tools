@@ -117,7 +117,7 @@ namespace RDLSave
                     break;
                 }
 
-                if (item.Type == ItemTypeEnum.Report || item.Type == ItemTypeEnum.Resource)
+                if (item.Type == ItemTypeEnum.Report || item.Type == ItemTypeEnum.Resource || item.Type == ItemTypeEnum.DataSource)
                 {
                     Byte[] data = RsHelper.DownloadReportItem(rs, item);
 
@@ -127,7 +127,7 @@ namespace RDLSave
                         string TempFromFolder = FromFolder.AddEndSlash();
                         string FilePath = item.Path.Remove(item.Path.ToLower().IndexOf(TempFromFolder.ToLower()), TempFromFolder.Length);
                         FilePath = Path.Combine(DestRootPath, FilePath);
-                        FilePath = (item.Type == ItemTypeEnum.Report) ? FilePath + ".rdl" : FilePath;
+                        FilePath = FilePath + RsHelper.GetFileExtension(item);
                         File.WriteAllBytes(FilePath, data);
                     }
                     else
@@ -445,6 +445,11 @@ namespace RDLSave
                     string MimeType;
                     return rs.GetResourceContents(ReportItem.Path, out MimeType);
                 }
+                else if (ReportItem.Type == ItemTypeEnum.DataSource)
+                {
+                    DataSourceDefinition dsn = rs.GetDataSourceContents(ReportItem.Path);
+                    return System.Text.Encoding.UTF8.GetBytes(dsn.ConnectString);
+                }
             }
             catch (System.Web.Services.Protocols.SoapException ex)
             {
@@ -457,6 +462,22 @@ namespace RDLSave
             }
 
             return null;
+        }
+
+        public static string GetFileExtension(CatalogItem ReportItem)
+        {
+            if (ReportItem.Type == ItemTypeEnum.Report)
+            {
+                return ".rdl";
+            }
+            else if (ReportItem.Type == ItemTypeEnum.DataSource)
+            {
+                return ".ds";
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 

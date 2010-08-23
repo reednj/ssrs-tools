@@ -151,7 +151,7 @@ namespace ReportingTools.Common
             }
             catch(System.Net.WebException ex)
             {
-                if (this.ServerUrl.InstanceName != null && ((System.Net.HttpWebResponse)ex.Response).StatusCode == System.Net.HttpStatusCode.NotFound)
+                if (this.ServerUrl.InstanceName != null && ex.Response != null && ((System.Net.HttpWebResponse)ex.Response).StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
                     // this is a special case when we are first logging on to a named instance
                     //
