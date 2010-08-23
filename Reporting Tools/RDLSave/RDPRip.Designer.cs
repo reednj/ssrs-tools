@@ -29,7 +29,7 @@ namespace RDLSave
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Home");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Home");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RDPRip));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -41,12 +41,12 @@ namespace RDLSave
             this.DownloadButton = new System.Windows.Forms.ToolStripButton();
             this.Download_Worker = new System.ComponentModel.BackgroundWorker();
             this.TreeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FolderSelectDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.ReportTreeList = new ReportingTools.Common.ReportTree();
-            this.viewReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.TreeContextMenu.SuspendLayout();
@@ -143,7 +143,14 @@ namespace RDLSave
             this.refreshToolStripMenuItem});
             this.TreeContextMenu.Name = "TreeContextMenu";
             this.TreeContextMenu.ShowImageMargin = false;
-            this.TreeContextMenu.Size = new System.Drawing.Size(134, 98);
+            this.TreeContextMenu.Size = new System.Drawing.Size(134, 76);
+            // 
+            // viewReportToolStripMenuItem
+            // 
+            this.viewReportToolStripMenuItem.Name = "viewReportToolStripMenuItem";
+            this.viewReportToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.viewReportToolStripMenuItem.Text = "View Report...";
+            this.viewReportToolStripMenuItem.Click += new System.EventHandler(this.viewReportToolStripMenuItem_Click);
             // 
             // downloadAllToolStripMenuItem
             // 
@@ -173,24 +180,17 @@ namespace RDLSave
             this.ReportTreeList.ImageIndex = 0;
             this.ReportTreeList.Location = new System.Drawing.Point(12, 28);
             this.ReportTreeList.Name = "ReportTreeList";
-            treeNode2.ImageKey = "Folder";
-            treeNode2.Name = "Root";
-            treeNode2.SelectedImageKey = "Folder";
-            treeNode2.Text = "Home";
+            treeNode1.ImageKey = "Folder";
+            treeNode1.Name = "Root";
+            treeNode1.SelectedImageKey = "Folder";
+            treeNode1.Text = "Home";
             this.ReportTreeList.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.ReportTreeList.SelectedImageIndex = 0;
             this.ReportTreeList.Size = new System.Drawing.Size(631, 496);
             this.ReportTreeList.TabIndex = 0;
             this.ReportTreeList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ReportTreeList_MouseUp);
             this.ReportTreeList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ReportTreeList_AfterSelect);
-            // 
-            // viewReportToolStripMenuItem
-            // 
-            this.viewReportToolStripMenuItem.Name = "viewReportToolStripMenuItem";
-            this.viewReportToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.viewReportToolStripMenuItem.Text = "View Report...";
-            this.viewReportToolStripMenuItem.Click += new System.EventHandler(this.viewReportToolStripMenuItem_Click);
             // 
             // RDPRip
             // 
@@ -203,7 +203,7 @@ namespace RDLSave
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "RDPRip";
-            this.Text = "Save Rdls";
+            this.Text = "Download Server Objects";
             this.Load += new System.EventHandler(this.RDPRip_Load);
             this.SizeChanged += new System.EventHandler(this.RDPRip_SizeChanged);
             this.Activated += new System.EventHandler(this.RDPRip_Activated);

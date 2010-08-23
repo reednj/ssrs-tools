@@ -224,7 +224,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ReportingToolsCommon, Version=1.1.3887.24630, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ReportingToolsCommon, Version=1.1.3887.25449, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_0691C75A0CE09AD2AA754EC9C91C47E9"
@@ -511,7 +511,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_67CC798E05494F118E7DA2D2D9287553"
             {
-            "Name" = "8:Download RDLs"
+            "Name" = "8:Server Ripper"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
