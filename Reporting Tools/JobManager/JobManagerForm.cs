@@ -44,8 +44,11 @@ namespace ReportingTools.JobManager
 
         private void LoadJobsComplete(object sender, ListJobsCompletedEventArgs e)
         {
-            Job[] jobList = e.Result;
+            LoadJobData(e.Result);
+        }
 
+        private void LoadJobData(Job[] jobList)
+        {
             jobListView.Items.Clear();
             foreach (Job curJob in jobList)
             {
@@ -116,7 +119,7 @@ namespace ReportingTools.JobManager
                 // every one in 5 times actually refresh the page, the rest of the time
                 // just refresh the timer.
                 this.CurrentState = ServiceState.LoadingList;
-                rs.ListJobsAsync();
+                LoadJobData(rs.ListJobs());
             }
 
             this.UpdateRowDurations();
