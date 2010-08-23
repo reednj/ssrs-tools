@@ -224,7 +224,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ReportingToolsCommon, Version=1.1.3887.25449, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ReportingToolsCommon, Version=1.1.3887.26564, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_0691C75A0CE09AD2AA754EC9C91C47E9"
@@ -390,7 +390,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Reporting-Tools"
         "ProductCode" = "8:{0C6CE374-23AC-4B5B-A1C4-EF68DAE3A125}"
-        "PackageCode" = "8:{DC6142C3-CE41-40EF-ABEE-B11CD2C0BE3D}"
+        "PackageCode" = "8:{C070063A-F3FB-4663-A9E6-FDB784991868}"
         "UpgradeCode" = "8:{92142E06-6429-42ED-873C-C3B6C6C411D4}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -511,7 +511,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_67CC798E05494F118E7DA2D2D9287553"
             {
-            "Name" = "8:Server Ripper"
+            "Name" = "8:RDL Downloader"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
