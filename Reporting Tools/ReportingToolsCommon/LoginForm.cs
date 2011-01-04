@@ -48,6 +48,7 @@ namespace ReportingTools.Common
                 // the user has a valid license, so make sure we hide the license panel
                 // then let them go about their business
                 LicensePanel.Visible = false;
+                return;
             }
 
             // no valid license? How many days remaining in the trial?
